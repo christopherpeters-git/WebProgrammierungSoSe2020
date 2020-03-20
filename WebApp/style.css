@@ -2,13 +2,31 @@ footer {
 }
 
 body {
-    background-color: blueviolet;
+    background-color: grey;
 }
 
 header{
 }
 
-#videoplayer{
+#commentsection{
+    border-radius: 8px;
+    background-color: rgb(161, 161, 161);
+    border: 1px solid grey;  
+}
+
+*{
+    font-family:"Courier New"; 
+}
+.comment{
+    margin: auto;
+    width: 790px;
+    font-size: small;
+    border-radius: 8px;
+    background-color: lightgrey;
+    border: 1px solid black;
+}
+
+#video{
     width:  800px;
     margin: auto;
     margin-top: 5%;
@@ -17,3 +35,22 @@ header{
     border-radius: 10px;
     border: 1px solid black;
 }
+
+#createcommentarea{
+    margin: auto;
+    font-size: x-small;
+    width: 790px;
+    border-radius: 8px;
+    background-color: lightgrey;
+    border: 1px solid black;
+}
+
+#videoinfo{
+    margin: auto;
+    font-size: x-small;
+    width: 790px;
+    border-radius: 8px;
+    background-color: lightgrey;
+    border: 1px solid black; 
+}
+

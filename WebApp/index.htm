@@ -1,15 +1,32 @@
 <!DOCTYPE html>
-<html>
+<meta charset="UTF8"/>
+<html lang="en">
 	<head>
         <link rel="stylesheet" href="style.css">
+        
     </head>
-    <body>
-        <div id="videoplayer">
-            <video width="800" height="450" controls>
-                <source src="media/videos/funnyvid0.mp4" type="video/mp4">
+    <body onload="initVideoPlayer()">
+        <script src="scripts.js"></script>
+        
+        <button onclick=toggleVisibility()>Show/Hide Video</button>
+        <div id="video" style="display: block;">
+            <video id="videoplayer" width="800" height="450" controls>
+                <source id="videosource" src="media/videos/funnyvid0.mp4" type="video/mp4">
             </video>
+            <div id="commentsection">
+                <div id = "videoinfo">
+                    <h1 id="videotitle" style="display: inline-block;">Title</h1>
+                </div>
+                <div id = "createcommentarea">
+                    <h1>Author/Message</h1>
+                    <input id="inputname">
+                    <input id="inputmessage">
+                    <button onclick="submitComment()">Submit Message</button>
+                </div>
+            </div>
         </div>
     </body>
     <footer>
     </footer>
 </html>
+
