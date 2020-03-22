@@ -1,5 +1,7 @@
 "use strict";
 
+const forbidden=['<','>'];
+
 class Comment{
     constructor(author,message){
         var date = new Date();
@@ -35,14 +37,31 @@ function submitComment(){
     var authorInput = document.getElementById("inputname");
     var messageInput = document.getElementById("inputmessage");
     var date = new Date();
-
+    if(!isInputLegal(authorInput.value) || !isInputLegal(messageInput.value)){
+        return;
+    }
     newComment.setAttribute("class","comment");
-    newComment.innerHTML = "<h3>" + authorInput.value + " - " + date.toDateString() +  "</h3>" + messageInput.value;
+    newComment.innerHTML = "<h3>" + authorInput.value + " - " + date.toDateString() + " " + date.toTimeString() +  "</h3>" + messageInput.value;
     document.getElementById("commentsection").appendChild(newComment);
     
     authorInput.value = "";
     messageInput.value = "";
 }
+
+function isInputLegal(strIn){
+    var inputLength = strIn.length;
+    var forbiddenLength = forbidden.length;
+    for(var i = 0; i < inputLength;i++){
+        for(var j = 0; j < forbiddenLength;j++){
+            if(strIn[i] == forbidden[j]){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+
 
 //Setzt den Titel des Videos
 function initVideoPlayer(){
