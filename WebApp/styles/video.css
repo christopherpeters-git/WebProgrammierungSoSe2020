@@ -1,21 +1,7 @@
-footer {
-}
-
-body {
-    background-color: grey;
-}
-
-header{
-}
-
 #commentsection{
     border-radius: 8px;
     background-color: rgb(161, 161, 161);
     border: 1px solid grey;  
-}
-
-*{
-    font-family:"Courier New"; 
 }
 .comment{
     margin: auto;
