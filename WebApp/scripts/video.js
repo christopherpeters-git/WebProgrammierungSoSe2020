@@ -6,7 +6,7 @@ const forbidden=['<','>'];
 //NOT USED YET
 class Comment{
     constructor(author,message){
-        var date = new Date();
+        const date = new Date();
         this.author = author;
         this.message = message;
         this.date = date.toDateString();
@@ -26,7 +26,7 @@ class Video{
 
 //creats XMLHttp- or ActiveX-Request depending on browser support
 function createAjaxRequest(){
-    var request;
+    let request;
     if(window.XMLHttpRequest){
         request = new XMLHttpRequest();
     }else{
@@ -37,10 +37,10 @@ function createAjaxRequest(){
 
 //Checks if string contains illegal characters which are defined in forbidden
 function isInputLegal(strIn){
-    var inputLength = strIn.length;
-    var forbiddenLength = forbidden.length;
-    for(var i = 0; i < inputLength;i++){
-        for(var j = 0; j < forbiddenLength;j++){
+    const inputLength = strIn.length;
+    const forbiddenLength = forbidden.length;
+    for(let i = 0; i < inputLength;i++){
+        for(let j = 0; j < forbiddenLength;j++){
             if(strIn[i] == forbidden[j]){
                 return false;
             }
@@ -55,13 +55,13 @@ function initVideoOverview(){
     var request = createAjaxRequest();
     request.onreadystatechange = function(){
         if(4 == this.readyState && 200 == this.status){
-            var videos = JSON.parse(this.responseText);
-            var videoOverview = document.getElementById("videooverview");
-            var video = new Video("","","","");
+            const videos = JSON.parse(this.responseText);
+            const videoOverview = document.getElementById("videooverview");
+            const video = new Video("","","","");
             for(video of videos){
-                var header5 = document.createElement("h5");
-                var header7 = document.createElement("h7");
-                var ahref = document.createElement("a");
+                const header5 = document.createElement("h5");
+                const header7 = document.createElement("h7");
+                const ahref = document.createElement("a");
                 ahref.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
                 ahref.innerHTML = video.name;
                 header5.appendChild(ahref);
@@ -85,13 +85,13 @@ function init(){
 function showVideoPlayerHideOverview(videoStr){
     var vidArea = document.getElementById("videoArea");
     if(vidArea.style.display == "none") {
-        var video = JSON.parse(videoStr);
-        var vidOverview = document.getElementById("videooverview");
+        const video = JSON.parse(videoStr);
+        const vidOverview = document.getElementById("videooverview");
         //var videoSrc = document.getElementById("videosource");
-        var videoTitle = document.getElementById("videotitle");
-        var buttonBackToVideos = document.getElementById("backtovideos");
-        var videoPlayer = document.createElement("video");
-        var videoSource = document.createElement("source");
+        const videoTitle = document.getElementById("videotitle");
+        const buttonBackToVideos = document.getElementById("backtovideos");
+        const videoPlayer = document.createElement("video");
+        const videoSource = document.createElement("source");
 
         videoPlayer.setAttribute("controls","true");
         videoPlayer.setAttribute("width","800");
@@ -109,10 +109,10 @@ function showVideoPlayerHideOverview(videoStr){
 }
 //Shows the video-list and hides the video-player
 function showOverviewHideVideoplayer(){
-    var vidOverview = document.getElementById("videooverview");
+    const vidOverview = document.getElementById("videooverview");
     if(vidOverview.style.display == "none"){
-        var vidArea = document.getElementById("videoArea");
-        var buttonBackToVideos = document.getElementById("backtovideos");
+        const vidArea = document.getElementById("videoArea");
+        const buttonBackToVideos = document.getElementById("backtovideos");
         vidArea.removeChild(vidArea.firstChild);
         vidArea.style.display = "none";
         vidOverview.style.display = "block";
@@ -122,10 +122,10 @@ function showOverviewHideVideoplayer(){
 
 //Creats a new comment
 function submitComment(){
-    var newComment = document.createElement("div");
-    var authorInput = document.getElementById("inputname");
-    var messageInput = document.getElementById("inputmessage");
-    var date = new Date();
+    const newComment = document.createElement("div");
+    const authorInput = document.getElementById("inputname");
+    const messageInput = document.getElementById("inputmessage");
+    const date = new Date();
     if(!isInputLegal(authorInput.value) || !isInputLegal(messageInput.value)){
         return;
     }
