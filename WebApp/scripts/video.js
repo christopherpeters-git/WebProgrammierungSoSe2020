@@ -13,6 +13,15 @@ class Comment{
     }
 }
 
+class Video{
+    constructor(id,src,name,duration){
+        this.id = id;
+        this.src = src;
+        this.name = name;
+        this.duration = duration;
+    }
+}
+
 //*************************************Helpers**************************************
 
 //creats XMLHttp- or ActiveX-Request depending on browser support
@@ -48,7 +57,7 @@ function initVideoOverview(){
         if(4 == this.readyState && 200 == this.status){
             var videos = JSON.parse(this.responseText);
             var videoOverview = document.getElementById("videooverview");
-
+            var video = new Video("","","","");
             for(video of videos){
                 var header5 = document.createElement("h5");
                 var header7 = document.createElement("h7");
@@ -66,44 +75,46 @@ function initVideoOverview(){
     request.send();
 }
 
-function initVideoPlayer(){
-    var videoSrcPath = document.getElementById("videosource").src;
-    var videoName = videoSrcPath.substr(videoSrcPath.lastIndexOf("/") + 1);
-    document.getElementById("videotitle").innerHTML = videoName;
-}
-
 //*************************************HTML-called-functions***********************************
 //Is called on page load, calls all initializers
 function init(){
     initVideoOverview()
-    initVideoPlayer()
 }
 
 //Shows the video-player and hides the video-list
 function showVideoPlayerHideOverview(videoStr){
-    var vidPlayer = document.getElementById("video");
-    if(vidPlayer.style.display == "none") {
+    var vidArea = document.getElementById("videoArea");
+    if(vidArea.style.display == "none") {
         var video = JSON.parse(videoStr);
         var vidOverview = document.getElementById("videooverview");
-        var videoSrc = document.getElementById("videosource");
+        //var videoSrc = document.getElementById("videosource");
         var videoTitle = document.getElementById("videotitle");
         var buttonBackToVideos = document.getElementById("backtovideos");
+        var videoPlayer = document.createElement("video");
+        var videoSource = document.createElement("source");
+
+        videoPlayer.setAttribute("controls","true");
+        videoPlayer.setAttribute("width","800");
+        videoPlayer.setAttribute("height","450");
+        videoSource.setAttribute("type","video/mp4");
+        videoSource.setAttribute("src",video.src);
+        videoPlayer.appendChild(videoSource);
+        vidArea.insertBefore(videoPlayer,vidArea.firstChild);
 
         vidOverview.style.display = "none";
-        videoSrc.src = video.src;
         videoTitle.innerHTML = video.name;
         buttonBackToVideos.style.display = "block";
-        vidPlayer.style.display = "block";
-
+        vidArea.style.display = "block";
     }
 }
 //Shows the video-list and hides the video-player
 function showOverviewHideVideoplayer(){
     var vidOverview = document.getElementById("videooverview");
     if(vidOverview.style.display == "none"){
+        var vidArea = document.getElementById("videoArea");
         var buttonBackToVideos = document.getElementById("backtovideos");
-        var vidPlayer = document.getElementById("video");
-        vidPlayer.style.display = "none";
+        vidArea.removeChild(vidArea.firstChild);
+        vidArea.style.display = "none";
         vidOverview.style.display = "block";
         buttonBackToVideos.style.display = "none";
     }
