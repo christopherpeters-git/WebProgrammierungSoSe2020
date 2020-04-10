@@ -57,7 +57,7 @@ function initVideoOverview(){
         if(4 == this.readyState && 200 == this.status){
             const videos = JSON.parse(this.responseText);
             const videoOverview = document.getElementById("videooverview");
-            const video = new Video("","","","");
+            let video = new Video("","","","");
             for(video of videos){
                 const header5 = document.createElement("h5");
                 const header7 = document.createElement("h7");
