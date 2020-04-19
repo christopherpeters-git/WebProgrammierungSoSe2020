@@ -11,9 +11,23 @@ ul.header {
     padding: 0;
     overflow: hidden;
 }
-
 li.header {
     float: left;
+}
+nav{
+    text-align: center;
+    font-size: 20px;
+
+}
+
+ul.nav {
+    list-style-type: none;
+    overflow: hidden;
+}
+
+li.nav{
+    display: inline;
+    margin-right: 40px;
 }
 
 footer {
