@@ -1,4 +1,5 @@
 [
   { "id":"v00", "src":"media/videos/funnyvid0.mp4", "name": "funnyVid00.mp4", "duration": "0:03"},
-  { "id":"v01", "src":"media/videos/wendler_egal.mp4", "name": "wendler_egal.mp4", "duration": "0:03"}
+  { "id":"v01", "src":"media/videos/wendler_egal.mp4", "name": "wendler_egal.mp4", "duration": "0:03"},
+  { "id":"v02", "src":"media/videos/Avengers_Whatever_It_Takes.mp4", "name": "Whatever it Takes", "duration": "0:04"}
 ]
