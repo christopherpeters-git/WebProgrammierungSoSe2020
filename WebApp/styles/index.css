@@ -4,9 +4,17 @@
 header{
     background-color: #666;
     padding: 30px;
-    color: white;
-    text-align: right;
     }
+ul.header {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li.header {
+    float: left;
+}
 
 footer {
 }
