@@ -149,6 +149,10 @@ function slideshowGetVideo(i) {
         var json = {"id": "v02", "src": "media/videos/Avengers_Whatever_It_Takes.mp4", "name": "Whatever_it_takes", "duration": "0:04"};
         var test_string = JSON.stringify(json);
         showVideoPlayerHideOverview(test_string);
+    } else  if (i===1) {
+        var json = {"id": "v02", "src": "media/videos/wendler_egal.mp4", "name": "Whatever_it_takes", "duration": "0:04"};
+        var test_string = JSON.stringify(json);
+        showVideoPlayerHideOverview(test_string);
     }
 
 }
