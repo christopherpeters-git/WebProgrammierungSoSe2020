@@ -110,6 +110,7 @@ function showVideoPlayerHideOverview(videoStr){
         videoTitle.innerHTML = video.name;
         buttonBackToVideos.style.display = "block";
         vidArea.style.display = "block";
+        hideSlideShow();
     }
 }
 //Shows the video-list and hides the video-player
@@ -122,6 +123,7 @@ function showOverviewHideVideoplayer(){
         vidArea.style.display = "none";
         vidOverview.style.display = "block";
         buttonBackToVideos.style.display = "none";
+        hideSlideShow();
     }
 }
 
@@ -140,4 +142,26 @@ function submitComment(){
 
     authorInput.value = "";
     messageInput.value = "";
+}
+//*************************************Slideshow-Functions***********************************
+function slideshowGetVideo(i) {
+    if (i===0) {
+        var json = {"id": "v02", "src": "media/videos/Avengers_Whatever_It_Takes.mp4", "name": "Whatever_it_takes", "duration": "0:04"};
+        var test_string = JSON.stringify(json);
+        showVideoPlayerHideOverview(test_string);
+    } else  if (i===1) {
+        var json = {"id": "v02", "src": "media/videos/wendler_egal.mp4", "name": "Whatever_it_takes", "duration": "0:04"};
+        var test_string = JSON.stringify(json);
+        showVideoPlayerHideOverview(test_string);
+    }
+
+}
+function hideSlideShow() {
+    const slideShow= document.getElementById("slideShow");
+    if(slideShow.style.display=="none"){
+        slideShow.style.display = "block";
+    }else {
+        slideShow.style.display = "none";
+    }
+
 }
