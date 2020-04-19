@@ -2,7 +2,6 @@
     font-family:"Courier New";
 }
 header{
-    background-color: #666;
     padding: 30px;
     }
 ul.header {
@@ -21,6 +20,8 @@ nav{
 }
 
 ul.nav {
+    background-color: #666;
+    padding: 10px;
     list-style-type: none;
     overflow: hidden;
 }
@@ -34,7 +35,7 @@ footer {
 }
 
 body {
-    background-color: white;
+    background-color: whitesmoke;
 }
 
 header{
