@@ -52,26 +52,31 @@ function isInputLegal(strIn){
 
 //Creates an entry on the video-overview for every video listed in the videos.json
 function initVideoOverview(){
-    var request = createAjaxRequest();
+    const request = createAjaxRequest();
     request.onreadystatechange = function(){
         if(4 == this.readyState && 200 == this.status){
             const videos = JSON.parse(this.responseText);
             const videoOverview = document.getElementById("videooverview");
             let video = new Video("","","","");
             for(video of videos){
+                const videoDiv = document.createElement("div");
                 const header5 = document.createElement("h5");
                 const header7 = document.createElement("h7");
                 const ahref = document.createElement("a");
+
+                videoDiv.setAttribute("class","videoLink");
                 ahref.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
                 ahref.innerHTML = video.name;
                 header5.appendChild(ahref);
                 header7.innerHTML = video.duration;
-                videoOverview.appendChild(header5);
-                videoOverview.appendChild(header7);
+                videoDiv.appendChild(header5);
+                videoDiv.appendChild(header7);
+                videoOverview.appendChild(videoDiv);
             }
         }
+        console.log(this.readystatechange + " : " + this.status)
     }
-    request.open("GET","./videos.json",true);
+    request.open("GET","videos.json",true);
     request.send();
 }
 
@@ -87,13 +92,13 @@ function showVideoPlayerHideOverview(videoStr){
     if(vidArea.style.display == "none") {
         const video = JSON.parse(videoStr);
         const vidOverview = document.getElementById("videooverview");
-        //var videoSrc = document.getElementById("videosource");
         const videoTitle = document.getElementById("videotitle");
         const buttonBackToVideos = document.getElementById("backtovideos");
         const videoPlayer = document.createElement("video");
         const videoSource = document.createElement("source");
 
         videoPlayer.setAttribute("controls","true");
+        videoPlayer.setAttribute("autoplay","true");
         videoPlayer.setAttribute("width","800");
         videoPlayer.setAttribute("height","450");
         videoSource.setAttribute("type","video/mp4");

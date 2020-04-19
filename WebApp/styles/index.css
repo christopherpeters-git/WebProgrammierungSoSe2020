@@ -26,3 +26,19 @@ body {
 header{
 }
 
+.videoLink {
+    border-style: groove;
+    border-color: floralwhite;
+    border-radius: 5px;
+    float: left;
+    margin: 1%;
+    padding: 1%;
+    height: 10%;
+    width: 15%;
+}
+
+#videooverview{
+    margin-left: 25%;
+    width: 50%;
+}
+
