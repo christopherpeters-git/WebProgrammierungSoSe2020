@@ -3,7 +3,7 @@
 * {box-sizing:border-box}
 /* Slideshow container */
 .slideshow-container {
-    max-width:700px;
+    max-width:800px;
     visibility: visible;
     position: relative;
     margin: auto;
