@@ -15,7 +15,7 @@
     </head>
     <body onload="init()">
 
-    <header style="display: block;">
+    <header>
         <ul class="header">
             <li class="header" style="width: 10%;">
                 <img src="media/bilder/Logo.png" height="85" width="85" align="left"/>
@@ -29,6 +29,19 @@
         </ul>
     </header>
 
+    <nav>
+        <ul class="nav">
+            <li class="nav">
+                <a class="nav">Home</a>
+            </li>
+            <li class="nav">
+                <a class="nav">Über</a>
+            </li>
+            <li class="nav">
+                <a class="nav">Kontakt</a>
+            </li>
+        </ul>
+    </nav>
     <div id="slideShow">
         <!-- Slideshow container -->
         <div class="slideshow-container">
@@ -58,12 +71,6 @@
     <div id="videooverview"></div>
         <button id="backtovideos" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>
         <div id="videoArea" style="display: none;">
-            <!--
-            <video id="videoplayer" width="800" height="450" controls>
-                <source id="videosource" src="media/videos/funnyvid0.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            -->
             <div id="commentsection">
                 <div id = "videoinfo">
                     <h1 id="videotitle" style="display: inline-block;">Title</h1>
