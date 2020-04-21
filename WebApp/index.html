@@ -1,30 +1,88 @@
 <!DOCTYPE html>
-<meta charset="UTF8"/>
-<html lang="en">
+
+<html lang="de">
 	<head>
         <link rel="stylesheet" href="styles/index.css">
         <link rel="stylesheet" href="styles/video.css">
+        <link rel="stylesheet" href="styles/desgin.css">
         <script src="scripts/video.js"></script>
+        <script src="scripts/slideshow.js"></script>
+        <meta charset="UTF8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Lassen Sie sich durch kurze Videos ein Lächeln aufs Gesicht zaubern">
+        <meta name="keywords" content="Videos,Fun,clips">
+        <meta name="author" content="Team 17">
     </head>
     <body onload="init()">
+
+    <header>
+        <ul class="header">
+            <li class="header" style="width: 10%;">
+                <img src="media/bilder/Logo.png" height="85" width="85" align="left"/>
+            </li>
+            <li class="header" style="width: 80%;">
+                <h1 style="text-align: center;font-size: 30px; color: black">Team 17 Videos</h1>
+            </li>
+            <li class="header" style="width: 10%;">
+                <a href="https://accounts.google.com/ServiceLogin" style=" color: black; text-align: right"> Login </a>
+            </li>
+        </ul>
+    </header>
+
+    <nav>
+        <ul class="nav">
+            <li class="nav">
+                <a class="nav">Home</a>
+            </li>
+            <li class="nav">
+                <a class="nav">Über</a>
+            </li>
+            <li class="nav">
+                <a class="nav">Kontakt</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="slideShow">
+        <!-- Slideshow container -->
+        <div class="slideshow-container">
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+                <a onclick="slideshowGetVideo(0)">
+                    <img src="media/bilder/whatever_it_takes.jpg" alt="Whatever_it_takes" style="width:100%; height:300px">
+                    <div class="text">Whatever it takes </div>
+                </a>
+            </div>
+            <div class="mySlides fade">
+                <a onclick="slideshowGetVideo(1)">
+                    <img src="media/bilder/wendler_egal.jpg" style="width:100% ;height:300px">
+                    <div class="text">Wendler Egal </div>
+                </a>
+            </div>
+            <div class="mySlides fade" >
+                <img src="media/bilder/img3.jpg" style="width:100%; height:300px" >
+            </div>
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            <script> plusSlides(0)</script>
+        </div>
+    </div>
+        <br>
+
+
+
     <div id="videooverview"></div>
         <button id="backtovideos" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>
         <div id="videoArea" style="display: none;">
-            <!--
-            <video id="videoplayer" width="800" height="450" controls>
-                <source id="videosource" src="media/videos/funnyvid0.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            -->
             <div id="commentsection">
                 <div id = "videoinfo">
                     <h1 id="videotitle" style="display: inline-block;">Title</h1>
                 </div>
                 <div id = "createcommentarea">
-                    <h1>Author/Message</h1>
                     <input id="inputname" placeholder="Author">
                     <input id="inputmessage" placeholder="Message">
-                    <button onclick="submitComment()">Submit Message</button>
+                    <button onclick="submitComment()">Submit Comment</button>
                 </div>
             </div>
         </div>

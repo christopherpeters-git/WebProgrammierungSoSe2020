@@ -1,15 +1,15 @@
 #commentsection{
     border-radius: 8px;
-    background-color: rgb(161, 161, 161);
-    border: 1px solid grey;  
+    background-color: white;
+    border: 1px solid white;
 }
 .comment{
     margin: auto;
     width: 790px;
     font-size: small;
     border-radius: 8px;
-    background-color: lightgrey;
-    border: 1px solid black;
+    background-color: white;
+    font-family: serif;
 }
 
 #videoArea{
@@ -27,7 +27,7 @@
     font-size: x-small;
     width: 790px;
     border-radius: 8px;
-    background-color: lightgrey;
+    background-color: white;
     border: 1px solid black;
 }
 
@@ -36,7 +36,7 @@
     font-size: x-small;
     width: 790px;
     border-radius: 8px;
-    background-color: lightgrey;
+    background-color: white;
     border: 1px solid black; 
 }
 
