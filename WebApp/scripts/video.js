@@ -1,6 +1,7 @@
 "use strict";
 
 const forbidden=['<','>'];
+const localStorageVideoPrefix = "video";
 
 //*************************************Classes**************************************
 //NOT USED YET
@@ -9,7 +10,7 @@ class Comment{
         const date = new Date();
         this.author = author;
         this.message = message;
-        this.date = date.toDateString();
+        this.date = date.toDateString() + " " + date.toTimeString();
     }
 }
 
@@ -37,6 +38,9 @@ function createAjaxRequest(){
 
 //Checks if string contains illegal characters which are defined in forbidden
 function isInputLegal(strIn){
+    if(!strIn || (strIn.length === 0)){
+        return false;
+    }
     const inputLength = strIn.length;
     const forbiddenLength = forbidden.length;
     for(let i = 0; i < inputLength;i++){
@@ -48,13 +52,54 @@ function isInputLegal(strIn){
     }
     return true;
 }
+
+//Loads comments from webstorage. Returns elements in an array, returns array with size 0 if no comments found for id
+function loadCommentsForId(id){
+    let comments;
+    if(localStorage.getItem(localStorageVideoPrefix + String(id))){
+        comments = JSON.parse(localStorage.getItem(localStorageVideoPrefix + String(id)));
+    }else{
+        comments = new Array();
+        console.log("No comments found!");
+    }
+    return comments;
+}
+
+//Saves comments in webstorage for video id.
+function saveCommentsForId(comments, id){
+    localStorage.setItem(localStorageVideoPrefix + String(id), JSON.stringify(comments));
+}
+
+//Clears "createcommentarea" and generates and appends saved comments to parent
+function generateComments(videoIdStr){
+    const createCommentArea = document.getElementById("createcommentarea");
+    createCommentArea.innerHTML = "";
+    const comments = loadCommentsForId(videoIdStr);
+    if(!(comments.length === 0)){
+        for(let i = 0; i < comments.length; i++){
+            //Create new comment-html
+            const newComment = document.createElement("div");
+            newComment.setAttribute("class","comment");
+            const header3 = document.createElement("h3");
+            header3.innerHTML = comments[i].author + " - " + comments[i].date;
+            const message = document.createElement("p");
+            message.innerHTML = comments[i].message;
+            newComment.appendChild(header3);
+            newComment.appendChild(message);
+            createCommentArea.appendChild(newComment);
+        }
+    }
+}
+
+//creates a comment, in use for foreach loop
+
 //*************************************Initializers************************************
 
 //Creates an entry on the video-overview for every video listed in the videos.json
 function initVideoOverview(){
     const request = createAjaxRequest();
     request.onreadystatechange = function(){
-        if(4 == this.readyState && 200 == this.status){
+        if((4 === this.readyState) && (200 === this.status)){
             const videos = JSON.parse(this.responseText);
             const videoOverview = document.getElementById("videooverview");
             let video = new Video("","","","");
@@ -74,7 +119,6 @@ function initVideoOverview(){
                 videoOverview.appendChild(videoDiv);
             }
         }
-        console.log(this.readystatechange + " : " + this.status)
     }
     request.open("GET","videos.json",true);
     request.send();
@@ -96,29 +140,41 @@ function showVideoPlayerHideOverview(videoStr){
         const buttonBackToVideos = document.getElementById("backtovideos");
         const videoPlayer = document.createElement("video");
         const videoSource = document.createElement("source");
+        const videoId = document.createElement("div");
 
+        //Initialize video player
         videoPlayer.setAttribute("controls","true");
         videoPlayer.setAttribute("autoplay","true");
         videoPlayer.setAttribute("width","800");
         videoPlayer.setAttribute("height","450");
         videoSource.setAttribute("type","video/mp4");
         videoSource.setAttribute("src",video.src);
+        videoId.setAttribute("id","videoId");
+        videoId.setAttribute("style","display: none;")
         videoPlayer.appendChild(videoSource);
+        videoPlayer.appendChild(videoId);
         vidArea.insertBefore(videoPlayer,vidArea.firstChild);
 
+        videoId.innerHTML = video.id;
         vidOverview.style.display = "none";
         videoTitle.innerHTML = video.name;
         buttonBackToVideos.style.display = "block";
         vidArea.style.display = "block";
+
+        generateComments(videoId.innerHTML);
         hideSlideShow();
     }
 }
+
 //Shows the video-list and hides the video-player
 function showOverviewHideVideoplayer(){
     const vidOverview = document.getElementById("videooverview");
     if(vidOverview.style.display == "none"){
         const vidArea = document.getElementById("videoArea");
         const buttonBackToVideos = document.getElementById("backtovideos");
+        const createCommentArea = document.createElement("createcommentarea");
+
+        createCommentArea.innerHTML = "";
         vidArea.removeChild(vidArea.firstChild);
         vidArea.style.display = "none";
         vidOverview.style.display = "block";
@@ -127,21 +183,35 @@ function showOverviewHideVideoplayer(){
     }
 }
 
-//Creats a new comment
+//Creates a new comment
 function submitComment(){
-    const newComment = document.createElement("div");
+    //Get needed elements
     const authorInput = document.getElementById("inputname");
+    const author = authorInput.value;
     const messageInput = document.getElementById("inputmessage");
-    const date = new Date();
+    const message = messageInput.value;
+    const videoId = document.getElementById("videoId");
+
+    //Check inputs for illegal chars
     if(!isInputLegal(authorInput.value) || !isInputLegal(messageInput.value)){
         return;
     }
-    newComment.setAttribute("class","comment");
-    newComment.innerHTML = "<h3>" + authorInput.value + " - " + date.toDateString() + " " + date.toTimeString() +  "</h3>" + messageInput.value;
-    document.getElementById("commentsection").appendChild(newComment);
+    //Create new comment
+    const newComment = new Comment(author,message);
+    //Save new comment in webstorage
+    const currentVideoId = document.getElementById("videoId");
+    const comments = loadCommentsForId(currentVideoId.innerHTML);
+    if(!comments){
+        console.log("No entry for this video found");
+    }
+    comments.push(newComment);
+    saveCommentsForId(comments, currentVideoId.innerHTML);
 
+    //Reset form values
     authorInput.value = "";
     messageInput.value = "";
+
+    generateComments(videoId.innerHTML);
 }
 //*************************************Slideshow-Functions***********************************
 function slideshowGetVideo(i) {
