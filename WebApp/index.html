@@ -13,13 +13,30 @@
         <meta name="description" content="Lassen Sie sich durch kurze Videos ein Lächeln aufs Gesicht zaubern">
         <meta name="keywords" content="Videos,Fun,clips">
         <meta name="author" content="Team 17">
+        <script>
+
+            function openAlert() {
+                const alert = document.getElementById("login-accept");
+                alert.style.bottom = "95%";
+                alert.style.height = "5%";
+                setTimeout(closeAlert,3000);
+            }
+            function closeAlert() {
+                const alert = document.getElementById("login-accept");
+                alert.style.bottom = "100%";
+                alert.style.height = "0%";
+            }
+        </script>
     </head>
     <body onload="init()">
+    <div id="login-accept" class="login-alert">
+        <div class="text-alert">Anmeldung erfolgreich</div>
+    </div>
 
     <header>
         <ul class="header">
-            <li class="header" style="width: 10%;">
-                <img src="media/bilder/Logo.png" height="85" width="85" align="left"/>
+            <li class="header test" style="width: 10%;">
+                <img  src="media/bilder/Logo.png" height="85" width="85" align="left"/>
             </li>
             <li class="header" style="width: 80%;">
                 <h1 style="text-align: center;font-size: 30px; color: black">Team 17 Videos</h1>
@@ -29,6 +46,7 @@
             </li>
         </ul>
     </header>
+    <button onclick="openAlert()"> bottom</button>
 
     <nav>
         <ul class="nav">
@@ -45,7 +63,7 @@
     </nav>
 
     <div id="login" class="background-login">
-        <form class="login-window animate" method="post">
+        <form id="logininput" class="login-window animate" action="index.html" method="get">
             <div class="closediv">
                 <div id="login-header">Login</div>
                 <span class="close-x" onclick="document.getElementById('login').style.display='none'" title="Fenster schließen">&times;</span>
@@ -63,8 +81,8 @@
             </div>
             <div class="window-form" style="background-color: #f2f2f2">
                 <button type="button" title="Fenster schließen" onclick="document.getElementById('login').style.display='none'" class="closebtn">Cancel</button>
+                <input type="submit" onsubmit="openAlert()" class="login" style="text-align: center">Login</input>
             </div>
-            <button type="submit" class="login" style="text-align: center">Login</button>
 
         </form>
     </div>

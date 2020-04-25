@@ -42,14 +42,16 @@ header{
 }
 
 .videoLink {
+    box-sizing: border-box;
     border-style: groove;
     border-color: floralwhite;
     border-radius: 5px;
     float: left;
     margin: 1%;
-    padding: 1%;
+    padding: 5px;
     height: 125px;
-    width: 15%;
+    width: 20%;
+    min-width: 120px;
 }
 
 #videooverview{
