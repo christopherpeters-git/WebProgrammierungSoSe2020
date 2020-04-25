@@ -1,5 +1,5 @@
 *{
-    font-family:"Courier New";
+    font-family:"Times New Roman";
 }
 header{
     padding: 30px;
@@ -27,7 +27,7 @@ ul.nav {
 }
 
 li.nav{
-    display: inline;
+    display: inline-block;
     margin-right: 40px;
 }
 
