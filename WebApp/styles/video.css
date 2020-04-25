@@ -40,3 +40,8 @@
     border: 1px solid black; 
 }
 
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
