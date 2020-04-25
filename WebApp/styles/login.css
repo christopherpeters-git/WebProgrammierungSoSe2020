@@ -14,20 +14,36 @@ button {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+}
+
+button.login {
+    float: right;
+    display: block;
+    padding: 14px 20px;
+    margin: 8px 0;
+    width: auto%;
 }
 
 button:hover {
     opacity: 0.8;
+}
+#login-header{
+    background-color: #4CAF50;
+    text-align: center;
+    padding: 8px 0;
+    font-size: larger;
+    font-weight: bolder;
+    margin: 0 0 20px 0;
 }
 
 .closebtn{
     width: auto;
     padding: 10px 18px;
     background-color: #f44336;
+    float: none;
 }
 .window-form{
-    padding: 16px;
+    padding: 0px 16px 16px 16px;
 }
 .background-login{
     display: none;
@@ -71,4 +87,9 @@ button:hover {
 @-webkit-keyframes animatezoom {
     from {-webkit-transform: scale(0)}
     to {transform: scale(1)}
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
 }

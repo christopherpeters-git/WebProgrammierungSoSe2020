@@ -25,7 +25,7 @@
                 <h1 style="text-align: center;font-size: 30px; color: black">Team 17 Videos</h1>
             </li>
             <li class="header" style="width: 10%;">
-                <button onclick="document.getElementById('login').style.display='block'" style="width: auto;">Lgoin</button>
+                <button onclick="document.getElementById('login').style.display='block'" style="width: auto;">Login</button>
             </li>
         </ul>
     </header>
@@ -47,16 +47,17 @@
     <div id="login" class="background-login">
         <form class="login-window animate" method="post">
             <div class="closediv">
+                <div id="login-header">Login</div>
                 <span class="close-x" onclick="document.getElementById('login').style.display='none'" title="Fenster schließen">&times;</span>
             </div>
-            <div class="window-form">
-                <label for="username"><b>E-Mail Adresse</b></label>
+            <div class="window-form clearfix">
+                <label for="username"><b>E-Mail</b></label>
                 <input type="email" placeholder="E-Mail Adresse eintragen" name="username" required>
 
                 <label for="password"><b>Passwort</b></label>
                 <input type="password" placeholder="Passwort eintragen" name="password" required>
 
-                <button type="submit">Login</button>
+                <button type="submit" class="login" style="text-align: center">Login</button>
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
