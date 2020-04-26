@@ -15,7 +15,6 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    position: ;
 }
 
 button.login {
@@ -85,7 +84,7 @@ button:hover .login-alert{
     color: red;
     cursor: pointer;
 }
-.login-alert{
+.alert{
     position: absolute;
     bottom: 100%;
     left: 0;
@@ -108,20 +107,12 @@ button:hover .login-alert{
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-
-}
-.test:hover .login-alert{
-    bottom: 90%;
 }
 
 .animate {
     -webkit-animation: animatezoom 0.6s;
     animation: animatezoom 0.6s;
 }
-
- @keyframes alertwindow{
-
- }
 
 @-webkit-keyframes animatezoom {
     from {-webkit-transform: scale(0)}
