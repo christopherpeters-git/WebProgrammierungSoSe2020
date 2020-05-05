@@ -4,5 +4,7 @@
   { "id":1, "src":"media/videos/wendler_egal.mp4", "name": "wendler_egal.mp4", "duration": "0:03",
     "thumbnailPath":"media/bilder/wendler_egal.jpg" },
   { "id":2, "src":"media/videos/Avengers_Whatever_It_Takes.mp4", "name": "Whatever it Takes", "duration": "0:04",
-    "thumbnailPath":"media/bilder/whatever_it_takes.jpg"}
+    "thumbnailPath":"media/bilder/whatever_it_takes.jpg"},
+  { "id":3, "src":"media/videos/zaehne_putzen.mp4", "name": "zaehne_putzen.mp4", "duration": "0:03",
+    "thumbnailPath":"media/bilder/zaehne_putzen.jpg"}
 ]
