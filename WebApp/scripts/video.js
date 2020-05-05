@@ -107,16 +107,21 @@ function initVideoOverview(){
                 const videoDiv = document.createElement("div");
                 const header5 = document.createElement("h5");
                 const header7 = document.createElement("h7");
-                const ahref = document.createElement("a");
+                const a = document.createElement("a");
+                const img = document.createElement("img");
 
                 videoDiv.setAttribute("class","videoLink");
-                ahref.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
-                ahref.innerHTML = video.name;
-                header5.appendChild(ahref);
+                a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
+                img.setAttribute("src",video.thumbnailPath);
+                console.log(video.thumbnailPath);
+                img.setAttribute("class","thumbnail");
+                header5.innerHTML = video.name;
                 header7.innerHTML = video.duration;
+                videoDiv.appendChild(img);
                 videoDiv.appendChild(header5);
                 videoDiv.appendChild(header7);
-                videoOverview.appendChild(videoDiv);
+                a.appendChild(videoDiv);
+                videoOverview.appendChild(a);
             }
         }
     }

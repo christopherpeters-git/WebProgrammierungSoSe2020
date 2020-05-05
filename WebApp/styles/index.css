@@ -48,12 +48,18 @@ header{
     float: left;
     margin: 1%;
     padding: 1%;
-    height: 125px;
+    height: 150px;
     width: 15%;
+    line-height: 0px;
 }
 
 #videooverview{
     margin-left: 25%;
     width: 50%;
+}
+
+.thumbnail{
+    width: 100%;
+    height: 60%;
 }
 
