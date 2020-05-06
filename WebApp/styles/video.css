@@ -9,6 +9,7 @@
     border-radius: 8px;
     background-color: white;
     font-family: serif;
+    padding-left: 1%;
 }
 
 #videoArea{
@@ -24,7 +25,6 @@
 #createcommentarea{
     margin: auto;
     font-size: x-small;
-    width: 790px;
     border-radius: 8px;
     background-color: white;
     border: 1px solid black;
@@ -33,17 +33,16 @@
 #videoinfo{
     margin: auto;
     font-size: x-small;
-    width: 790px;
     border-radius: 8px;
     background-color: white;
-    border: 1px solid black; 
+    border: 1px solid black;
+    padding-left: 1%;
 }
 
 #submitCommentDiv{
     text-align: center;
     border-radius: 8px;
     border: 1px solid black;
-
 }
 
 .clearfix::after {
