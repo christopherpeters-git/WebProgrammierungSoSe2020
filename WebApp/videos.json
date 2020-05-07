@@ -1,5 +1,14 @@
 [
-  { "id":0, "src":"media/videos/funnyvid0.mp4", "name": "funnyVid00.mp4", "duration": "0:03"},
-  { "id":1, "src":"media/videos/wendler_egal.mp4", "name": "wendler_egal.mp4", "duration": "0:03"},
-  { "id":2, "src":"media/videos/Avengers_Whatever_It_Takes.mp4", "name": "Whatever it Takes", "duration": "0:04"}
+  { "id":0, "src":"media/videos/funnyvid0.mp4", "name": "funnyVid00.mp4", "duration": "0:03",
+    "thumbnailPath":"media/bilder/Funnyvid.jpg"},
+  { "id":1, "src":"media/videos/wendler_egal.mp4", "name": "wendler_egal.mp4", "duration": "0:03",
+    "thumbnailPath":"media/bilder/wendler_egal.jpg" },
+  { "id":2, "src":"media/videos/Avengers_Whatever_It_Takes.mp4", "name": "Whatever it Takes", "duration": "0:04",
+    "thumbnailPath":"media/bilder/whatever_it_takes.jpg"},
+  { "id":3, "src":"media/videos/zaehne_putzen.mp4", "name": "zaehne_putzen.mp4", "duration": "0:03",
+    "thumbnailPath":"media/bilder/zaehne_putzen.jpg"},
+  { "id":4, "src":"media/videos/cool_cars.mp4", "name": "cool_cars.mp4", "duration": "0:04",
+    "thumbnailPath":"media/bilder/cool_cars.jpg"},
+  { "id":5, "src":"media/videos/coincidance.mp4", "name": "coincidance.mp4", "duration": "0:06",
+    "thumbnailPath":"media/bilder/coincidance.jpg"}
 ]
