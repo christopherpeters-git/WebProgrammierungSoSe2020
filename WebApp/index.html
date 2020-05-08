@@ -8,41 +8,17 @@
         <link rel="stylesheet" href="styles/login.css">
         <script src="scripts/video.js"></script>
         <script src="scripts/slideshow.js"></script>
+        <script src="scripts/login.js"></script>
         <meta charset="UTF8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Lassen Sie sich durch kurze Videos ein Lächeln aufs Gesicht zaubern">
         <meta name="keywords" content="Videos,Fun,clips">
         <meta name="author" content="Team 17">
-        <script>
-            document.getElementById('logininput').addEventListener(
-                "submit", function (evt) {
-                  //  let username = document.getElementById('username').nodeValue;
-                  //  let password = document.getElementById('password').nodeValue;
-                  //  if(username=="asdf@asdf.de" && password=="asdf"){
-                        openAlert("login erfolgreich");
-                  //  }
-                }
-            )
-            function openAlert(inhalt) {
-                const alert = document.getElementById("alert");
-                const text = document.createElement("div");
-                text.setAttribute("class","text-alert");
-                text.innerHTML = inhalt;
-                alert.appendChild(text);
-                alert.style.bottom = "95%";
-                alert.style.height = "5%";
-                setTimeout(closeAlert,3000);
-            }
-            function closeAlert() {
-                const alert = document.getElementById("alert");
-                alert.style.bottom = "100%";
-                alert.style.height = "0%";
-            }
-        </script>
+
     </head>
     <body onload="init()">
     <div id="alert" class="alert">
-        <div class="text-alert"></div>
+        <div id="alert-text" class="text-alert"></div>
     </div>
 
     <header>
@@ -50,15 +26,22 @@
             <li class="header test" style="width: 10%;">
                 <img  src="media/bilder/Logo.png" height="85" width="85" align="left"/>
             </li>
-            <li class="header" style="width: 80%;">
+            <li class="header" style="width: 75%;">
                 <h1 style="text-align: center;font-size: 30px; color: black">Team 17 Videos</h1>
             </li>
-            <li class="header" style="width: 10%;">
-                <button onclick="document.getElementById('login').style.display='block'" style="width: auto;">Login</button>
+            <li class="header" style="width: 15%;">
+                <span id="login-name" style="font-size: larger;"></span>
+                <button id="loginLogout" onclick="document.getElementById('login').style.display='block'" style="width: auto; float: right">Login</button>
             </li>
         </ul>
     </header>
     <button onclick="openAlert('Button alert')"> bottom</button>
+
+    <div id="searcharea" style="text-align: center">
+        <button id="returnToMainPage" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>
+        <input style="color: black; background-color: white; margin: auto; position: center; height: 45px " type="text" size="50"  id="searchentry" placeholder="Search">
+        <button style="position: center" onclick="searchVideos()"> Search</button>
+    </div>
 
     <nav>
         <ul class="nav">
@@ -74,23 +57,27 @@
         </ul>
     </nav>
 
+    <div id="searchentrys" style="text-align: center"></div>
+
     <div id="login" class="background-login">
-        <form id="logininput" class="login-window animate" action="" method="get">
+        <form id="logininput" class="login-window animate"  method="get">
             <div class="closediv">
                 <div id="login-header">Login</div>
                 <span class="close-x" onclick="document.getElementById('login').style.display='none'" title="Fenster schließen">&times;</span>
             </div>
             <div class="window-form clearfix">
-                <label for="username"><b>E-Mail</b></label>
-                <input id="username" type="email" placeholder="E-Mail Adresse eintragen" name="username" required>
+                <label for="username"><b>Benutzername</b></label>
+                <input class="login" id="username" type="text" placeholder="Benutzername eintragen" name="username" required>
 
                 <label for="password"><b>Passwort</b></label>
-                <input id="password" type="password" placeholder="Passwort eintragen" name="password" required>
+                <input class="login" id="password" type="password" placeholder="Passwort eintragen" name="password" required>
+
+                <div id="login-notification" style="color: #f44336; display: none;"> Username oder Passwort falsch! </div>
 
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
-                <input type="submit" onsubmit="openAlert('test')" class="login" style="text-align: center">Login</input>
+                <button type="button"  onclick="loginCheck()" class="login" style="text-align: center">Login</button>
 
             </div>
             <div class="window-form" style="background-color: #f2f2f2">
@@ -145,7 +132,7 @@
                 <div id = "videoinfo">
                     <h1 id="videotitle" style="display: inline-block;">Title</h1>
                 </div>
-                <div class="comment">
+                <div id="submitCommentDiv">
                     <input id="inputname" placeholder="Author">
                     <input id="inputmessage" placeholder="Message">
                     <button onclick="submitComment()">Submit Comment</button>

@@ -1,4 +1,4 @@
-input[type=email], input[type=password] {
+input[type=text].login, input[type=password].login {
     width: 100%;
     padding: 10px 15px;
     margin: 10px 0;
@@ -22,7 +22,7 @@ button.login {
     display: block;
     padding: 14px 20px;
     margin: 8px 0;
-    width: 25%;
+    width: auto;
 }
 
 button:hover {

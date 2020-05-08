@@ -15,11 +15,12 @@ class Comment{
 }
 
 class Video{
-    constructor(id,src,name,duration){
+    constructor(id,src,name,duration,category){
         this.id = id;
         this.src = src;
         this.name = name;
         this.duration = duration;
+        this.category = category;
     }
 }
 
@@ -107,16 +108,21 @@ function initVideoOverview(){
                 const videoDiv = document.createElement("div");
                 const header5 = document.createElement("h5");
                 const header7 = document.createElement("h7");
-                const ahref = document.createElement("a");
+                const a = document.createElement("a");
+                const img = document.createElement("img");
 
                 videoDiv.setAttribute("class","videoLink");
-                ahref.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
-                ahref.innerHTML = video.name;
-                header5.appendChild(ahref);
+                a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
+                img.setAttribute("src",video.thumbnailPath);
+                console.log(video.thumbnailPath);
+                img.setAttribute("class","thumbnail");
+                header5.innerHTML = video.name;
                 header7.innerHTML = video.duration;
+                videoDiv.appendChild(img);
                 videoDiv.appendChild(header5);
                 videoDiv.appendChild(header7);
-                videoOverview.appendChild(videoDiv);
+                a.appendChild(videoDiv);
+                videoOverview.appendChild(a);
             }
         }
     }
@@ -132,8 +138,10 @@ function init(){
 
 //Shows the video-player and hides the video-list
 function showVideoPlayerHideOverview(videoStr){
+    document.getElementById("searchentrys").innerHTML = "";
     var vidArea = document.getElementById("videoArea");
     if(vidArea.style.display == "none") {
+        const buttonMainP = document.getElementById("returnToMainPage");
         const video = JSON.parse(videoStr);
         const vidOverview = document.getElementById("videooverview");
         const videoTitle = document.getElementById("videotitle");
@@ -141,6 +149,7 @@ function showVideoPlayerHideOverview(videoStr){
         const videoPlayer = document.createElement("video");
         const videoSource = document.createElement("source");
         const videoId = document.createElement("div");
+        const slideShow = document.getElementById("slideShow");
 
         //Initialize video player
         videoPlayer.setAttribute("controls","true");
@@ -160,25 +169,33 @@ function showVideoPlayerHideOverview(videoStr){
         videoTitle.innerHTML = video.name;
         buttonBackToVideos.style.display = "block";
         vidArea.style.display = "block";
+        buttonMainP.style.display = "none";
 
         generateComments(videoId.innerHTML);
-        hideSlideShow();
+        if(slideShow.style.display == "block") {
+            hideSlideShow();
+        }
     }
 }
 
 //Shows the video-list and hides the video-player
 function showOverviewHideVideoplayer(){
+    document.getElementById("searchentrys").innerHTML = "";
     const vidOverview = document.getElementById("videooverview");
     if(vidOverview.style.display == "none"){
         const vidArea = document.getElementById("videoArea");
         const buttonBackToVideos = document.getElementById("backtovideos");
         const createCommentArea = document.createElement("createcommentarea");
+        const buttonBackToMainPage = document.getElementById("returnToMainPage");
 
         createCommentArea.innerHTML = "";
-        vidArea.removeChild(vidArea.firstChild);
+        if(vidArea.firstChild != null) {
+            vidArea.removeChild(vidArea.firstChild);
+        }
         vidArea.style.display = "none";
         vidOverview.style.display = "block";
         buttonBackToVideos.style.display = "none";
+        buttonBackToMainPage.style.display = "none";
         hideSlideShow();
     }
 }
@@ -212,6 +229,67 @@ function submitComment(){
     messageInput.value = "";
 
     generateComments(videoId.innerHTML);
+}
+
+function searchVideos() {
+    document.getElementById("searchentrys").innerHTML = "";
+    const slideShow = document.getElementById("slideShow");
+    if(slideShow.style.display == "block") {
+        //console.log("jabadadu");
+        hideSlideShow();
+    }
+    const buttonBackToMainPage = document.getElementById("returnToMainPage");
+    buttonBackToMainPage.style.display = "block";
+    const search = document.getElementById("searchentry").value;
+    const vidOverview = document.getElementById("videooverview")
+    vidOverview.style.display = "none";
+    console.log(search);
+    let video = new Video("","","","");
+    var request = createAjaxRequest();
+    request.onreadystatechange = function(){
+        if(4 == this.readyState && 200 == this.status) {
+            const videos = JSON.parse(this.responseText);
+            const searchresults = document.getElementById("searchentrys");
+            for (video of videos) {
+                // console.log(video.name)
+                if(checkVideoAttributes(search,video) || (video.duration.localeCompare(search)==0)) {
+                    const videoDiv = document.createElement("div");
+                    const header5 = document.createElement("h5");
+                    const header7 = document.createElement("h7");
+                    const a = document.createElement("a");
+                    const img = document.createElement("img");
+
+                    videoDiv.setAttribute("class","videoLink");
+                    a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
+                    img.setAttribute("src",video.thumbnailPath);
+                    console.log(video.thumbnailPath);
+                    img.setAttribute("class","thumbnail");
+                    header5.innerHTML = video.name;
+                    header7.innerHTML = video.duration;
+                    videoDiv.appendChild(img);
+                    videoDiv.appendChild(header5);
+                    videoDiv.appendChild(header7);
+                    a.appendChild(videoDiv);
+                    searchresults.appendChild(a);
+                }
+            }
+        }
+    }
+    request.open("GET","./videos.json",true);
+    request.send();
+
+}
+
+function checkVideoAttributes(searchEntry,video) {
+    if(searchEntry === "") {
+        return false;
+    }
+    let searchEntryNormalized = searchEntry.toUpperCase();
+    let videoName = video.name.toUpperCase();
+    let videoCategory = video.category.toUpperCase();
+    if(videoName.includes(searchEntryNormalized) || videoCategory.includes(searchEntryNormalized)) {
+        return true;
+    }
 }
 //*************************************Slideshow-Functions***********************************
 function slideshowGetVideo(i) {
