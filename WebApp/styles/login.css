@@ -21,7 +21,7 @@ button.login {
     display: block;
     padding: 14px 20px;
     margin: 8px 0;
-    width: auto%;
+    width: auto;
 }
 
 button:hover {

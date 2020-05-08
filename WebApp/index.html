@@ -30,6 +30,12 @@
         </ul>
     </header>
 
+    <div id="searcharea" style="text-align: center">
+        <button id="returnToMainPage" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>
+        <input style="color: black; background-color: white; margin: auto; position: center; height: 45px " type="text" size="50"  id="searchentry" placeholder="Search">
+        <button style="position: center" onclick="searchVideos()"> Search</button>
+    </div>
+
     <nav>
         <ul class="nav">
             <li class="nav">
@@ -43,6 +49,8 @@
             </li>
         </ul>
     </nav>
+
+    <div id="searchentrys" style="text-align: center"></div>
 
     <div id="login" class="background-login">
         <form class="login-window animate" method="post">
