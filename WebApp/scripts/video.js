@@ -172,7 +172,10 @@ function showVideoPlayerHideOverview(videoStr){
         buttonMainP.style.display = "none";
 
         generateComments(videoId.innerHTML);
-        if(slideShow.style.display == "block") {
+
+
+        if(slideShow.hidden == false) {
+            console.log(slideShow);
             hideSlideShow();
         }
     }
@@ -234,7 +237,7 @@ function submitComment(){
 function searchVideos() {
     document.getElementById("searchentrys").innerHTML = "";
     const slideShow = document.getElementById("slideShow");
-    if(slideShow.style.display == "block") {
+    if(slideShow.hidden == false) {
         //console.log("jabadadu");
         hideSlideShow();
     }
@@ -306,10 +309,10 @@ function slideshowGetVideo(i) {
 }
 function hideSlideShow() {
     const slideShow= document.getElementById("slideShow");
-    if(slideShow.style.display=="none"){
-        slideShow.style.display = "block";
+    if(slideShow.hidden==false){
+        slideShow.hidden=true;
     }else {
-        slideShow.style.display = "none";
+        slideShow.hidden=false;
     }
 
 }
