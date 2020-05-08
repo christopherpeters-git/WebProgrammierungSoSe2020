@@ -2,6 +2,7 @@
 
 const forbidden=['<','>'];
 const localStorageVideoPrefix = "video";
+let loggedIn = true;
 
 //*************************************Classes**************************************
 //NOT USED YET
@@ -73,7 +74,7 @@ function saveCommentsForId(comments, id){
 
 //Clears "createcommentarea" and generates and appends saved comments to parent
 function generateComments(videoIdStr){
-    const createCommentArea = document.getElementById("createcommentarea");
+    const createCommentArea = document.getElementById("createCommentArea");
     createCommentArea.innerHTML = "";
     const comments = loadCommentsForId(videoIdStr);
     if(!(comments.length === 0)){
@@ -150,6 +151,7 @@ function showVideoPlayerHideOverview(videoStr){
         const videoSource = document.createElement("source");
         const videoId = document.createElement("div");
         const slideShow = document.getElementById("slideShow");
+        const submitCommentDiv = document.getElementById("submitCommentDiv")
 
         //Initialize video player
         videoPlayer.setAttribute("controls","true");
@@ -170,9 +172,11 @@ function showVideoPlayerHideOverview(videoStr){
         buttonBackToVideos.style.display = "block";
         vidArea.style.display = "block";
         buttonMainP.style.display = "none";
+        if(loggedIn){
+            submitCommentDiv.style.display = "block";
+        }
 
         generateComments(videoId.innerHTML);
-
 
         if(slideShow.hidden == false) {
             console.log(slideShow);
@@ -190,6 +194,7 @@ function showOverviewHideVideoplayer(){
         const buttonBackToVideos = document.getElementById("backtovideos");
         const createCommentArea = document.createElement("createcommentarea");
         const buttonBackToMainPage = document.getElementById("returnToMainPage");
+        const submitCommentDiv = document.getElementById("submitCommentDiv")
 
         createCommentArea.innerHTML = "";
         if(vidArea.firstChild != null) {
@@ -199,6 +204,7 @@ function showOverviewHideVideoplayer(){
         vidOverview.style.display = "block";
         buttonBackToVideos.style.display = "none";
         buttonBackToMainPage.style.display = "none";
+        submitCommentDiv.style.display = "none";
         hideSlideShow();
     }
 }
@@ -208,7 +214,7 @@ function submitComment(){
     //Get needed elements
     const authorInput = document.getElementById("inputname");
     const author = authorInput.value;
-    const messageInput = document.getElementById("inputmessage");
+    const messageInput = document.getElementById("inputMessage");
     const message = messageInput.value;
     const videoId = document.getElementById("videoId");
 

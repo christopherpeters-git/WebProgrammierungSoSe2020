@@ -118,16 +118,16 @@
     <div id="videooverview"></div>
         <button id="backtovideos" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>
         <div id="videoArea" style="display: none;">
-            <div id="commentsection">
-                <div id = "videoinfo">
+            <div id="commentSection">
+                <div id = "videoInfo">
                     <h1 id="videotitle" style="display: inline-block;">Title</h1>
                 </div>
-                <div id="submitCommentDiv">
-                    <input id="inputname" placeholder="Author">
-                    <input id="inputmessage" placeholder="Message">
-                    <button onclick="submitComment()">Submit Comment</button>
+                <div id="submitCommentDiv" style="display: none;">
+<!--                <input id="inputname" placeholder="Author" class="commentInput">-->
+                    <input id="inputMessage" placeholder="Message">
+                    <button id="submitCommentButton" onclick="submitComment()">Submit Comment</button>
                 </div>
-                <div id = "createcommentarea">
+                <div id = "createCommentArea">
 
                 </div>
             </div>
