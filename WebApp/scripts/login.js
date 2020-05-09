@@ -1,86 +1,72 @@
 class user {
-    constructor(username, password) {
+    constructor(username, password, loginAccepted) {
         this.username = username;
         this.password = password;
-        this.loginAccepted = false;
+        this.loginAccepted = loginAccepted;
     }
     get getname(){
         return this.username;
-    }
-    get getpassword(){
-        return this.password;
     }
     set loginStatus(staus){
         return this.loginAccepted=staus;
     }
 
 }
-
+//Funktion überprüft die Benutzerdaten und meldet den User an.
 function loginCheck() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    const userlogin = new user(username, password);
-   //  let usertest = new user("test","passwort");
+    const userlogin = new user(username, password,false);
     const request = createAjaxRequest();
     request.onreadystatechange = function() {
-        openAlert("Test vor der if");
         if ((4 === this.readyState) && (200 === this.status)){
-            openAlert("Test in der if")
-            const users = JSON.parse(this.responseText);
-            let iterator = new user("","");
-            for (iterator of users){
-                openAlert("Test in der for");
+            const logins = JSON.parse(this.responseText);
+            let iterator = new user("", "");
+            for (iterator of logins){
                 if (userComparison(userlogin,iterator)){
                     document.getElementById('login-notification').style.display='none';
                     document.getElementById('login').style.display='none';
-
                     document.getElementById('login-name').innerHTML= 'Angemeldet als: ' + userlogin.getname;
                     document.getElementById('loginLogout').innerHTML="Logout";
                     document.getElementById('loginLogout').setAttribute('onclick', 'logout()');
                     openAlert("login erfolgreich");
                     userlogin.loginStatus(true);
+                    //Speichert die Benutzerdaten im local Storage.
+                    localStorage.setItem('auth',JSON.stringify(userlogin));
                     return;
                 }
             }
             document.getElementById('login-notification').style.display='block';
         }
-        request.open("GET","login.json",true);
-        request.send();
+
     }
-    /*
-    if (userComparison(userlogin,usertest)) {
-       document.getElementById('login-notification').style.display='none';
-       document.getElementById('login').style.display='none';
-
-       document.getElementById('login-name').innerHTML= 'Angemeldet als: ' + userlogin.getname;
-       document.getElementById('loginLogout').innerHTML="Logout";
-       document.getElementById('loginLogout').setAttribute('onclick', 'logout()');
-       openAlert("login erfolgreich");
-       userlogin.loginStatus(true);
-
-
-    } else {
-        document.getElementById('login-notification').style.display='block';
-
-    } */
+    request.open("GET","logins.json",true);
+    request.send();
 }
 
-
+//Meldet den Benutzer ab.
 function logout() {
     let lgoinbutton = document.getElementById('loginLogout');
     lgoinbutton.setAttribute('onclick', 'document.getElementById(\'login\').style.display=\'block\'');
     lgoinbutton.innerText='Login';
     document.getElementById('login-name').innerHTML= '';
     openAlert("Erfolgreich Ausgeloggt")
+    //Entfernt Benutzerdaten aus dem local Storage.
+    localStorage.removeItem('auth');
 }
 
+// Vergleicht zweier Benutzerdaten.
 function userComparison (loginuser,vergleich) {
-    if (loginuser.getname === vergleich.getname && loginuser.getpassword === vergleich.getpassword){
+    if (loginuser.username === vergleich.username && loginuser.password === vergleich.password){
         return true;
     }
     return false;
 }
 
+/*
+Fährt das Hinweisfenster mit ensprechenden Inhalt aus.
+inhalt = String der den Inhalt des Hinweises enthällt.
+ */
 function openAlert(inhale) {
     const alert = document.getElementById('alert');
     const text = document.getElementById('alert-text');
@@ -88,8 +74,8 @@ function openAlert(inhale) {
     alert.style.bottom = "95%";
     alert.style.height = "5%";
     setTimeout(closeAlert,3000);
-
 }
+//Fährt das Hinweisfenster wieder ein.
 function closeAlert() {
     const alert = document.getElementById("alert");
     alert.style.bottom = "100%";
