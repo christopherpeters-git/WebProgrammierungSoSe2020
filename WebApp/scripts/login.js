@@ -12,6 +12,23 @@ class user {
     }
 
 }
+
+function eventOnEnterByLogin() {
+    let inputUsername = document.getElementById('username');
+    let inputPasswort = document.getElementById('password');
+
+    inputPasswort.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            loginCheck();
+        }
+    });
+    inputUsername.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            loginCheck();
+        }
+    });
+}
+
 //Funktion überprüft die Benutzerdaten und meldet den User an.
 function loginCheck() {
     const username = document.getElementById('username').value;
@@ -29,7 +46,7 @@ function loginCheck() {
                     document.getElementById('login-name').innerHTML= 'Angemeldet als: ' + userlogin.getname;
                     document.getElementById('loginLogout').innerHTML="Logout";
                     document.getElementById('loginLogout').setAttribute('onclick', 'logout()');
-                    openAlert("login erfolgreich");
+                    openAlert("Login erfolgreich");
                     userlogin.loginStatus(true);
                     //Speichert die Benutzerdaten im local Storage.
                     localStorage.setItem('auth',userlogin.username);

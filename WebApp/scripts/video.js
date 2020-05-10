@@ -92,6 +92,7 @@ function generateComments(videoIdStr){
     }
 }
 
+
 //creates a comment, in use for foreach loop
 
 //*************************************Initializers************************************
@@ -133,7 +134,8 @@ function initVideoOverview(){
 //*************************************HTML-called-functions***********************************
 //Is called on page load, calls all initializers
 function init(){
-    initVideoOverview()
+    initVideoOverview();
+    eventOnEnter();
 }
 
 //Shows the video-player and hides the video-list
