@@ -13,6 +13,11 @@ class user {
 
 }
 
+function closeLoginWindow() {
+    document.getElementById('login').style.display='none';
+    document.getElementById('login-notification').style.display='none';
+}
+
 function eventOnEnterByLogin() {
     let inputUsername = document.getElementById('username');
     let inputPasswort = document.getElementById('password');
@@ -33,6 +38,13 @@ function eventOnEnterByLogin() {
 function loginCheck() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+
+    if (!isInputLegal(username) || !isInputLegal(password)){
+        document.getElementById('login-notification').innerHTML = 'Username oder Passwort falsch!';
+        document.getElementById('login-notification').style.display='block';
+        return;
+    }
+
     const userlogin = new user(username, password,false);
     const request = createAjaxRequest();
     request.onreadystatechange = function() {
@@ -53,6 +65,7 @@ function loginCheck() {
                     return;
                 }
             }
+            document.getElementById('login-notification').innerHTML = 'Username oder Passwort falsch!';
             document.getElementById('login-notification').style.display='block';
         }
 

@@ -62,16 +62,16 @@
         <form id="logininput" class="login-window animate"  method="get">
             <div class="closediv">
                 <div id="login-header">Login</div>
-                <span class="close-x" onclick="document.getElementById('login').style.display='none'" title="Fenster schließen">&times;</span>
+                <span class="close-x" onclick="closeLoginWindow()" title="Fenster schließen">&times;</span>
             </div>
             <div class="window-form clearfix">
                 <label for="username"><b>Benutzername</b></label>
-                <input class="login" id="username" type="text" placeholder="Benutzername eintragen" name="username" required>
+                <input class="login" id="username" type="text" placeholder="Benutzername eintragen" name="username" required maxlength="20">
 
                 <label for="password"><b>Passwort</b></label>
-                <input class="login" id="password" type="password" placeholder="Passwort eintragen" name="password" required>
+                <input class="login" id="password" type="password" placeholder="Passwort eintragen" name="password" required maxlength="20">
 
-                <div id="login-notification" style="color: #f44336; display: none;"> Username oder Passwort falsch! </div>
+                <div id="login-notification" style="color: #f44336; display: none;"> </div>
 
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
@@ -79,18 +79,18 @@
 
             </div>
             <div class="window-form" style="background-color: #f2f2f2">
-                <button type="button" title="Fenster schließen" onclick="document.getElementById('login').style.display='none'" class="closebtn">Cancel</button>
+                <button type="button" title="Fenster schließen" onclick="closeLoginWindow()" class="closebtn">Cancel</button>
                 <button type="button"  onclick="loginCheck()" class="login" style="text-align: center">Login</button>
             </div>
 
         </form>
     </div>
     <script>
-        var windowLogin = document.getElementById('login');
+        let windowLogin = document.getElementById('login');
 
         window.onclick = function (event) {
             if (event.target == windowLogin) {
-                windowLogin.style.display='none';
+                closeLoginWindow();
             }
         }
     </script>

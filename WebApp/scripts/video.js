@@ -135,7 +135,7 @@ function initVideoOverview(){
 //Is called on page load, calls all initializers
 function init(){
     initVideoOverview();
-    eventOnEnter();
+    eventOnEnterByLogin();
 }
 
 //Shows the video-player and hides the video-list
