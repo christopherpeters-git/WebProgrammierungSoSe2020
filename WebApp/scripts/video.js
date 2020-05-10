@@ -2,6 +2,7 @@
 
 const forbidden=['<','>'];
 const localStorageVideoPrefix = "video";
+const categories= ["Entertainment", "Music","Cars"];
 
 //*************************************Classes**************************************
 //NOT USED YET
@@ -104,7 +105,33 @@ function initVideoOverview(){
             const videos = JSON.parse(this.responseText);
             const videoOverview = document.getElementById("videooverview");
             let video = new Video("","","","");
+            for(let i=0;i<categories.length;i++){
+                let t = document.createTextNode(categories[i]);
+                let hr = document.createElement("hr");
+                const text_div = document.createElement("div");
+                const videoKat= document.createElement("div");
+                videoKat.setAttribute("id",categories[i]);
+                text_div.setAttribute("class","text_category");
+                videoKat.setAttribute("class","category");
+                text_div.appendChild(t);
+                text_div.appendChild(hr);
+                videoKat.appendChild(text_div  );
+                videoOverview.appendChild(videoKat);
+            }
+
             for(video of videos){
+                let cat="";
+                for(let i=0;i<categories.length;i++){
+                    if(categories[i]===video.category){
+                        cat= categories[i];
+                        console.log(i);
+                        break;
+                    }
+                }
+                if(cat==""){
+                    return;
+                }
+                const catDiv = document.getElementById(cat);
                 const videoDiv = document.createElement("div");
                 const header5 = document.createElement("h5");
                 const header7 = document.createElement("h7");
@@ -122,7 +149,7 @@ function initVideoOverview(){
                 videoDiv.appendChild(header5);
                 videoDiv.appendChild(header7);
                 a.appendChild(videoDiv);
-                videoOverview.appendChild(a);
+                catDiv.appendChild(a);
             }
         }
     }
@@ -133,7 +160,14 @@ function initVideoOverview(){
 //*************************************HTML-called-functions***********************************
 //Is called on page load, calls all initializers
 function init(){
-    initVideoOverview()
+    initVideoOverview();
+    setEventhandlerSlideShow();
+
+    document.getElementById("slideshow-container").addEventListener('mouseenter', setButtonsVisible, false);
+    document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
+
+
+
 }
 
 //Shows the video-player and hides the video-list
@@ -141,11 +175,11 @@ function showVideoPlayerHideOverview(videoStr){
     document.getElementById("searchentrys").innerHTML = "";
     var vidArea = document.getElementById("videoArea");
     if(vidArea.style.display == "none") {
-        const buttonMainP = document.getElementById("returnToMainPage");
+       // const buttonMainP = document.getElementById("returnToMainPage");
         const video = JSON.parse(videoStr);
         const vidOverview = document.getElementById("videooverview");
         const videoTitle = document.getElementById("videotitle");
-        const buttonBackToVideos = document.getElementById("backtovideos");
+        //const buttonBackToVideos = document.getElementById("backtovideos");
         const videoPlayer = document.createElement("video");
         const videoSource = document.createElement("source");
         const videoId = document.createElement("div");
@@ -167,9 +201,9 @@ function showVideoPlayerHideOverview(videoStr){
         videoId.innerHTML = video.id;
         vidOverview.style.display = "none";
         videoTitle.innerHTML = video.name;
-        buttonBackToVideos.style.display = "block";
+      //  buttonBackToVideos.style.display = "block";
         vidArea.style.display = "block";
-        buttonMainP.style.display = "none";
+       // buttonMainP.style.display = "none";
 
         generateComments(videoId.innerHTML);
 
@@ -241,8 +275,8 @@ function searchVideos() {
         //console.log("jabadadu");
         hideSlideShow();
     }
-    const buttonBackToMainPage = document.getElementById("returnToMainPage");
-    buttonBackToMainPage.style.display = "block";
+   // const buttonBackToMainPage = document.getElementById("returnToMainPage");
+   // buttonBackToMainPage.style.display = "block";
     const search = document.getElementById("searchentry").value;
     const vidOverview = document.getElementById("videooverview")
     vidOverview.style.display = "none";
@@ -295,24 +329,4 @@ function checkVideoAttributes(searchEntry,video) {
     }
 }
 //*************************************Slideshow-Functions***********************************
-function slideshowGetVideo(i) {
-    if (i===0) {
-        var json = {"id": 2, "src": "media/videos/Avengers_Whatever_It_Takes.mp4", "name": "Whatever_it_takes", "duration": "0:04"};
-        var test_string = JSON.stringify(json);
-        showVideoPlayerHideOverview(test_string);
-    } else  if (i===1) {
-        var json = {"id": 1, "src": "media/videos/wendler_egal.mp4", "name": "Whatever_it_takes", "duration": "0:04"};
-        var test_string = JSON.stringify(json);
-        showVideoPlayerHideOverview(test_string);
-    }
 
-}
-function hideSlideShow() {
-    const slideShow= document.getElementById("slideShow");
-    if(slideShow.hidden==false){
-        slideShow.hidden=true;
-    }else {
-        slideShow.hidden=false;
-    }
-
-}
