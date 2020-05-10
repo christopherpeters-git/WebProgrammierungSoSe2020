@@ -32,7 +32,7 @@ function loginCheck() {
                     openAlert("login erfolgreich");
                     userlogin.loginStatus(true);
                     //Speichert die Benutzerdaten im local Storage.
-                    localStorage.setItem('auth',JSON.stringify(userlogin));
+                    localStorage.setItem('auth',userlogin.username);
                     return;
                 }
             }
