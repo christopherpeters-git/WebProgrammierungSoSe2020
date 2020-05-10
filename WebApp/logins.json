@@ -2,7 +2,7 @@
   { "username":"test", "password":"abc123","loginAccepted":false},
   { "username":"mathu", "password":"kasachstan","loginAccepted":false},
   { "username":"till", "password":"schweiger","loginAccepted":false},
-  { "username":"christoper", "password":"kolumbus","loginAccepted":false},
+  { "username":"christopher", "password":"kolumbus","loginAccepted":false},
   { "username":"simon", "password":"unge","loginAccepted":false},
   { "username":"admin", "password":"admin","loginAccepted":false}
 ]
