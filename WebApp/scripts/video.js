@@ -93,6 +93,7 @@ function generateComments(videoIdStr){
     }
 }
 
+
 //creates a comment, in use for foreach loop
 
 //*************************************Initializers************************************
@@ -161,12 +162,11 @@ function initVideoOverview(){
 //Is called on page load, calls all initializers
 function init(){
     initVideoOverview();
+    eventOnEnterByLogin();
     setEventhandlerSlideShow();
 
     document.getElementById("slideshow-container").addEventListener('mouseenter', setButtonsVisible, false);
     document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
-
-
 
 }
 
