@@ -6,113 +6,107 @@
         <link rel="stylesheet" href="styles/video.css">
         <link rel="stylesheet" href="styles/desgin.css">
         <link rel="stylesheet" href="styles/login.css">
+
         <script src="scripts/video.js"></script>
         <script src="scripts/slideshow.js"></script>
+        <script src="scripts/login.js"></script>
         <meta charset="UTF8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Lassen Sie sich durch kurze Videos ein Lächeln aufs Gesicht zaubern">
         <meta name="keywords" content="Videos,Fun,clips">
         <meta name="author" content="Team 17">
+
     </head>
     <body onload="init()">
+    <div id="alert" class="alert">
+        <div id="alert-text" class="text-alert"></div>
+    </div>
 
     <header>
         <ul class="header">
-            <li class="header" style="width: 10%;">
-                <img src="media/bilder/Logo.png" height="85" width="85" align="left"/>
+
+            <li class="header"style="margin-top: 5px" >
+                <img src="media/bilder/Logo.png" height="44" width="44" align="left"onclick="location.reload()" style="cursor: pointer"/>
             </li>
             <li class="header" style="width: 80%;">
-                <h1 style="text-align: center;font-size: 30px; color: black">Team 17 Videos</h1>
+                <div id="searcharea" style="text-align: center">
+                    <!-- <button id="returnToMainPage" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>-->
+                    <input style="color: black; background-color: white; margin-top: 5px; position: center; height: 25px " type="text" size="50"  id="searchentry" placeholder="Search">
+                    <img src="./media/bilder/icon_Search.png" style="height: 0.93cm;margin-top: 10px" onclick="searchVideos()">
+
+                </div>
             </li>
-            <li class="header" style="width: 10%;">
-                <button onclick="document.getElementById('login').style.display='block'" style="width: auto;">Login</button>
+            <li class="header" style="width: 15%;">
+                <span id="login-name" style="font-size: larger;"></span>
+                <button id="loginLogout" onclick="document.getElementById('login').style.display='block'" style="width: auto; float: right">Login</button>
             </li>
         </ul>
     </header>
 
-    <div id="searcharea" style="text-align: center">
-        <button id="returnToMainPage" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>
-        <input style="color: black; background-color: white; margin: auto; position: center; height: 45px " type="text" size="50"  id="searchentry" placeholder="Search">
-        <button style="position: center" onclick="searchVideos()"> Search</button>
-    </div>
 
-    <nav>
-        <ul class="nav">
-            <li class="nav">
-                <a class="nav">Home</a>
-            </li>
-            <li class="nav">
-                <a class="nav">Über</a>
-            </li>
-            <li class="nav">
-                <a class="nav">Kontakt</a>
-            </li>
-        </ul>
-    </nav>
 
     <div id="searchentrys" style="text-align: center"></div>
 
     <div id="login" class="background-login">
-        <form class="login-window animate" method="post">
+        <form id="logininput" class="login-window animate"  method="get">
             <div class="closediv">
                 <div id="login-header">Login</div>
-                <span class="close-x" onclick="document.getElementById('login').style.display='none'" title="Fenster schließen">&times;</span>
+                <span class="close-x" onclick="closeLoginWindow()" title="Fenster schließen">&times;</span>
             </div>
             <div class="window-form clearfix">
-                <label for="username"><b>E-Mail</b></label>
-                <input type="email" placeholder="E-Mail Adresse eintragen" name="username" required>
+                <label for="username"><b>Benutzername</b></label>
+                <input class="login" id="username" type="text" placeholder="Benutzername eintragen" name="username" required maxlength="20">
 
                 <label for="password"><b>Passwort</b></label>
-                <input type="password" placeholder="Passwort eintragen" name="password" required>
+                <input class="login" id="password" type="password" placeholder="Passwort eintragen" name="password" required maxlength="20">
+
+                <div id="login-notification" style="color: #f44336; display: none;"> </div>
 
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
+
             </div>
             <div class="window-form" style="background-color: #f2f2f2">
-                <button type="button" title="Fenster schließen" onclick="document.getElementById('login').style.display='none'" class="closebtn">Cancel</button>
+                <button type="button" title="Fenster schließen" onclick="closeLoginWindow()" class="closebtn">Cancel</button>
+                <button type="button"  onclick="loginCheck()" class="login" style="text-align: center">Login</button>
             </div>
-            <button type="submit" class="login" style="text-align: center">Login</button>
 
         </form>
     </div>
     <script>
-        var windowLogin = document.getElementById('login');
+        let windowLogin = document.getElementById('login');
 
         window.onclick = function (event) {
-            if (event.target == windowLogin) {
-                windowLogin.style.display='none';
+            if (event.target === windowLogin) {
+                closeLoginWindow();
             }
         }
     </script>
 
-    <div id="slideShow">
+    <div id="slideShow" >
         <!-- Slideshow container -->
-        <div class="slideshow-container">
+        <div class="slideshow-container" id="slideshow-container">
             <!-- Full-width images with number and caption text -->
             <div class="mySlides fade">
-                <a onclick="slideshowGetVideo(0)">
-                    <img src="media/bilder/whatever_it_takes.jpg" alt="Whatever_it_takes" style="width:100%; height:300px">
-                    <div class="text">Whatever it takes </div>
-                </a>
+                <img src="media/bilder/wendler_egal.jpg" alt="Whatever_it_takes" style="width:100%; height:300px">
             </div>
             <div class="mySlides fade">
-                <a onclick="slideshowGetVideo(1)">
-                    <img src="media/bilder/wendler_egal.jpg" style="width:100% ;height:300px">
-                    <div class="text">Wendler Egal </div>
-                </a>
+                    <img src="media/bilder/whatever_it_takes.jpg" style="width:100% ;height:300px">
             </div>
             <div class="mySlides fade" >
-                <img src="media/bilder/img3.jpg" style="width:100%; height:300px" >
+                <img src="media/bilder/zaehne_putzen.jpg" style="width:100%; height:300px" >
+            </div>
+            <div class="mySlides fade" >
+                <img src="media/bilder/cool_cars.jpg" style="width:100%; height:300px" >
             </div>
             <!-- Next and previous buttons -->
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            <a class="prev" id="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" id="next" onclick="plusSlides(1)">&#10095;</a>
             <script> plusSlides(0)</script>
         </div>
     </div>
         <br>
-
 
 
     <div id="videooverview"></div>
@@ -133,7 +127,19 @@
             </div>
         </div>
     </body>
+    <br>
+    <br>
     <footer>
+
+        <nav>
+            <div class="nav" id="home_btn" style="float: left;margin-left: 5cm">
+                <a onclick="location.reload()" style="cursor: pointer"> Home</a>
+            </div>
+            <div class="nav" id ="Impressum_btn">
+                <a onclick="location.reload()"style="cursor: pointer"> Impressum</a>
+            </div>
+        </nav>
+
     </footer>
 </html>
 
