@@ -3,7 +3,6 @@
 const forbidden=['<','>'];
 const localStorageVideoPrefix = "video";
 const categories= ["Entertainment", "Music","Cars"];
-
 //*************************************Classes**************************************
 //NOT USED YET
 class Comment{
@@ -161,6 +160,7 @@ function initVideoOverview(){
 //*************************************HTML-called-functions***********************************
 //Is called on page load, calls all initializers
 function init(){
+    addEnterFunctionality();
     initVideoOverview();
     eventOnEnterByLogin();
     setEventhandlerSlideShow();
@@ -168,6 +168,16 @@ function init(){
     document.getElementById("slideshow-container").addEventListener('mouseenter', setButtonsVisible, false);
     document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
 
+}
+
+function addEnterFunctionality() {
+    var inputSearch = document.getElementById("searchentry");
+    inputSearch.addEventListener("keyup",function (event) {
+        if(event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("searchPic").click();
+        }
+    })
 }
 
 //Shows the video-player and hides the video-list
