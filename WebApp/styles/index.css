@@ -1,3 +1,8 @@
+body {
+    background-color: whitesmoke;
+    max-width: 1200px;
+    margin: auto;
+}
 
 header{
     //padding: 30px;
@@ -34,22 +39,15 @@ footer {
     clear: both;
 }
 
-body {
-    background-color: whitesmoke;
-}
-
 
 .videoLink {
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-   // border-style: groove;
     border-color: floralwhite;
-   // border-radius: 5px;
     float: left;
     margin-left: 1.5%;
-    //padding: 1%;
     height: 250px;
     min-width: 125px;
     width: 22%;
@@ -68,11 +66,6 @@ h7{
     color:#cccccc;
 }
 
-#videooverview{
-   // margin-left: 10%;
-    //width: 50%;
-}
-
 .thumbnail{
     width: 100%;
     height: 70%;
@@ -84,10 +77,10 @@ h7{
     margin-left: 10px;
 }
 hr{
-    width: 97%;
+    width: 90%;
     color: #888888;
     height: 2px;
-
+    margin-left:2%;
 }
 .text_category{
     font-size: 20px;

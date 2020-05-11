@@ -12,8 +12,7 @@
 
 #videoArea{
     width:  800px;
-    margin: auto;
-    margin-top: 5%;
+    margin: 5% auto auto;
     background-color: black;
     -webkit-box-shadow: 0px 7px 13px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 7px 13px 0px rgba(0,0,0,0.75);
@@ -37,9 +36,19 @@
 
 #submitCommentDiv{
     border-bottom: 1px solid lightgrey;
-    width: 100%;
     padding-left: 1%;
     padding-right: 1%;
+}
+
+#submitCommentButton{
+    float: right;
+    background-color: #4CAF50;
+    cursor:pointer;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-decoration:none;
+    width: auto;
 }
 
 #inputMessage{
@@ -48,21 +57,10 @@
     border-top-style: none;
     background-color: whitesmoke;
     border-bottom-style: groove;
-    width: 70%;
     min-height: 50px;
     padding-bottom: 0px;
     height: 2%;
     width: 80%;
-}
-
-#submitCommentButton{
-    float: right;
-    background-color: grey;
-    cursor:pointer;
-    padding: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-decoration:none;
 }
 
 .clearfix::after {

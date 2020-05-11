@@ -1,6 +1,6 @@
 "use strict";
 
-const forbidden=['<','>'];
+const forbidden=['<','>','/'];
 const localStorageVideoPrefix = "video";
 const categories= ["Entertainment", "Music","Cars"];
 let loggedIn = true;
@@ -12,7 +12,7 @@ class Comment{
         const date = new Date();
         this.author = author;
         this.message = message;
-        this.date = date.toDateString() + " " + date.toTimeString();
+        this.date = date.toDateString() ;
     }
 }
 
@@ -245,18 +245,23 @@ function showOverviewHideVideoplayer(){
 //Creates a new comment
 function submitComment(){
     //Get needed elements
-    const authorInput = document.getElementById("inputname");
-    const author = authorInput.value;
+    const author = "WIP";//localStorage.getItem("auth");
+    console.log(localStorage.getItem("auth"));
     const messageInput = document.getElementById("inputMessage");
     const message = messageInput.value;
     const videoId = document.getElementById("videoId");
 
     //Check inputs for illegal chars
-    if(!isInputLegal(authorInput.value) || !isInputLegal(messageInput.value)){
+    if(!isInputLegal(messageInput.value)){
         return;
     }
     //Create new comment
-    const newComment = new Comment(author,message);
+    let newComment;
+    if(author == ""){
+        newComment = new Comment("unknown",message);
+    }else{
+        newComment = new Comment(author,message);
+    }
     //Save new comment in webstorage
     const currentVideoId = document.getElementById("videoId");
     const comments = loadCommentsForId(currentVideoId.innerHTML);
@@ -267,7 +272,6 @@ function submitComment(){
     saveCommentsForId(comments, currentVideoId.innerHTML);
 
     //Reset form values
-    authorInput.value = "";
     messageInput.value = "";
 
     generateComments(videoId.innerHTML);
