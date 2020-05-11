@@ -271,13 +271,16 @@ function submitComment(){
 function searchVideos() {
     document.getElementById("searchentrys").innerHTML = "";
     const slideShow = document.getElementById("slideShow");
+    const search = document.getElementById("searchentry").value;
+    if(!isInputLegal(search)){
+        console.log("Search Canceled! Illegal Charackters used")
+        return;
+    }
     if(slideShow.hidden == false) {
-        //console.log("jabadadu");
         hideSlideShow();
     }
    // const buttonBackToMainPage = document.getElementById("returnToMainPage");
    // buttonBackToMainPage.style.display = "block";
-    const search = document.getElementById("searchentry").value;
     const vidOverview = document.getElementById("videooverview")
     const videoPlayer = document.getElementById("videoArea")
     const createCommentArea = document.getElementById("createcommentarea");
