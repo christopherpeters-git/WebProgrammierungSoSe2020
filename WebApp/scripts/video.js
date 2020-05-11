@@ -279,6 +279,15 @@ function searchVideos() {
    // buttonBackToMainPage.style.display = "block";
     const search = document.getElementById("searchentry").value;
     const vidOverview = document.getElementById("videooverview")
+    const videoPlayer = document.getElementById("videoArea")
+    const createCommentArea = document.getElementById("createcommentarea");
+    if(videoPlayer.style.display == "block") {
+        videoPlayer.style.display = "none";
+        createCommentArea.innerHTML = "";
+        if(videoPlayer.firstChild != null) {
+            videoPlayer.removeChild(videoPlayer.firstChild);
+        }
+    }
     vidOverview.style.display = "none";
     console.log(search);
     let video = new Video("","","","");
