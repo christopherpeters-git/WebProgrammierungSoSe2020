@@ -3,7 +3,6 @@
 const forbidden=['<','>','/'];
 const localStorageVideoPrefix = "video";
 const categories= ["Entertainment", "Music","Cars"];
-
 //*************************************Classes**************************************
 //NOT USED YET
 class Comment{
@@ -162,6 +161,7 @@ function initVideoOverview(){
 //*************************************HTML-called-functions***********************************
 //Is called on page load, calls all initializers
 function init(){
+    addEnterFunctionality();
     initVideoOverview();
     eventOnEnterByLogin();
     setEventhandlerSlideShow();
@@ -169,6 +169,16 @@ function init(){
     document.getElementById("slideshow-container").addEventListener('mouseenter', setButtonsVisible, false);
     document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
 
+}
+
+function addEnterFunctionality() {
+    var inputSearch = document.getElementById("searchentry");
+    inputSearch.addEventListener("keyup",function (event) {
+        if(event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("searchPic").click();
+        }
+    })
 }
 
 //Shows the video-player and hides the video-list
@@ -281,14 +291,26 @@ function submitComment(){
 function searchVideos() {
     document.getElementById("searchentrys").innerHTML = "";
     const slideShow = document.getElementById("slideShow");
+    const search = document.getElementById("searchentry").value;
+    if(!isInputLegal(search)){
+        console.log("Search Canceled! Illegal Charackters used")
+        return;
+    }
     if(slideShow.hidden == false) {
-        //console.log("jabadadu");
         hideSlideShow();
     }
    // const buttonBackToMainPage = document.getElementById("returnToMainPage");
    // buttonBackToMainPage.style.display = "block";
-    const search = document.getElementById("searchentry").value;
     const vidOverview = document.getElementById("videooverview")
+    const videoPlayer = document.getElementById("videoArea")
+    const createCommentArea = document.getElementById("createcommentarea");
+    if(videoPlayer.style.display == "block") {
+        videoPlayer.style.display = "none";
+        createCommentArea.innerHTML = "";
+        if(videoPlayer.firstChild != null) {
+            videoPlayer.removeChild(videoPlayer.firstChild);
+        }
+    }
     vidOverview.style.display = "none";
     console.log(search);
     let video = new Video("","","","");
