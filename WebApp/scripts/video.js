@@ -1,6 +1,6 @@
 "use strict";
 
-const forbidden=['<','>'];
+const forbidden=['<','>','/'];
 const localStorageVideoPrefix = "video";
 const categories= ["Entertainment", "Music","Cars"];
 //*************************************Classes**************************************
@@ -10,7 +10,9 @@ class Comment{
         const date = new Date();
         this.author = author;
         this.message = message;
-        this.date = date.toDateString() + " " + date.toTimeString();
+        const completeTimeString = date.toTimeString();
+        const time = completeTimeString.slice(0,completeTimeString.lastIndexOf(":"));
+        this.date = date.toDateString() + " " +  time;
     }
 }
 
@@ -26,13 +28,13 @@ class Video{
 
 //*************************************Helpers**************************************
 
-//creats XMLHttp- or ActiveX-Request depending on browser support
+//creates XMLHttp- or ActiveX-Request depending on browser support
 function createAjaxRequest(){
     let request;
     if(window.XMLHttpRequest){
         request = new XMLHttpRequest();
     }else{
-        request = new ActiveXObject();
+        request = new ActiveXObject("Microsoft.XMLHTTP");
     }
     return request;
 }
@@ -73,7 +75,7 @@ function saveCommentsForId(comments, id){
 
 //Clears "createcommentarea" and generates and appends saved comments to parent
 function generateComments(videoIdStr){
-    const createCommentArea = document.getElementById("createcommentarea");
+    const createCommentArea = document.getElementById("createCommentArea");
     createCommentArea.innerHTML = "";
     const comments = loadCommentsForId(videoIdStr);
     if(!(comments.length === 0)){
@@ -91,7 +93,6 @@ function generateComments(videoIdStr){
         }
     }
 }
-
 
 //creates a comment, in use for foreach loop
 
@@ -194,6 +195,7 @@ function showVideoPlayerHideOverview(videoStr){
         const videoSource = document.createElement("source");
         const videoId = document.createElement("div");
         const slideShow = document.getElementById("slideShow");
+        const submitCommentDiv = document.getElementById("submitCommentDiv")
 
         //Initialize video player
         videoPlayer.setAttribute("controls","true");
@@ -214,9 +216,12 @@ function showVideoPlayerHideOverview(videoStr){
       //  buttonBackToVideos.style.display = "block";
         vidArea.style.display = "block";
        // buttonMainP.style.display = "none";
+        console.log("Auth: " + localStorage.getItem("auth"));
+        if(localStorage.getItem("auth") != null){
+            submitCommentDiv.style.display = "block";
+        }
 
         generateComments(videoId.innerHTML);
-
 
         if(slideShow.hidden == false) {
             console.log(slideShow);
@@ -234,6 +239,7 @@ function showOverviewHideVideoplayer(){
         const buttonBackToVideos = document.getElementById("backtovideos");
         const createCommentArea = document.createElement("createcommentarea");
         const buttonBackToMainPage = document.getElementById("returnToMainPage");
+        const submitCommentDiv = document.getElementById("submitCommentDiv")
 
         createCommentArea.innerHTML = "";
         if(vidArea.firstChild != null) {
@@ -243,6 +249,7 @@ function showOverviewHideVideoplayer(){
         vidOverview.style.display = "block";
         buttonBackToVideos.style.display = "none";
         buttonBackToMainPage.style.display = "none";
+        submitCommentDiv.style.display = "none";
         hideSlideShow();
     }
 }
@@ -250,18 +257,22 @@ function showOverviewHideVideoplayer(){
 //Creates a new comment
 function submitComment(){
     //Get needed elements
-    const authorInput = document.getElementById("inputname");
-    const author = authorInput.value;
-    const messageInput = document.getElementById("inputmessage");
+    const author = localStorage.getItem("auth");
+    const messageInput = document.getElementById("inputMessage");
     const message = messageInput.value;
     const videoId = document.getElementById("videoId");
 
     //Check inputs for illegal chars
-    if(!isInputLegal(authorInput.value) || !isInputLegal(messageInput.value)){
+    if(!isInputLegal(messageInput.value)){
         return;
     }
     //Create new comment
-    const newComment = new Comment(author,message);
+    let newComment;
+    if(author == ""){
+        newComment = new Comment("unknown",message);
+    }else{
+        newComment = new Comment(author,message);
+    }
     //Save new comment in webstorage
     const currentVideoId = document.getElementById("videoId");
     const comments = loadCommentsForId(currentVideoId.innerHTML);
@@ -272,7 +283,6 @@ function submitComment(){
     saveCommentsForId(comments, currentVideoId.innerHTML);
 
     //Reset form values
-    authorInput.value = "";
     messageInput.value = "";
 
     generateComments(videoId.innerHTML);
