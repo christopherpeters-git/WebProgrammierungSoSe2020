@@ -18,34 +18,39 @@
 
 </head>
 <body onload="init()">
-    <div id="upperBody">
-        <div class="alert" id="alert">
-            <div class="text-alert" id="alert-text"></div>
-        </div>
+<div id="upperBody">
+    <div class="alert" id="alert">
+        <div class="text-alert" id="alert-text"></div>
+    </div>
 
-        <header>
-            <ul class="header">
+    <header>
+        <ul class="header">
 
-            <li class="header"style="margin-top: 5px" >
-                <img src="media/bilder/Logo.png" height="44" width="44" align="left"onclick="location.reload()" style="cursor: pointer"/>
+            <li class="header" style="margin-top: 5px">
+                <img align="left" height="44" onclick="location.reload()" src="media/bilder/Logo.png" style="cursor: pointer"
+                     width="44"/>
             </li>
             <li class="header" style="width: 80%;">
                 <div id="searcharea" style="text-align: center">
                     <!-- <button id="returnToMainPage" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>-->
-                    <input style="color: black; background-color: white; margin-top: 5px; position: center; height: 25px " type="text" size="50"  id="searchentry" placeholder="Search">
-                    <img id="searchPic" src="./media/bilder/icon_Search.png" style="height: 0.93cm;margin-top: 10px" onclick="searchVideos()">
+                    <input id="searchentry"
+                           placeholder="Search" size="50" style="color: black; background-color: white; margin-top: 5px; position: center; height: 25px " type="text">
+                    <img id="searchPic" onclick="searchVideos()" src="./media/bilder/icon_Search.png"
+                         style="height: 0.93cm;margin-top: 10px">
                 </div>
             </li>
             <li class="header" style="width: 15%;">
                 <span id="login-name" style="font-size: larger;"></span>
-                <button id="loginLogout" onclick="document.getElementById('login').style.display='block'" style="width: auto; float: right">Login</button>
+                <button id="loginLogout" onclick="document.getElementById('login').style.display='block'"
+                        style="width: auto; float: right">Login
+                </button>
             </li>
         </ul>
     </header>
-    </div>
+</div>
 
 
-    <div id="lowerBody">
+<div id="lowerBody">
     <div id="searchentrys" style="text-align: center"></div>
 
     <div class="background-login" id="login">
@@ -56,11 +61,13 @@
             </div>
             <div class="window-form clearfix">
                 <label for="username"><b>Benutzername</b></label>
-                <input class="login" id="username" maxlength="20" name="username" placeholder="Benutzername eintragen" required
+                <input class="login" id="username" maxlength="20" name="username" placeholder="Benutzername eintragen"
+                       required
                        type="text">
 
                 <label for="password"><b>Passwort</b></label>
-                <input class="login" id="password" maxlength="20" name="password" placeholder="Passwort eintragen" required
+                <input class="login" id="password" maxlength="20" name="password" placeholder="Passwort eintragen"
+                       required
                        type="password">
 
                 <div id="login-notification" style="color: #f44336; display: none;"></div>
@@ -110,26 +117,26 @@
             <script> plusSlides(0)</script>
         </div>
     </div>
-<br>
+    <br>
 
 
-<div id="videooverview"></div>
-<button id="backtovideos" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>
-<div id="videoArea" style="display: none;">
-    <div id="commentSection">
-        <div id="videoInfo">
-            <h1 id="videotitle" style="display: inline-block;">Title</h1>
-        </div>
-        <div id="submitCommentDiv" style="display: none;">
-            <!--                <input id="inputname" placeholder="Author" class="commentInput">-->
-            <input id="inputMessage" placeholder="Message">
-            <button id="submitCommentButton" onclick="submitComment()">Submit Comment</button>
-        </div>
-        <div id="createCommentArea">
+    <div id="videooverview"></div>
+    <button id="backtovideos" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>
+    <div id="videoArea" style="display: none;">
+        <div id="commentSection">
+            <div id="videoInfo">
+                <h1 id="videotitle" style="display: inline-block;">Title</h1>
+            </div>
+            <div id="submitCommentDiv" style="display: none;">
+                <!--                <input id="inputname" placeholder="Author" class="commentInput">-->
+                <input id="inputMessage" placeholder="Message">
+                <button id="submitCommentButton" onclick="submitComment()">Submit Comment</button>
+            </div>
+            <div id="createCommentArea">
 
+            </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 <br>
