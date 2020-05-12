@@ -59,7 +59,7 @@ function loginCheck() {
                     document.getElementById('loginLogout').innerHTML="Logout";
                     document.getElementById('loginLogout').setAttribute('onclick', 'logout()');
                     openAlert("Login erfolgreich");
-                    userlogin.loginStatus(true);
+                    userlogin.loginStatus = true;
                     //Speichert die Benutzerdaten im local Storage.
                     localStorage.setItem('auth',userlogin.username);
                     return;

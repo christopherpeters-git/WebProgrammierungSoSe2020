@@ -3,7 +3,6 @@
 const forbidden=['<','>','/'];
 const localStorageVideoPrefix = "video";
 const categories= ["Entertainment", "Music","Cars"];
-let loggedIn = true;
 
 //*************************************Classes**************************************
 //NOT USED YET
@@ -205,7 +204,8 @@ function showVideoPlayerHideOverview(videoStr){
       //  buttonBackToVideos.style.display = "block";
         vidArea.style.display = "block";
        // buttonMainP.style.display = "none";
-        if(loggedIn){
+        console.log("Auth: " + localStorage.getItem("auth"));
+        if(localStorage.getItem("auth") != null){
             submitCommentDiv.style.display = "block";
         }
 
