@@ -11,7 +11,9 @@ class Comment{
         const date = new Date();
         this.author = author;
         this.message = message;
-        this.date = date.toDateString() ;
+        const completeTimeString = date.toTimeString();
+        const time = completeTimeString.slice(0,completeTimeString.lastIndexOf(":"));
+        this.date = date.toDateString() + " " +  time;
     }
 }
 
@@ -27,13 +29,13 @@ class Video{
 
 //*************************************Helpers**************************************
 
-//creats XMLHttp- or ActiveX-Request depending on browser support
+//creates XMLHttp- or ActiveX-Request depending on browser support
 function createAjaxRequest(){
     let request;
     if(window.XMLHttpRequest){
         request = new XMLHttpRequest();
     }else{
-        request = new ActiveXObject();
+        request = new ActiveXObject("Microsoft.XMLHTTP");
     }
     return request;
 }
@@ -245,8 +247,7 @@ function showOverviewHideVideoplayer(){
 //Creates a new comment
 function submitComment(){
     //Get needed elements
-    const author = "WIP";//localStorage.getItem("auth");
-    console.log(localStorage.getItem("auth"));
+    const author = localStorage.getItem("auth");
     const messageInput = document.getElementById("inputMessage");
     const message = messageInput.value;
     const videoId = document.getElementById("videoId");
