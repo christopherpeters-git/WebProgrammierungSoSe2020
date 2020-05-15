@@ -42,7 +42,7 @@ function getIndex() {
 
 function hideSlideShow() {
     const slideShow= document.getElementById("slideShow");
-    if(slideShow.hidden==false){
+    if(slideShow.hidden===false){
         slideShow.hidden=true;
     }else {
         slideShow.hidden=false;
