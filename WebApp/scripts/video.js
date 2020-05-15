@@ -186,11 +186,11 @@ function showVideoPlayerHideOverview(videoStr){
     document.getElementById("searchentrys").innerHTML = "";
     var vidArea = document.getElementById("videoArea");
     if(vidArea.style.display == "none") {
-       // const buttonMainP = document.getElementById("returnToMainPage");
+        const buttonMainP = document.getElementById("returnToMainPage");
         const video = JSON.parse(videoStr);
         const vidOverview = document.getElementById("videooverview");
         const videoTitle = document.getElementById("videotitle");
-        //const buttonBackToVideos = document.getElementById("backtovideos");
+        const buttonBackToVideos = document.getElementById("backtovideos");
         const videoPlayer = document.createElement("video");
         const videoSource = document.createElement("source");
         const videoId = document.createElement("div");
@@ -213,9 +213,9 @@ function showVideoPlayerHideOverview(videoStr){
         videoId.innerHTML = video.id;
         vidOverview.style.display = "none";
         videoTitle.innerHTML = video.name;
-      //  buttonBackToVideos.style.display = "block";
+        buttonBackToVideos.style.display = "block";
         vidArea.style.display = "block";
-       // buttonMainP.style.display = "none";
+        buttonMainP.style.display = "none";
         console.log("Auth: " + localStorage.getItem("auth"));
         if(localStorage.getItem("auth") != null){
             submitCommentDiv.style.display = "block";
