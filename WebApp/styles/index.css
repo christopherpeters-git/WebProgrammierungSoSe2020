@@ -8,7 +8,7 @@ body {
     margin: auto;
 }
 
-#lowerBody{
+.lowerBody{
     max-width: 1200px;
     margin: auto;
 }
@@ -42,10 +42,6 @@ ul.nav {
 li.nav{
     display: inline-block;
     margin-right: 40px;
-}
-
-footer {
-    clear: both;
 }
 
 
@@ -94,4 +90,23 @@ hr{
 .text_category{
     font-size: 20px;
     font-weight: bold;
+}
+
+ul.footer {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: darkgray;
+}
+div.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+li.footer{
+    float: left;
 }
