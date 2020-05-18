@@ -32,7 +32,6 @@
             </li>
             <li class="header" style="width: 80%;">
                 <div id="searcharea" style="text-align: center">
-                    <!-- <button id="returnToMainPage" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>-->
                     <input id="searchentry"
                            placeholder="Search" size="50" style="color: black; background-color: white; margin-top: 5px; position: center; height: 25px " type="text">
                     <img id="searchPic" onclick="searchVideos()" src="./media/bilder/icon_Search.png"
@@ -40,10 +39,11 @@
                 </div>
             </li>
             <li class="header" style="width: 15%;">
-                <span id="login-name" style="font-size: larger;"></span>
-                <button id="loginLogout" onclick="document.getElementById('login').style.display='block'"
-                        style="width: auto; float: right">Login
-                </button>
+                <div>
+                    <span id="login-name">T</span>
+                    <button id="loginLogout" onclick="document.getElementById('login').style.display='block'"
+                            style="width: auto;">Login</button>
+                </div>
             </li>
         </ul>
     </header>
@@ -121,7 +121,6 @@
 
 
     <div id="videooverview"></div>
-    <button id="backtovideos" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>
     <div id="videoArea" style="display: none;">
         <div id="commentSection">
             <div id="videoInfo">
