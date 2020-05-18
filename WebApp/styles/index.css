@@ -8,7 +8,7 @@ body {
     margin: auto;
 }
 
-#lowerBody{
+.lowerBody{
     max-width: 1200px;
     margin: auto;
 }
@@ -94,4 +94,34 @@ hr{
 .text_category{
     font-size: 20px;
     font-weight: bold;
+}
+
+ul.footer {
+    list-style: none;
+    margin: 0;
+    padding: 5px 0;
+    overflow: hidden;
+    background-color: darkgray;
+}
+div.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+li.footer{
+    float: left;
+}
+
+#login-name{
+    display: none;
+    width: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 32px;
+    border: 2px solid black;
+    background-color: yellowgreen;
 }
