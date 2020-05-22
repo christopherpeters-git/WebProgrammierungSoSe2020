@@ -1,23 +1,23 @@
 "use strict";
 
-const forbidden=['<','>','/'];
+const forbidden = ['<', '>', '/'];
 const localStorageVideoPrefix = "video";
-const categories= ["Entertainment", "Music","Cars"];
+const categories = ["Entertainment", "Music", "Cars"];
 //*************************************Classes**************************************
 //NOT USED YET
-class Comment{
-    constructor(author,message){
+class Comment {
+    constructor(author, message) {
         const date = new Date();
         this.author = author;
         this.message = message;
         const completeTimeString = date.toTimeString();
-        const time = completeTimeString.slice(0,completeTimeString.lastIndexOf(":"));
-        this.date = date.toDateString() + " " +  time;
+        const time = completeTimeString.slice(0, completeTimeString.lastIndexOf(":"));
+        this.date = date.toDateString() + " " + time;
     }
 }
 
-class Video{
-    constructor(id,src,name,duration,category){
+class Video {
+    constructor(id, src, name, duration, category) {
         this.id = id;
         this.src = src;
         this.name = name;
@@ -29,26 +29,26 @@ class Video{
 //*************************************Helpers**************************************
 
 //creates XMLHttp- or ActiveX-Request depending on browser support
-function createAjaxRequest(){
+function createAjaxRequest() {
     let request;
-    if(window.XMLHttpRequest){
+    if (window.XMLHttpRequest) {
         request = new XMLHttpRequest();
-    }else{
+    } else {
         request = new ActiveXObject("Microsoft.XMLHTTP");
     }
     return request;
 }
 
 //Checks if string contains illegal characters which are defined in forbidden
-function isInputLegal(strIn){
-    if(!strIn || (strIn.length === 0)){
+function isInputLegal(strIn) {
+    if (!strIn || (strIn.length === 0)) {
         return false;
     }
     const inputLength = strIn.length;
     const forbiddenLength = forbidden.length;
-    for(let i = 0; i < inputLength;i++){
-        for(let j = 0; j < forbiddenLength;j++){
-            if(strIn[i] == forbidden[j]){
+    for (let i = 0; i < inputLength; i++) {
+        for (let j = 0; j < forbiddenLength; j++) {
+            if (strIn[i] == forbidden[j]) {
                 return false;
             }
         }
@@ -57,11 +57,11 @@ function isInputLegal(strIn){
 }
 
 //Loads comments from webstorage. Returns elements in an array, returns array with size 0 if no comments found for id
-function loadCommentsForId(id){
+function loadCommentsForId(id) {
     let comments;
-    if(localStorage.getItem(localStorageVideoPrefix + String(id))){
+    if (localStorage.getItem(localStorageVideoPrefix + String(id))) {
         comments = JSON.parse(localStorage.getItem(localStorageVideoPrefix + String(id)));
-    }else{
+    } else {
         comments = new Array();
         console.log("No comments found!");
     }
@@ -69,20 +69,27 @@ function loadCommentsForId(id){
 }
 
 //Saves comments in webstorage for video id.
-function saveCommentsForId(comments, id){
+function saveCommentsForId(comments, id) {
     localStorage.setItem(localStorageVideoPrefix + String(id), JSON.stringify(comments));
+}
+//hidde and unhidde the back Button in videoArea.
+function unhiddeBackbutton(){
+    document.getElementById('backtovideos').hidden = false;
+}
+function hiddeBackbutton() {
+    document.getElementById('backtovideos').hidden = true;
 }
 
 //Clears "createcommentarea" and generates and appends saved comments to parent
-function generateComments(videoIdStr){
+function generateComments(videoIdStr) {
     const createCommentArea = document.getElementById("createCommentArea");
     createCommentArea.innerHTML = "";
     const comments = loadCommentsForId(videoIdStr);
-    if(!(comments.length === 0)){
-        for(let i = 0; i < comments.length; i++){
+    if (!(comments.length === 0)) {
+        for (let i = 0; i < comments.length; i++) {
             //Create new comment-html
             const newComment = document.createElement("div");
-            newComment.setAttribute("class","comment");
+            newComment.setAttribute("class", "comment");
             const header3 = document.createElement("h3");
             header3.innerHTML = comments[i].author + " - " + comments[i].date;
             const message = document.createElement("p");
@@ -99,37 +106,37 @@ function generateComments(videoIdStr){
 //*************************************Initializers************************************
 
 //Creates an entry on the video-overview for every video listed in the videos.json
-function initVideoOverview(){
+function initVideoOverview() {
     const request = createAjaxRequest();
-    request.onreadystatechange = function(){
-        if((4 === this.readyState) && (200 === this.status)){
+    request.onreadystatechange = function () {
+        if ((4 === this.readyState) && (200 === this.status)) {
             const videos = JSON.parse(this.responseText);
             const videoOverview = document.getElementById("videooverview");
-            let video = new Video("","","","");
-            for(let i=0;i<categories.length;i++){
+            let video = new Video("", "", "", "");
+            for (let i = 0; i < categories.length; i++) {
                 let t = document.createTextNode(categories[i]);
                 let hr = document.createElement("hr");
                 const text_div = document.createElement("div");
-                const videoKat= document.createElement("div");
-                videoKat.setAttribute("id",categories[i]);
-                text_div.setAttribute("class","text_category");
-                videoKat.setAttribute("class","category");
+                const videoKat = document.createElement("div");
+                videoKat.setAttribute("id", categories[i]);
+                text_div.setAttribute("class", "text_category");
+                videoKat.setAttribute("class", "category");
                 text_div.appendChild(t);
                 text_div.appendChild(hr);
-                videoKat.appendChild(text_div  );
+                videoKat.appendChild(text_div);
                 videoOverview.appendChild(videoKat);
             }
 
-            for(video of videos){
-                let cat="";
-                for(let i=0;i<categories.length;i++){
-                    if(categories[i]===video.category){
-                        cat= categories[i];
+            for (video of videos) {
+                let cat = "";
+                for (let i = 0; i < categories.length; i++) {
+                    if (categories[i] === video.category) {
+                        cat = categories[i];
                         console.log(i);
                         break;
                     }
                 }
-                if(cat==""){
+                if (cat == "") {
                     return;
                 }
                 const catDiv = document.getElementById(cat);
@@ -139,11 +146,11 @@ function initVideoOverview(){
                 const a = document.createElement("a");
                 const img = document.createElement("img");
 
-                videoDiv.setAttribute("class","videoLink");
-                a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
-                img.setAttribute("src",video.thumbnailPath);
+                videoDiv.setAttribute("class", "videoLink");
+                a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video) + "'" + ")";
+                img.setAttribute("src", video.thumbnailPath);
                 console.log(video.thumbnailPath);
-                img.setAttribute("class","thumbnail");
+                img.setAttribute("class", "thumbnail");
                 header5.innerHTML = video.name;
                 header7.innerHTML = video.duration;
                 videoDiv.appendChild(img);
@@ -154,27 +161,32 @@ function initVideoOverview(){
             }
         }
     }
-    request.open("GET","videos.json",true);
+    request.open("GET", "videos.json", true);
     request.send();
 }
 
 //*************************************HTML-called-functions***********************************
 //Is called on page load, calls all initializers
-function init(){
+function init() {
     addEnterFunctionality();
     initVideoOverview();
     eventOnEnterByLogin();
     setEventhandlerSlideShow();
 
+    // Eventlistener for slideshow
     document.getElementById("slideshow-container").addEventListener('mouseenter', setButtonsVisible, false);
     document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
 
+    // Eventlistener for Video Player (X-Button)
+    const xButton = document.getElementById('videoArea');
+    xButton.addEventListener('mouseenter', unhiddeBackbutton, true);
+    xButton.addEventListener('mouseleave', hiddeBackbutton, true);
 }
 
 function addEnterFunctionality() {
     var inputSearch = document.getElementById("searchentry");
-    inputSearch.addEventListener("keyup",function (event) {
-        if(event.keyCode === 13) {
+    inputSearch.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
             event.preventDefault();
             document.getElementById("searchPic").click();
         }
@@ -182,48 +194,59 @@ function addEnterFunctionality() {
 }
 
 //Shows the video-player and hides the video-list
-function showVideoPlayerHideOverview(videoStr){
+function showVideoPlayerHideOverview(videoStr) {
     document.getElementById("searchentrys").innerHTML = "";
     var vidArea = document.getElementById("videoArea");
-    if(vidArea.style.display == "none") {
-       // const buttonMainP = document.getElementById("returnToMainPage");
+    if (vidArea.style.display == "none") {
+
+        // Eventlistener for Video Player hidde/unhidde backButton
+
+
+
+        const buttonMainP = document.getElementById("returnToMainPage");
         const video = JSON.parse(videoStr);
         const vidOverview = document.getElementById("videooverview");
         const videoTitle = document.getElementById("videotitle");
-        //const buttonBackToVideos = document.getElementById("backtovideos");
         const videoPlayer = document.createElement("video");
         const videoSource = document.createElement("source");
         const videoId = document.createElement("div");
         const slideShow = document.getElementById("slideShow");
-        const submitCommentDiv = document.getElementById("submitCommentDiv")
+        const submitCommentDiv = document.getElementById("submitCommentDiv");
+        const backXButton = document.createElement('span');
 
         //Initialize video player
-        videoPlayer.setAttribute("controls","true");
-        videoPlayer.setAttribute("autoplay","true");
-        videoPlayer.setAttribute("width","800");
-        videoPlayer.setAttribute("height","450");
-        videoSource.setAttribute("type","video/mp4");
-        videoSource.setAttribute("src",video.src);
-        videoId.setAttribute("id","videoId");
-        videoId.setAttribute("style","display: none;")
+        videoPlayer.setAttribute("controls", "true");
+        videoPlayer.setAttribute("autoplay", "true");
+        videoPlayer.setAttribute("width", "800");
+        videoPlayer.setAttribute("height", "450");
+        videoSource.setAttribute("type", "video/mp4");
+        videoSource.setAttribute("src", video.src);
+        videoId.setAttribute("id", "videoId");
+        videoId.setAttribute("style", "display: none;");
+        backXButton.setAttribute('id','backtovideos');
+        backXButton.setAttribute('onclick', 'showOverviewHideVideoplayer()');
+        backXButton.innerHTML = "&times;";
+        backXButton.setAttribute('hidden', 'true');
         videoPlayer.appendChild(videoSource);
         videoPlayer.appendChild(videoId);
-        vidArea.insertBefore(videoPlayer,vidArea.firstChild);
+        vidArea.insertBefore(videoPlayer, vidArea.firstChild);
+        vidArea.appendChild(backXButton);
+
+
 
         videoId.innerHTML = video.id;
         vidOverview.style.display = "none";
         videoTitle.innerHTML = video.name;
-      //  buttonBackToVideos.style.display = "block";
         vidArea.style.display = "block";
-       // buttonMainP.style.display = "none";
+        buttonMainP.style.display = "none";
         console.log("Auth: " + localStorage.getItem("auth"));
-        if(localStorage.getItem("auth") != null){
+        if (localStorage.getItem("auth") != null) {
             submitCommentDiv.style.display = "block";
         }
 
         generateComments(videoId.innerHTML);
 
-        if(slideShow.hidden == false) {
+        if (slideShow.hidden == false) {
             console.log(slideShow);
             hideSlideShow();
         }
@@ -231,27 +254,29 @@ function showVideoPlayerHideOverview(videoStr){
 }
 
 //Shows the video-list and hides the video-player
-function showOverviewHideVideoplayer(){
+function showOverviewHideVideoplayer() {
     document.getElementById("searchentrys").innerHTML = "";
     const vidOverview = document.getElementById("videooverview");
-    if(vidOverview.style.display == "none"){
+    if (vidOverview.style.display == "none") {
         const vidArea = document.getElementById("videoArea");
         const createCommentArea = document.createElement("createcommentarea");
         const submitCommentDiv = document.getElementById("submitCommentDiv")
+        const backXButton = document.getElementById('backtovideos');
 
         createCommentArea.innerHTML = "";
-        if(vidArea.firstChild != null) {
+        if (vidArea.firstChild != null) {
             vidArea.removeChild(vidArea.firstChild);
         }
         vidArea.style.display = "none";
         vidOverview.style.display = "block";
         submitCommentDiv.style.display = "none";
+        vidArea.removeChild(backXButton);
         hideSlideShow();
     }
 }
 
 //Creates a new comment
-function submitComment(){
+function submitComment() {
     //Get needed elements
     const author = localStorage.getItem("auth");
     const messageInput = document.getElementById("inputMessage");
@@ -259,20 +284,20 @@ function submitComment(){
     const videoId = document.getElementById("videoId");
 
     //Check inputs for illegal chars
-    if(!isInputLegal(messageInput.value)){
+    if (!isInputLegal(messageInput.value)) {
         return;
     }
     //Create new comment
     let newComment;
-    if(author == ""){
-        newComment = new Comment("unknown",message);
-    }else{
-        newComment = new Comment(author,message);
+    if (author == "") {
+        newComment = new Comment("unknown", message);
+    } else {
+        newComment = new Comment(author, message);
     }
     //Save new comment in webstorage
     const currentVideoId = document.getElementById("videoId");
     const comments = loadCommentsForId(currentVideoId.innerHTML);
-    if(!comments){
+    if (!comments) {
         console.log("No entry for this video found");
     }
     comments.push(newComment);
@@ -288,47 +313,47 @@ function searchVideos() {
     document.getElementById("searchentrys").innerHTML = "";
     const slideShow = document.getElementById("slideShow");
     const search = document.getElementById("searchentry").value;
-    if(!isInputLegal(search)){
+    if (!isInputLegal(search)) {
         console.log("Search Canceled! Illegal Charackters used")
         return;
     }
-    if(slideShow.hidden == false) {
+    if (slideShow.hidden == false) {
         hideSlideShow();
     }
-   // const buttonBackToMainPage = document.getElementById("returnToMainPage");
-   // buttonBackToMainPage.style.display = "block";
+    // const buttonBackToMainPage = document.getElementById("returnToMainPage");
+    // buttonBackToMainPage.style.display = "block";
     const vidOverview = document.getElementById("videooverview")
     const videoPlayer = document.getElementById("videoArea")
     const createCommentArea = document.getElementById("createcommentarea");
-    if(videoPlayer.style.display == "block") {
+    if (videoPlayer.style.display == "block") {
         videoPlayer.style.display = "none";
         createCommentArea.innerHTML = "";
-        if(videoPlayer.firstChild != null) {
+        if (videoPlayer.firstChild != null) {
             videoPlayer.removeChild(videoPlayer.firstChild);
         }
     }
     vidOverview.style.display = "none";
     console.log(search);
-    let video = new Video("","","","");
+    let video = new Video("", "", "", "");
     var request = createAjaxRequest();
-    request.onreadystatechange = function(){
-        if(4 == this.readyState && 200 == this.status) {
+    request.onreadystatechange = function () {
+        if (4 == this.readyState && 200 == this.status) {
             const videos = JSON.parse(this.responseText);
             const searchresults = document.getElementById("searchentrys");
             for (video of videos) {
                 // console.log(video.name)
-                if(checkVideoAttributes(search,video) || (video.duration.localeCompare(search)==0)) {
+                if (checkVideoAttributes(search, video) || (video.duration.localeCompare(search) == 0)) {
                     const videoDiv = document.createElement("div");
                     const header5 = document.createElement("h5");
                     const header7 = document.createElement("h7");
                     const a = document.createElement("a");
                     const img = document.createElement("img");
 
-                    videoDiv.setAttribute("class","videoLink");
-                    a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
-                    img.setAttribute("src",video.thumbnailPath);
+                    videoDiv.setAttribute("class", "videoLink");
+                    a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video) + "'" + ")";
+                    img.setAttribute("src", video.thumbnailPath);
                     console.log(video.thumbnailPath);
-                    img.setAttribute("class","thumbnail");
+                    img.setAttribute("class", "thumbnail");
                     header5.innerHTML = video.name;
                     header7.innerHTML = video.duration;
                     videoDiv.appendChild(img);
@@ -340,21 +365,22 @@ function searchVideos() {
             }
         }
     }
-    request.open("GET","./videos.json",true);
+    request.open("GET", "./videos.json", true);
     request.send();
 
 }
 
-function checkVideoAttributes(searchEntry,video) {
-    if(searchEntry === "") {
+function checkVideoAttributes(searchEntry, video) {
+    if (searchEntry === "") {
         return false;
     }
     let searchEntryNormalized = searchEntry.toUpperCase();
     let videoName = video.name.toUpperCase();
     let videoCategory = video.category.toUpperCase();
-    if(videoName.includes(searchEntryNormalized) || videoCategory.includes(searchEntryNormalized)) {
+    if (videoName.includes(searchEntryNormalized) || videoCategory.includes(searchEntryNormalized)) {
         return true;
     }
 }
+
 //*************************************Slideshow-Functions***********************************
 
