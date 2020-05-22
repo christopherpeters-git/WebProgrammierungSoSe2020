@@ -259,9 +259,7 @@ function showOverviewHideVideoplayer() {
     const vidOverview = document.getElementById("videooverview");
     if (vidOverview.style.display == "none") {
         const vidArea = document.getElementById("videoArea");
-        const buttonBackToVideos = document.getElementById("backtovideos");
         const createCommentArea = document.createElement("createcommentarea");
-        const buttonBackToMainPage = document.getElementById("returnToMainPage");
         const submitCommentDiv = document.getElementById("submitCommentDiv")
         const backXButton = document.getElementById('backtovideos');
 
@@ -271,8 +269,6 @@ function showOverviewHideVideoplayer() {
         }
         vidArea.style.display = "none";
         vidOverview.style.display = "block";
-        buttonBackToVideos.style.display = "none";
-        buttonBackToMainPage.style.display = "none";
         submitCommentDiv.style.display = "none";
         vidArea.removeChild(backXButton);
         hideSlideShow();
