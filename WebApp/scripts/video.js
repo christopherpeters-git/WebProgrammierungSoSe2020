@@ -177,9 +177,10 @@ function init() {
     document.getElementById("slideshow-container").addEventListener('mouseenter', setButtonsVisible, false);
     document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
 
-    // Eventlistener for Video Player
-    //document.getElementById('videoArea').addEventListener('mouseenter', unhiddeBackbutton, true);
-    //document.getElementById('videoArea').addEventListener('mouseleave', hiddeBackbutton, true);
+    // Eventlistener for Video Player (X-Button)
+    const xButton = document.getElementById('videoArea');
+    xButton.addEventListener('mouseenter', unhiddeBackbutton, true);
+    xButton.addEventListener('mouseleave', hiddeBackbutton, true);
 }
 
 function addEnterFunctionality() {
@@ -199,8 +200,7 @@ function showVideoPlayerHideOverview(videoStr) {
     if (vidArea.style.display == "none") {
 
         // Eventlistener for Video Player hidde/unhidde backButton
-        vidArea.addEventListener('mouseenter', unhiddeBackbutton, true);
-        vidArea.addEventListener('mouseleave', hiddeBackbutton, true);
+
 
 
         const buttonMainP = document.getElementById("returnToMainPage");
@@ -226,10 +226,12 @@ function showVideoPlayerHideOverview(videoStr) {
         backXButton.setAttribute('id','backtovideos');
         backXButton.setAttribute('onclick', 'showOverviewHideVideoplayer()');
         backXButton.innerHTML = "&times;";
+        backXButton.setAttribute('hidden', 'true');
         videoPlayer.appendChild(videoSource);
         videoPlayer.appendChild(videoId);
         vidArea.insertBefore(videoPlayer, vidArea.firstChild);
         vidArea.appendChild(backXButton);
+
 
 
         videoId.innerHTML = video.id;
@@ -261,6 +263,7 @@ function showOverviewHideVideoplayer() {
         const createCommentArea = document.createElement("createcommentarea");
         const buttonBackToMainPage = document.getElementById("returnToMainPage");
         const submitCommentDiv = document.getElementById("submitCommentDiv")
+        const backXButton = document.getElementById('backtovideos');
 
         createCommentArea.innerHTML = "";
         if (vidArea.firstChild != null) {
@@ -271,6 +274,7 @@ function showOverviewHideVideoplayer() {
         buttonBackToVideos.style.display = "none";
         buttonBackToMainPage.style.display = "none";
         submitCommentDiv.style.display = "none";
+        vidArea.removeChild(backXButton);
         hideSlideShow();
     }
 }
