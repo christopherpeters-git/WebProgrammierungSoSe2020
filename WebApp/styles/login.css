@@ -85,7 +85,7 @@ button:hover .login-alert{
     cursor: pointer;
 }
 .alert{
-    position: absolute;
+    position: fixed;
     bottom: 100%;
     left: 0;
     right: 0;

@@ -291,7 +291,10 @@ function showOverviewHideVideoplayer() {
         vidArea.style.display = "none";
         vidOverview.style.display = "block";
         submitCommentDiv.style.display = "none";
-        vidArea.removeChild(backXButton);
+        console.log(backXButton);
+        if(backXButton!=null) {
+            vidArea.removeChild(backXButton);
+        }
         hideSlideShow();
     }
 }

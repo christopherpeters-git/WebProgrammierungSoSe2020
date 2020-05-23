@@ -19,13 +19,14 @@
 </head>
 <body onload="init()">
 <div id="upperBody" class="upperbody">
-    <div class="alert" id="alert">
-        <div class="text-alert" id="alert-text"></div>
-    </div>
 
     <header>
         <ul class="header">
-
+            <li class="header">
+                <div class="alert" id="alert" style="z-index: 5">
+                    <div class="text-alert" id="alert-text"></div>
+                </div>
+            </li>
             <li class="header" style="margin-top: 5px">
                 <img height="44" onclick="showOverviewHideVideoplayer()" src="media/bilder/Logo.png" style="cursor: pointer" width="44"
                 alt="logo"/>
@@ -136,7 +137,7 @@
     <div class="footer">
 
         <ul class="footer">
-            <li class="footer"><a onclick="location.reload()" style="cursor: pointer"> Home</a></li>
+            <li class="footer"><a onclick="showOverviewHideVideoplayer()" style="cursor: pointer"> Home</a></li>
             <li class="footer" style="float: right;"> <a href="#Impressum"> Impressum </a> </li>
         </ul>
 
