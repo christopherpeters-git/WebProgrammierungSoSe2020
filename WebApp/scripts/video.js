@@ -203,7 +203,7 @@ function showVideoPlayerHideOverview(videoStr) {
 
 
 
-        const buttonMainP = document.getElementById("returnToMainPage");
+        // const buttonMainP = document.getElementById("returnToMainPage");
         const video = JSON.parse(videoStr);
         const vidOverview = document.getElementById("videooverview");
         const videoTitle = document.getElementById("videotitle");
@@ -238,7 +238,7 @@ function showVideoPlayerHideOverview(videoStr) {
         vidOverview.style.display = "none";
         videoTitle.innerHTML = video.name;
         vidArea.style.display = "block";
-        buttonMainP.style.display = "none";
+        // buttonMainP.style.display = "none";
         console.log("Auth: " + localStorage.getItem("auth"));
         if (localStorage.getItem("auth") != null) {
             submitCommentDiv.style.display = "block";
