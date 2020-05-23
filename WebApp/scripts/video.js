@@ -1,23 +1,23 @@
 "use strict";
 
-const forbidden = ['<', '>', '/'];
+const forbidden=['<','>','/'];
 const localStorageVideoPrefix = "video";
-const categories = ["Entertainment", "Music", "Cars"];
+const categories= ["Entertainment", "Music","Cars"];
 //*************************************Classes**************************************
 //NOT USED YET
-class Comment {
-    constructor(author, message) {
+class Comment{
+    constructor(author,message){
         const date = new Date();
         this.author = author;
         this.message = message;
         const completeTimeString = date.toTimeString();
-        const time = completeTimeString.slice(0, completeTimeString.lastIndexOf(":"));
-        this.date = date.toDateString() + " " + time;
+        const time = completeTimeString.slice(0,completeTimeString.lastIndexOf(":"));
+        this.date = date.toDateString() + " " +  time;
     }
 }
 
-class Video {
-    constructor(id, src, name, duration, category) {
+class Video{
+    constructor(id,src,name,duration,category){
         this.id = id;
         this.src = src;
         this.name = name;
@@ -29,19 +29,19 @@ class Video {
 //*************************************Helpers**************************************
 
 //creates XMLHttp- or ActiveX-Request depending on browser support
-function createAjaxRequest() {
+function createAjaxRequest(){
     let request;
-    if (window.XMLHttpRequest) {
+    if(window.XMLHttpRequest){
         request = new XMLHttpRequest();
-    } else {
+    }else{
         request = new ActiveXObject("Microsoft.XMLHTTP");
     }
     return request;
 }
 
 //Checks if string contains illegal characters which are defined in forbidden
-function isInputLegal(strIn) {
-    if (!strIn || (strIn.length === 0)) {
+function isInputLegal(strIn){
+    if(!strIn || (strIn.length === 0)){
         return false;
     }
     const inputLength = strIn.length;
@@ -57,11 +57,11 @@ function isInputLegal(strIn) {
 }
 
 //Loads comments from webstorage. Returns elements in an array, returns array with size 0 if no comments found for id
-function loadCommentsForId(id) {
+function loadCommentsForId(id){
     let comments;
-    if (localStorage.getItem(localStorageVideoPrefix + String(id))) {
+    if(localStorage.getItem(localStorageVideoPrefix + String(id))){
         comments = JSON.parse(localStorage.getItem(localStorageVideoPrefix + String(id)));
-    } else {
+    }else{
         comments = new Array();
         console.log("No comments found!");
     }
@@ -69,7 +69,7 @@ function loadCommentsForId(id) {
 }
 
 //Saves comments in webstorage for video id.
-function saveCommentsForId(comments, id) {
+function saveCommentsForId(comments, id){
     localStorage.setItem(localStorageVideoPrefix + String(id), JSON.stringify(comments));
 }
 //hidde and unhidde the back Button in videoArea.
@@ -167,7 +167,7 @@ function initVideoOverview() {
 
 //*************************************HTML-called-functions***********************************
 //Is called on page load, calls all initializers
-function init() {
+function init(){
     addEnterFunctionality();
     initVideoOverview();
     eventOnEnterByLogin();
@@ -181,6 +181,14 @@ function init() {
     })
 
     // Eventlistener for slideshow
+    setEventhandlerSlideShow();
+    document.getElementById("searchPic").addEventListener('mouseenter',function () {
+        document.getElementById("searchPic").style.backgroundColor="#cccccc";
+    },false);
+    document.getElementById("searchPic").addEventListener('mouseleave',function () {
+        document.getElementById("searchPic").style.backgroundColor="#FFFFFF";
+    },false);
+    addEventListener("scroll",searchbarScroll,false);
     document.getElementById("slideshow-container").addEventListener('mouseenter', setButtonsVisible, false);
     document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
 
@@ -198,6 +206,21 @@ function addEnterFunctionality() {
             document.getElementById("searchPic").click();
         }
     })
+}
+
+
+//von W3School
+// Searchbar ist fixed und folgt beim Scrollen
+function searchbarScroll() {
+    var header = document.getElementById("upperBody");
+// Get the offset position of the navbar
+    var sticky = header.offsetTop;
+    if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+    } else {
+        header.classList.remove("sticky");
+    }
+
 }
 
 //Shows the video-player and hides the video-list
@@ -240,7 +263,7 @@ function showVideoPlayerHideOverview(videoStr) {
         vidOverview.style.display = "none";
         videoTitle.innerHTML = video.name;
         vidArea.style.display = "block";
-        buttonMainP.style.display = "none";
+        // buttonMainP.style.display = "none";
         console.log("Auth: " + localStorage.getItem("auth"));
         if (localStorage.getItem("auth") != null) {
             submitCommentDiv.style.display = "block";
@@ -264,13 +287,16 @@ function showOverviewHideVideoplayer() {
         const backXButton = document.getElementById('backtovideos');
 
         createCommentArea.innerHTML = "";
-        if (vidArea.firstChild != null) {
+        if (vidArea.firstChild != null){
             vidArea.removeChild(vidArea.firstChild);
         }
         vidArea.style.display = "none";
         vidOverview.style.display = "block";
         submitCommentDiv.style.display = "none";
-        vidArea.removeChild(backXButton);
+        console.log(backXButton);
+        if(backXButton!=null) {
+            vidArea.removeChild(backXButton);
+        }
         hideSlideShow();
     }
 }
@@ -362,19 +388,19 @@ function searchVideos() {
             }
         }
     }
-    request.open("GET", "./videos.json", true);
+    request.open("GET","./videos.json",true);
     request.send();
 
 }
 
-function checkVideoAttributes(searchEntry, video) {
-    if (searchEntry === "") {
+function checkVideoAttributes(searchEntry,video) {
+    if(searchEntry === "") {
         return false;
     }
     let searchEntryNormalized = searchEntry.toUpperCase();
     let videoName = video.name.toUpperCase();
     let videoCategory = video.category.toUpperCase();
-    if (videoName.includes(searchEntryNormalized) || videoCategory.includes(searchEntryNormalized)) {
+    if(videoName.includes(searchEntryNormalized) || videoCategory.includes(searchEntryNormalized)) {
         return true;
     }
 }

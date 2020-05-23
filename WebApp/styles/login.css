@@ -8,7 +8,7 @@ input[type=text].login, input[type=password].login {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #000000;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -22,7 +22,7 @@ button.login {
     display: block;
     padding: 14px 20px;
     margin: 8px 0;
-    width: auto;
+  //  width: auto;
 }
 
 button:hover {
@@ -42,7 +42,7 @@ button:hover .login-alert{
 }
 
 .closebtn{
-    width: auto;
+    //width: auto;
     padding: 10px 18px;
     background-color: #f44336;
     float: none;
@@ -85,7 +85,7 @@ button:hover .login-alert{
     cursor: pointer;
 }
 .alert{
-    position: absolute;
+    position: fixed;
     bottom: 100%;
     left: 0;
     right: 0;
