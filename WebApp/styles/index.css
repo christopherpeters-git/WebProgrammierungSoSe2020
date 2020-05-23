@@ -128,6 +128,7 @@ hr{
     width: 80%;
 }
 
+
 @media only screen and (max-width: 400px) {
     #search_header{
         width: 50%;
@@ -168,6 +169,8 @@ li.footer{
 }
 
 #login-name{
+    margin-top:8px;
+    margin-right:12px;
     display: none;
     width: 35px;
     line-height: 35px;
