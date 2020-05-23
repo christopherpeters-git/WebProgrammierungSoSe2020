@@ -63,6 +63,9 @@ function loginCheck() {
                     userlogin.loginStatus = true;
                     //Speichert die Benutzerdaten im local Storage.
                     localStorage.setItem('auth',userlogin.username);
+
+                    //Displays the submit comment div
+                    document.getElementById("submitCommentDiv").style.display = "block";
                     return;
                 }
             }
@@ -85,6 +88,7 @@ function logout() {
     //Entfernt Benutzerdaten aus dem local Storage.
     localStorage.removeItem('auth');
     document.getElementById('login-name').style.display = 'none';
+    document.getElementById("submitCommentDiv").style.display = "none";
 }
 
 // Vergleicht zweier Benutzerdaten.
