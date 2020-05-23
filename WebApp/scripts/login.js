@@ -55,7 +55,8 @@ function loginCheck() {
                 if (userComparison(userlogin,iterator)){
                     document.getElementById('login-notification').style.display='none';
                     document.getElementById('login').style.display='none';
-                    document.getElementById('login-name').innerHTML= 'Angemeldet als: ' + userlogin.getname;
+                    document.getElementById('login-name').innerHTML= userlogin.getname[0].toUpperCase();
+                    document.getElementById('login-name').style.display = 'inline-block';
                     document.getElementById('loginLogout').innerHTML="Logout";
                     document.getElementById('loginLogout').setAttribute('onclick', 'logout()');
                     openAlert("Login erfolgreich");
@@ -83,6 +84,7 @@ function logout() {
     openAlert("Erfolgreich Ausgeloggt")
     //Entfernt Benutzerdaten aus dem local Storage.
     localStorage.removeItem('auth');
+    document.getElementById('login-name').style.display = 'none';
 }
 
 // Vergleicht zweier Benutzerdaten.

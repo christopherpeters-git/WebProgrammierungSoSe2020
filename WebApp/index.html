@@ -35,10 +35,9 @@
                     <input id="searchentry" placeholder="Search" type="text">
                     <img id="searchPic" onclick="searchVideos()" src="./media/bilder/icon_Search.png" alt="searchIcon">
                 </div>
-
             </li>
             <li class="header" style=" float: right">
-                <span id="login-name" style="font-size: larger;"></span>
+                <span id="login-name">T</span>
                 <button id="loginLogout" onclick="document.getElementById('login').style.display='block'" style="width: auto; float: right">Login
                 </button>
             </li>
@@ -118,7 +117,6 @@
 
 
     <div id="videooverview"></div>
-    <button id="backtovideos" onclick="showOverviewHideVideoplayer()" style="display: none">Back to videos</button>
     <div id="videoArea" style="display: none;">
         <div id="commentSection">
             <div id="videoInfo">
@@ -134,18 +132,20 @@
             </div>
         </div>
     </div>
+
+    <div class="footer">
+
+        <ul class="footer">
+            <li class="footer"><a onclick="location.reload()" style="cursor: pointer"> Home</a></li>
+            <li class="footer" style="float: right;"> <a href="#Impressum"> Impressum </a> </li>
+        </ul>
+
+    </div>
+
 </div>
 
-<footer>
-    <nav>
-        <div class="nav" id="home_btn" style="float: left;margin-left: 5cm">
-            <a onclick="location.reload()" style="cursor: pointer"> Home</a>
-        </div>
-        <div class="nav" id="Impressum_btn">
-            <a onclick="location.reload()" style="cursor: pointer"> Impressum</a>
-        </div>
-    </nav>
-</footer>
+
+
 </body>
 
 </html>

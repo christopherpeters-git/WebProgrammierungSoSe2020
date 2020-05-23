@@ -11,6 +11,7 @@
 }
 
 #videoArea{
+    position: relative;
     width:  800px;
     margin: 5% auto auto;
     background-color: black;
@@ -62,6 +63,18 @@
     padding-bottom: 0px;
     height: 2%;
     width: 80%;
+}
+#backtovideos{
+    font-size: 40px;
+    font-weight: bold;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: red;
+    cursor: pointer;
+    }
+#backtovideos:hover {
+    font-weight: bolder;
 }
 
 .clearfix::after {
