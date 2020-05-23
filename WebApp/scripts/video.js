@@ -165,7 +165,13 @@ function init(){
     initVideoOverview();
     eventOnEnterByLogin();
     setEventhandlerSlideShow();
-
+    document.getElementById("searchPic").addEventListener('mouseenter',function () {
+        document.getElementById("searchPic").style.backgroundColor="#cccccc";
+    },false);
+    document.getElementById("searchPic").addEventListener('mouseleave',function () {
+        document.getElementById("searchPic").style.backgroundColor="#FFFFFF";
+    },false);
+    addEventListener("scroll",searchbarScroll,false);
     document.getElementById("slideshow-container").addEventListener('mouseenter', setButtonsVisible, false);
     document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
 
@@ -179,6 +185,21 @@ function addEnterFunctionality() {
             document.getElementById("searchPic").click();
         }
     })
+}
+
+
+//von W3School
+// Searchbar ist fixed und folgt beim Scrollen
+function searchbarScroll() {
+    var header = document.getElementById("upperBody");
+// Get the offset position of the navbar
+    var sticky = header.offsetTop;
+    if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+    } else {
+        header.classList.remove("sticky");
+    }
+
 }
 
 //Shows the video-player and hides the video-list
@@ -196,12 +217,22 @@ function showVideoPlayerHideOverview(videoStr){
         const videoId = document.createElement("div");
         const slideShow = document.getElementById("slideShow");
         const submitCommentDiv = document.getElementById("submitCommentDiv")
+        const device_width= window.innerWidth;
+        console.log(device_width);
 
         //Initialize video player
         videoPlayer.setAttribute("controls","true");
         videoPlayer.setAttribute("autoplay","true");
-        videoPlayer.setAttribute("width","800");
-        videoPlayer.setAttribute("height","450");
+        if(device_width>400) {
+            videoPlayer.setAttribute("width", "800");
+            videoPlayer.setAttribute("height","450");
+        }else{
+            videoPlayer.setAttribute("width", "370");
+            videoPlayer.setAttribute("height","400");
+            vidArea.style.width = "400px";
+            console.log("true");
+        }
+
         videoSource.setAttribute("type","video/mp4");
         videoSource.setAttribute("src",video.src);
         videoId.setAttribute("id","videoId");
