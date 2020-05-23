@@ -77,9 +77,9 @@ function loginCheck() {
 
 //Meldet den Benutzer ab.
 function logout() {
-    let lgoinbutton = document.getElementById('loginLogout');
-    lgoinbutton.setAttribute('onclick', 'document.getElementById(\'login\').style.display=\'block\'');
-    lgoinbutton.innerText='Login';
+    let loginButton = document.getElementById('loginLogout');
+    loginButton.setAttribute('onclick', 'document.getElementById(\'login\').style.display=\'block\'');
+    loginButton.innerText='Login';
     document.getElementById('login-name').innerHTML= '';
     openAlert("Erfolgreich Ausgeloggt")
     //Entfernt Benutzerdaten aus dem local Storage.
@@ -89,10 +89,7 @@ function logout() {
 
 // Vergleicht zweier Benutzerdaten.
 function userComparison (loginuser,vergleich) {
-    if (loginuser.username === vergleich.username && loginuser.password === vergleich.password){
-        return true;
-    }
-    return false;
+    return loginuser.username === vergleich.username && loginuser.password === vergleich.password;
 }
 
 /*
