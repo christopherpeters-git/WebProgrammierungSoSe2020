@@ -68,34 +68,6 @@ function loadCommentsForId(id){
     return comments;
 }
 
-//Saves comments in webstorage for video id.
-function saveCommentsForId(comments, id){
-    localStorage.setItem(localStorageVideoPrefix + String(id), JSON.stringify(comments));
-}
-
-//Clears "createcommentarea" and generates and appends saved comments to parent
-function generateComments(videoIdStr){
-    const createCommentArea = document.getElementById("createCommentArea");
-    createCommentArea.innerHTML = "";
-    const comments = loadCommentsForId(videoIdStr);
-    if(!(comments.length === 0)){
-        for(let i = 0; i < comments.length; i++){
-            //Create new comment-html
-            const newComment = document.createElement("div");
-            newComment.setAttribute("class","comment");
-            const header3 = document.createElement("h3");
-            header3.innerHTML = comments[i].author + " - " + comments[i].date;
-            const message = document.createElement("p");
-            message.innerHTML = comments[i].message;
-            newComment.appendChild(header3);
-            newComment.appendChild(message);
-            createCommentArea.appendChild(newComment);
-        }
-    }
-}
-
-//creates a comment, in use for foreach loop
-
 //*************************************Initializers************************************
 
 //Creates an entry on the video-overview for every video listed in the videos.json
