@@ -1,5 +1,6 @@
-var slideIndex = 1;
+"use strict";
 
+var slideIndex = 1;
 
 // Next/previous controls
 function plusSlides(n) {
@@ -42,7 +43,7 @@ function getIndex() {
 
 function hideSlideShow() {
     const slideShow= document.getElementById("slideShow");
-    if(slideShow.hidden==false){
+    if(slideShow.hidden===false){
         slideShow.hidden=true;
     }else {
         slideShow.hidden=false;
@@ -58,7 +59,7 @@ function showVideoHideSlideshow() {
         if((4 === this.readyState) && (200 === this.status)){
             const videos = JSON.parse(this.responseText);
             for(video of videos) {
-                if (video_id == video.id){
+                if (video_id === video.id){
                     showVideoPlayerHideOverview(JSON.stringify(video));
                 }
             }
@@ -70,7 +71,7 @@ function showVideoHideSlideshow() {
 }
 
 
-function setEventhandlerSlideShow() {
+function setEventHandlerSlideShow() {
     let elements = document.getElementsByClassName("mySlides");
     console.log(elements);
     for (let i = 0; i < elements.length; i++) {

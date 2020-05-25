@@ -1,28 +1,17 @@
 "use strict";
 
-const forbidden=['<','>','/'];
-const localStorageVideoPrefix = "video";
+const forbiddenChars=['<','>','/'];
 const categories= ["Entertainment", "Music","Cars"];
 //*************************************Classes**************************************
-//NOT USED YET
-class Comment{
-    constructor(author,message){
-        const date = new Date();
-        this.author = author;
-        this.message = message;
-        const completeTimeString = date.toTimeString();
-        const time = completeTimeString.slice(0,completeTimeString.lastIndexOf(":"));
-        this.date = date.toDateString() + " " +  time;
-    }
-}
 
 class Video{
-    constructor(id,src,name,duration,category){
+    constructor(id,src,name,duration,category,thumbnailPath){
         this.id = id;
         this.src = src;
         this.name = name;
         this.duration = duration;
         this.category = category;
+        this.thumbnailPath = thumbnailPath;
     }
 }
 
@@ -39,35 +28,43 @@ function createAjaxRequest(){
     return request;
 }
 
-//Checks if string contains illegal characters which are defined in forbidden
+//Checks if string contains illegal characters which are defined in forbiddenChars
 function isInputLegal(strIn){
     if(!strIn || (strIn.length === 0)){
         return false;
     }
     const inputLength = strIn.length;
-    const forbiddenLength = forbidden.length;
+    const forbiddenLength = forbiddenChars.length;
     for(let i = 0; i < inputLength;i++){
         for(let j = 0; j < forbiddenLength;j++){
-            if(strIn[i] == forbidden[j]){
+            if(strIn[i] === forbiddenChars[j]){
                 return false;
             }
         }
     }
     return true;
 }
+//Creates an anker with a thumbnail for a video
+function createVideoAnker(video){
+    const videoDiv = document.createElement("div");
+    const header5 = document.createElement("h5");
+    const header7 = document.createElement("h7");
+    const a = document.createElement("a");
+    const img = document.createElement("img");
 
-//Loads comments from webstorage. Returns elements in an array, returns array with size 0 if no comments found for id
-function loadCommentsForId(id){
-    let comments;
-    if(localStorage.getItem(localStorageVideoPrefix + String(id))){
-        comments = JSON.parse(localStorage.getItem(localStorageVideoPrefix + String(id)));
-    }else{
-        comments = new Array();
-        console.log("No comments found!");
-    }
-    return comments;
+    videoDiv.setAttribute("class","videoLink");
+    a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
+    img.setAttribute("src",video.thumbnailPath);
+    console.log(video.thumbnailPath);
+    img.setAttribute("class","thumbnail");
+    header5.innerHTML = video.name;
+    header7.innerHTML = video.duration;
+    videoDiv.appendChild(img);
+    videoDiv.appendChild(header5);
+    videoDiv.appendChild(header7);
+    a.appendChild(videoDiv);
+    return a;
 }
-
 //*************************************Initializers************************************
 
 //Creates an entry on the video-overview for every video listed in the videos.json
@@ -101,28 +98,12 @@ function initVideoOverview(){
                         break;
                     }
                 }
-                if(cat==""){
+                if(cat===""){
                     return;
                 }
                 const catDiv = document.getElementById(cat);
-                const videoDiv = document.createElement("div");
-                const header5 = document.createElement("h5");
-                const header7 = document.createElement("h7");
-                const a = document.createElement("a");
-                const img = document.createElement("img");
-
-                videoDiv.setAttribute("class","videoLink");
-                a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
-                img.setAttribute("src",video.thumbnailPath);
-                console.log(video.thumbnailPath);
-                img.setAttribute("class","thumbnail");
-                header5.innerHTML = video.name;
-                header7.innerHTML = video.duration;
-                videoDiv.appendChild(img);
-                videoDiv.appendChild(header5);
-                videoDiv.appendChild(header7);
-                a.appendChild(videoDiv);
-                catDiv.appendChild(a);
+                const newAnker = createVideoAnker(video);
+                catDiv.appendChild(newAnker);
             }
         }
     }
@@ -136,7 +117,7 @@ function init(){
     addEnterFunctionality();
     initVideoOverview();
     eventOnEnterByLogin();
-    setEventhandlerSlideShow();
+    setEventHandlerSlideShow();
 
     document.getElementById("slideshow-container").addEventListener('mouseenter', setButtonsVisible, false);
     document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
@@ -157,7 +138,7 @@ function addEnterFunctionality() {
 function showVideoPlayerHideOverview(videoStr){
     document.getElementById("searchentrys").innerHTML = "";
     var vidArea = document.getElementById("videoArea");
-    if(vidArea.style.display == "none") {
+    if(vidArea.style.display === "none") {
        // const buttonMainP = document.getElementById("returnToMainPage");
         const video = JSON.parse(videoStr);
         const vidOverview = document.getElementById("videooverview");
@@ -195,7 +176,7 @@ function showVideoPlayerHideOverview(videoStr){
 
         generateComments(videoId.innerHTML);
 
-        if(slideShow.hidden == false) {
+        if(slideShow.hidden === false) {
             console.log(slideShow);
             hideSlideShow();
         }
@@ -206,7 +187,7 @@ function showVideoPlayerHideOverview(videoStr){
 function showOverviewHideVideoplayer(){
     document.getElementById("searchentrys").innerHTML = "";
     const vidOverview = document.getElementById("videooverview");
-    if(vidOverview.style.display == "none"){
+    if(vidOverview.style.display === "none"){
         const vidArea = document.getElementById("videoArea");
         const createCommentArea = document.createElement("createcommentarea");
         const submitCommentDiv = document.getElementById("submitCommentDiv")
@@ -236,10 +217,10 @@ function submitComment(){
     }
     //Create new comment
     let newComment;
-    if(author == ""){
-        newComment = new Comment("unknown",message);
+    if(author === ""){
+        newComment = new VideoComment("unknown",message);
     }else{
-        newComment = new Comment(author,message);
+        newComment = new VideoComment(author,message);
     }
     //Save new comment in webstorage
     const currentVideoId = document.getElementById("videoId");
@@ -249,10 +230,8 @@ function submitComment(){
     }
     comments.push(newComment);
     saveCommentsForId(comments, currentVideoId.innerHTML);
-
     //Reset form values
     messageInput.value = "";
-
     generateComments(videoId.innerHTML);
 }
 
@@ -264,7 +243,7 @@ function searchVideos() {
         console.log("Search Canceled! Illegal Charackters used")
         return;
     }
-    if(slideShow.hidden == false) {
+    if(slideShow.hidden === false) {
         hideSlideShow();
     }
    // const buttonBackToMainPage = document.getElementById("returnToMainPage");
@@ -272,7 +251,7 @@ function searchVideos() {
     const vidOverview = document.getElementById("videooverview")
     const videoPlayer = document.getElementById("videoArea")
     const createCommentArea = document.getElementById("createcommentarea");
-    if(videoPlayer.style.display == "block") {
+    if(videoPlayer.style.display === "block") {
         videoPlayer.style.display = "none";
         createCommentArea.innerHTML = "";
         if(videoPlayer.firstChild != null) {
@@ -284,30 +263,14 @@ function searchVideos() {
     let video = new Video("","","","");
     var request = createAjaxRequest();
     request.onreadystatechange = function(){
-        if(4 == this.readyState && 200 == this.status) {
+        if(4 === this.readyState && 200 === this.status) {
             const videos = JSON.parse(this.responseText);
             const searchresults = document.getElementById("searchentrys");
             for (video of videos) {
                 // console.log(video.name)
-                if(checkVideoAttributes(search,video) || (video.duration.localeCompare(search)==0)) {
-                    const videoDiv = document.createElement("div");
-                    const header5 = document.createElement("h5");
-                    const header7 = document.createElement("h7");
-                    const a = document.createElement("a");
-                    const img = document.createElement("img");
-
-                    videoDiv.setAttribute("class","videoLink");
-                    a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
-                    img.setAttribute("src",video.thumbnailPath);
-                    console.log(video.thumbnailPath);
-                    img.setAttribute("class","thumbnail");
-                    header5.innerHTML = video.name;
-                    header7.innerHTML = video.duration;
-                    videoDiv.appendChild(img);
-                    videoDiv.appendChild(header5);
-                    videoDiv.appendChild(header7);
-                    a.appendChild(videoDiv);
-                    searchresults.appendChild(a);
+                if(checkVideoAttributes(search,video) || (video.duration.localeCompare(search)===0)) {
+                    const newAnker = createVideoAnker(video);
+                    searchresults.appendChild(newAnker);
                 }
             }
         }
@@ -328,5 +291,3 @@ function checkVideoAttributes(searchEntry,video) {
         return true;
     }
 }
-//*************************************Slideshow-Functions***********************************
-

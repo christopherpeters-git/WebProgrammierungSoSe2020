@@ -1,14 +1,16 @@
-class user {
+"use strict";
+
+class User {
     constructor(username, password, loginAccepted) {
         this.username = username;
         this.password = password;
         this.loginAccepted = loginAccepted;
     }
-    get getname(){
+    get getName(){
         return this.username;
     }
-    set loginStatus(staus){
-        return this.loginAccepted=staus;
+    set loginStatus(status){
+        return this.loginAccepted=status;
     }
 
 }
@@ -20,15 +22,15 @@ function closeLoginWindow() {
 
 function eventOnEnterByLogin() {
     let inputUsername = document.getElementById('username');
-    let inputPasswort = document.getElementById('password');
+    let inputPassword = document.getElementById('password');
 
-    inputPasswort.addEventListener("keyup", function (event) {
-        if (event.keyCode === 13) {
+    inputPassword.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
             loginCheck();
         }
     });
     inputUsername.addEventListener("keyup", function (event) {
-        if (event.keyCode === 13) {
+        if (event.key === "Enter") {
             loginCheck();
         }
     });
@@ -45,17 +47,17 @@ function loginCheck() {
         return;
     }
 
-    const userlogin = new user(username, password,false);
+    const userlogin = new User(username, password,false);
     const request = createAjaxRequest();
     request.onreadystatechange = function() {
         if ((4 === this.readyState) && (200 === this.status)){
             const logins = JSON.parse(this.responseText);
-            let iterator = new user("", "");
+            let iterator = new User("", "");
             for (iterator of logins){
                 if (userComparison(userlogin,iterator)){
                     document.getElementById('login-notification').style.display='none';
                     document.getElementById('login').style.display='none';
-                    document.getElementById('login-name').innerHTML= userlogin.getname[0].toUpperCase();
+                    document.getElementById('login-name').innerHTML= userlogin.getName[0].toUpperCase();
                     document.getElementById('login-name').style.display = 'inline-block';
                     document.getElementById('loginLogout').innerHTML="Logout";
                     document.getElementById('loginLogout').setAttribute('onclick', 'logout()');
@@ -89,10 +91,7 @@ function logout() {
 
 // Vergleicht zweier Benutzerdaten.
 function userComparison (loginuser,vergleich) {
-    if (loginuser.username === vergleich.username && loginuser.password === vergleich.password){
-        return true;
-    }
-    return false;
+    return loginuser.username === vergleich.username && loginuser.password === vergleich.password;
 }
 
 /*

@@ -1,7 +1,8 @@
 "use strict";
+
 const localStorageVideoPrefix = "video";
 
-class Comment{
+class VideoComment{
     constructor(author,message){
         const date = new Date();
         this.author = author;
@@ -11,6 +12,7 @@ class Comment{
         this.date = date.toDateString() + " " +  time;
     }
 }
+
 
 //Loads comments from webstorage. Returns elements in an array, returns array with size 0 if no comments found for id
 function loadCommentsForId(id){
