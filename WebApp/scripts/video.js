@@ -117,21 +117,47 @@ function init(){
     addEnterFunctionality();
     initVideoOverview();
     eventOnEnterByLogin();
+    document.getElementById("searchPic").addEventListener('mouseenter',function () {
+        document.getElementById("searchPic").style.backgroundColor="#cccccc";
+    },false);
+    document.getElementById("searchPic").addEventListener('mouseleave',function () {
+        document.getElementById("searchPic").style.backgroundColor="#FFFFFF";
+    },false);
+    addEventListener("scroll",searchbarScroll,false);
     setEventHandlerSlideShow();
 
     document.getElementById("slideshow-container").addEventListener('mouseenter', setButtonsVisible, false);
     document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
 
+    // Eventlistener for Video Player (X-Button)
+    const xButton = document.getElementById('videoArea');
+    xButton.addEventListener('mouseenter', unhiddeBackbutton, true);
+    xButton.addEventListener('mouseleave', hiddeBackbutton, true);
 }
 
 function addEnterFunctionality() {
     var inputSearch = document.getElementById("searchentry");
-    inputSearch.addEventListener("keyup",function (event) {
-        if(event.keyCode === 13) {
+    inputSearch.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
             event.preventDefault();
             document.getElementById("searchPic").click();
         }
     })
+}
+
+
+//von W3School
+// Searchbar ist fixed und folgt beim Scrollen
+function searchbarScroll() {
+    var header = document.getElementById("upperBody");
+// Get the offset position of the navbar
+    var sticky = header.offsetTop;
+    if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+    } else {
+        header.classList.remove("sticky");
+    }
+
 }
 
 //Shows the video-player and hides the video-list
@@ -139,7 +165,6 @@ function showVideoPlayerHideOverview(videoStr){
     document.getElementById("searchentrys").innerHTML = "";
     var vidArea = document.getElementById("videoArea");
     if(vidArea.style.display === "none") {
-       // const buttonMainP = document.getElementById("returnToMainPage");
         const video = JSON.parse(videoStr);
         const vidOverview = document.getElementById("videooverview");
         const videoTitle = document.getElementById("videotitle");
@@ -148,27 +173,33 @@ function showVideoPlayerHideOverview(videoStr){
         const videoSource = document.createElement("source");
         const videoId = document.createElement("div");
         const slideShow = document.getElementById("slideShow");
-        const submitCommentDiv = document.getElementById("submitCommentDiv")
+        const submitCommentDiv = document.getElementById("submitCommentDiv");
+        const backXButton = document.createElement('span');
 
         //Initialize video player
-        videoPlayer.setAttribute("controls","true");
-        videoPlayer.setAttribute("autoplay","true");
-        videoPlayer.setAttribute("width","800");
-        videoPlayer.setAttribute("height","450");
-        videoSource.setAttribute("type","video/mp4");
-        videoSource.setAttribute("src",video.src);
-        videoId.setAttribute("id","videoId");
-        videoId.setAttribute("style","display: none;")
+        videoPlayer.setAttribute("controls", "true");
+        videoPlayer.setAttribute("autoplay", "true");
+        videoPlayer.setAttribute("width", "800");
+        videoPlayer.setAttribute("height", "450");
+        videoSource.setAttribute("type", "video/mp4");
+        videoSource.setAttribute("src", video.src);
+        videoId.setAttribute("id", "videoId");
+        videoId.setAttribute("style", "display: none;");
+        backXButton.setAttribute('id','backtovideos');
+        backXButton.setAttribute('onclick', 'showOverviewHideVideoplayer()');
+        backXButton.innerHTML = "&times;";
+        backXButton.setAttribute('hidden', 'true');
         videoPlayer.appendChild(videoSource);
         videoPlayer.appendChild(videoId);
-        vidArea.insertBefore(videoPlayer,vidArea.firstChild);
+        vidArea.insertBefore(videoPlayer, vidArea.firstChild);
+        vidArea.appendChild(backXButton);
+
+
 
         videoId.innerHTML = video.id;
         vidOverview.style.display = "none";
         videoTitle.innerHTML = video.name;
-      //  buttonBackToVideos.style.display = "block";
         vidArea.style.display = "block";
-       // buttonMainP.style.display = "none";
         console.log("Auth: " + localStorage.getItem("auth"));
         if(localStorage.getItem("auth") != null){
             submitCommentDiv.style.display = "block";
@@ -191,14 +222,21 @@ function showOverviewHideVideoplayer(){
         const vidArea = document.getElementById("videoArea");
         const createCommentArea = document.createElement("createcommentarea");
         const submitCommentDiv = document.getElementById("submitCommentDiv")
+        const backXButton = document.getElementById('backtovideos');
 
         createCommentArea.innerHTML = "";
-        if(vidArea.firstChild != null) {
+        if (vidArea.firstChild != null && vidArea.firstChild.nodeName==="VIDEO"){
             vidArea.removeChild(vidArea.firstChild);
         }
         vidArea.style.display = "none";
         vidOverview.style.display = "block";
-        submitCommentDiv.style.display = "none";
+        if(submitCommentDiv!=null) {
+            submitCommentDiv.style.display = "none";
+        }
+        console.log(backXButton);
+        if(backXButton!=null) {
+            vidArea.removeChild(backXButton);
+        }
         hideSlideShow();
     }
 }
@@ -236,6 +274,11 @@ function submitComment(){
 }
 
 function searchVideos() {
+    const vidArea= document.getElementById("videoArea");
+    if (vidArea.firstChild != null && vidArea.firstChild.nodeName==="VIDEO"){
+        vidArea.removeChild(vidArea.firstChild);
+    }
+    //showOverviewHideVideoplayer();
     document.getElementById("searchentrys").innerHTML = "";
     const slideShow = document.getElementById("slideShow");
     const search = document.getElementById("searchentry").value;
@@ -246,21 +289,18 @@ function searchVideos() {
     if(slideShow.hidden === false) {
         hideSlideShow();
     }
-   // const buttonBackToMainPage = document.getElementById("returnToMainPage");
-   // buttonBackToMainPage.style.display = "block";
     const vidOverview = document.getElementById("videooverview")
     const videoPlayer = document.getElementById("videoArea")
     const createCommentArea = document.getElementById("createcommentarea");
     if(videoPlayer.style.display === "block") {
         videoPlayer.style.display = "none";
-        createCommentArea.innerHTML = "";
-        if(videoPlayer.firstChild != null) {
-            videoPlayer.removeChild(videoPlayer.firstChild);
-        }
+        // if (videoPlayer.firstChild != null) {
+        //     videoPlayer.removeChild(videoPlayer.firstChild);
+        // }
     }
     vidOverview.style.display = "none";
     console.log(search);
-    let video = new Video("","","","");
+    let video = new Video("", "", "", "");
     var request = createAjaxRequest();
     request.onreadystatechange = function(){
         if(4 === this.readyState && 200 === this.status) {
