@@ -136,9 +136,9 @@ function init(){
 }
 
 function addEnterFunctionality() {
-    var inputSearch = document.getElementById("searchentry");
+    const inputSearch = document.getElementById("searchentry");
     inputSearch.addEventListener("keyup", function (event) {
-        if (event.keyCode === 13) {
+        if (event.key === "Enter") {
             event.preventDefault();
             document.getElementById("searchPic").click();
         }
