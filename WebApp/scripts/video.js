@@ -46,9 +46,9 @@ function isInputLegal(strIn){
     }
     const inputLength = strIn.length;
     const forbiddenLength = forbidden.length;
-    for(let i = 0; i < inputLength;i++){
-        for(let j = 0; j < forbiddenLength;j++){
-            if(strIn[i] == forbidden[j]){
+    for (let i = 0; i < inputLength; i++) {
+        for (let j = 0; j < forbiddenLength; j++) {
+            if (strIn[i] === forbidden[j]) {
                 return false;
             }
         }
@@ -136,7 +136,7 @@ function initVideoOverview() {
                         break;
                     }
                 }
-                if (cat == "") {
+                if (cat === "") {
                     return;
                 }
                 const catDiv = document.getElementById(cat);
@@ -171,6 +171,16 @@ function init(){
     addEnterFunctionality();
     initVideoOverview();
     eventOnEnterByLogin();
+    setEventHandlerSlideShow();
+
+    document.getElementById("inputMessage").addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("submitCommentButton").click();
+        }
+    })
+
+    // Eventlistener for slideshow
     setEventhandlerSlideShow();
     document.getElementById("searchPic").addEventListener('mouseenter',function () {
         document.getElementById("searchPic").style.backgroundColor="#cccccc";
@@ -217,12 +227,13 @@ function searchbarScroll() {
 function showVideoPlayerHideOverview(videoStr) {
     document.getElementById("searchentrys").innerHTML = "";
     var vidArea = document.getElementById("videoArea");
-    if (vidArea.style.display == "none") {
-        // const buttonMainP = document.getElementById("returnToMainPage");
+    if (vidArea.style.display === "none") {
+
+        // Eventlistener for Video Player hidde/unhidde backButton
+        const buttonMainP = document.getElementById("returnToMainPage");
         const video = JSON.parse(videoStr);
         const vidOverview = document.getElementById("videooverview");
         const videoTitle = document.getElementById("videotitle");
-        //const buttonBackToVideos = document.getElementById("backtovideos");
         const videoPlayer = document.createElement("video");
         const videoSource = document.createElement("source");
         const videoId = document.createElement("div");
@@ -248,8 +259,6 @@ function showVideoPlayerHideOverview(videoStr) {
         vidArea.insertBefore(videoPlayer, vidArea.firstChild);
         vidArea.appendChild(backXButton);
 
-
-
         videoId.innerHTML = video.id;
         vidOverview.style.display = "none";
         videoTitle.innerHTML = video.name;
@@ -259,10 +268,8 @@ function showVideoPlayerHideOverview(videoStr) {
         if (localStorage.getItem("auth") != null) {
             submitCommentDiv.style.display = "block";
         }
-
         generateComments(videoId.innerHTML);
-
-        if (slideShow.hidden == false) {
+        if (slideShow.hidden === false) {
             console.log(slideShow);
             hideSlideShow();
         }
@@ -273,7 +280,7 @@ function showVideoPlayerHideOverview(videoStr) {
 function showOverviewHideVideoplayer() {
     document.getElementById("searchentrys").innerHTML = "";
     const vidOverview = document.getElementById("videooverview");
-    if (vidOverview.style.display == "none") {
+    if (vidOverview.style.display === "none") {
         const vidArea = document.getElementById("videoArea");
         const createCommentArea = document.createElement("createcommentarea");
         const submitCommentDiv = document.getElementById("submitCommentDiv")
@@ -310,7 +317,7 @@ function submitComment() {
     }
     //Create new comment
     let newComment;
-    if (author == "") {
+    if (author === "") {
         newComment = new Comment("unknown", message);
     } else {
         newComment = new Comment(author, message);
@@ -326,7 +333,6 @@ function submitComment() {
 
     //Reset form values
     messageInput.value = "";
-
     generateComments(videoId.innerHTML);
 }
 
@@ -343,14 +349,13 @@ function searchVideos() {
         console.log("Search Canceled! Illegal Charackters used")
         return;
     }
-    if (slideShow.hidden == false) {
+    if (slideShow.hidden === false) {
         hideSlideShow();
     }
-    // const buttonBackToMainPage = document.getElementById("returnToMainPage");
-    // buttonBackToMainPage.style.display = "block";
+
     const vidOverview = document.getElementById("videooverview")
     const videoPlayer = document.getElementById("videoArea")
-    if (videoPlayer.style.display == "block") {
+    if (videoPlayer.style.display === "block") {
         videoPlayer.style.display = "none";
         // if (videoPlayer.firstChild != null) {
         //     videoPlayer.removeChild(videoPlayer.firstChild);
@@ -361,12 +366,11 @@ function searchVideos() {
     let video = new Video("", "", "", "");
     var request = createAjaxRequest();
     request.onreadystatechange = function () {
-        if (4 == this.readyState && 200 == this.status) {
+        if (4 === this.readyState && 200 === this.status) {
             const videos = JSON.parse(this.responseText);
             const searchresults = document.getElementById("searchentrys");
             for (video of videos) {
-                // console.log(video.name)
-                if (checkVideoAttributes(search, video) || (video.duration.localeCompare(search) == 0)) {
+                if (checkVideoAttributes(search, video) || (video.duration.localeCompare(search) === 0)) {
                     const videoDiv = document.createElement("div");
                     const header5 = document.createElement("h5");
                     const header7 = document.createElement("h7");
@@ -405,5 +409,3 @@ function checkVideoAttributes(searchEntry,video) {
         return true;
     }
 }
-//*************************************Slideshow-Functions***********************************
-
