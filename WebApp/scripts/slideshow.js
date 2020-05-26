@@ -58,7 +58,7 @@ function showVideoHideSlideshow() {
         if((4 === this.readyState) && (200 === this.status)){
             const videos = JSON.parse(this.responseText);
             for(video of videos) {
-                if (video_id == video.id){
+                if (video_id === video.id){
                     showVideoPlayerHideOverview(JSON.stringify(video));
                 }
             }
@@ -70,7 +70,7 @@ function showVideoHideSlideshow() {
 }
 
 
-function setEventhandlerSlideShow() {
+function setEventHandlerSlideShow() {
     let elements = document.getElementsByClassName("mySlides");
     console.log(elements);
     for (let i = 0; i < elements.length; i++) {
