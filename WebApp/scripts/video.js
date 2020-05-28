@@ -117,6 +117,16 @@ function init(){
     addEnterFunctionality();
     initVideoOverview();
     eventOnEnterByLogin();
+    setEventHandlerSlideShow();
+
+    document.getElementById("inputMessage").addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("submitCommentButton").click();
+        }
+    })
+
+    // Eventlistener for slideshow
     document.getElementById("searchPic").addEventListener('mouseenter',function () {
         document.getElementById("searchPic").style.backgroundColor="#cccccc";
     },false);
@@ -168,7 +178,6 @@ function showVideoPlayerHideOverview(videoStr){
         const video = JSON.parse(videoStr);
         const vidOverview = document.getElementById("videooverview");
         const videoTitle = document.getElementById("videotitle");
-        //const buttonBackToVideos = document.getElementById("backtovideos");
         const videoPlayer = document.createElement("video");
         const videoSource = document.createElement("source");
         const videoId = document.createElement("div");
@@ -194,8 +203,6 @@ function showVideoPlayerHideOverview(videoStr){
         vidArea.insertBefore(videoPlayer, vidArea.firstChild);
         vidArea.appendChild(backXButton);
 
-
-
         videoId.innerHTML = video.id;
         vidOverview.style.display = "none";
         videoTitle.innerHTML = video.name;
@@ -204,7 +211,6 @@ function showVideoPlayerHideOverview(videoStr){
         if(localStorage.getItem("auth") != null){
             submitCommentDiv.style.display = "block";
         }
-
         generateComments(videoId.innerHTML);
 
         if(slideShow.hidden === false) {
@@ -289,6 +295,7 @@ function searchVideos() {
     if(slideShow.hidden === false) {
         hideSlideShow();
     }
+
     const vidOverview = document.getElementById("videooverview")
     const videoPlayer = document.getElementById("videoArea")
     const createCommentArea = document.getElementById("createcommentarea");
