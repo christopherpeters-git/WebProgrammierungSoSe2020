@@ -181,7 +181,7 @@ function init(){
     })
 
     // Eventlistener for slideshow
-    setEventhandlerSlideShow();
+    setEventHandlerSlideShow();
     document.getElementById("searchPic").addEventListener('mouseenter',function () {
         document.getElementById("searchPic").style.backgroundColor="#cccccc";
     },false);
