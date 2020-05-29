@@ -351,8 +351,7 @@ function checkVideoAttributes(searchEntry,video) {
 
 //**************************Impressum-Functions*********************
 function hideSite() {
-    document.getElementById("homeLogo").style.display = "none";
-    document.getElementById("impressumReturnHome").style.display = "block";
+
     document.getElementById("search_header").style.display = "none";
     document.getElementById("loginStuff").style.display = "none";
     document.getElementById("impressum").style.display = "block"
@@ -368,8 +367,8 @@ function hideSite() {
 
 function showSite() {
     document.getElementById("impressum").style.display = "none"
-    document.getElementById("homeLogo").style.display = "block";
-    document.getElementById("impressumReturnHome").style.display = "none";
+
+
     document.getElementById("search_header").style.display = "block";
     document.getElementById("loginStuff").style.display = "block";
     document.getElementById("slideShow").hidden = false;
@@ -378,7 +377,7 @@ function showSite() {
     impressumCalled = false;
 }
 
-function handleHome() {
+function handleDecisionImpressum() {
     if(impressumCalled) {
         showSite();
     }else{
