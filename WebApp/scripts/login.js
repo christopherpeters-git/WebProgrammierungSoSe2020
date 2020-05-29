@@ -44,7 +44,6 @@ function loginCheck() {
 
     //Prüfung ob Illegale zeichen verwendet wurden.
     if (!isInputLegal(username) || !isInputLegal(password)){
-        console.log("Es wurden Illegale Zeichen verwendet.")
         document.getElementById('login-notification').innerHTML = 'Username oder Passwort falsch!';
         document.getElementById('login-notification').style.display='block';
         return;
