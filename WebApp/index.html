@@ -28,9 +28,13 @@
                     <div class="text-alert" id="alert-text"></div>
                 </div>
             </li>
-            <li class="header" style="margin-top: 5px">
+            <li class="header" style="margin-top: 5px" id="homeLogo">
                 <img height="44" onclick="showOverviewHideVideoplayer()" src="media/bilder/Logo.png" style="cursor: pointer" width="44"
                 alt="logo"/>
+            </li>
+            <li class="header" style="margin-top: 5px;display: none" id="impressumReturnHome">
+                <img height="44" onclick="showSite()" src="media/bilder/Logo.png" style="cursor: pointer" width="44"
+                     alt="logo"/>
             </li>
             <li class="header"  id="search_header">
                 <div id="searcharea" style="text-align: center">
@@ -38,13 +42,20 @@
                     <img id="searchPic" onclick="searchVideos()" src="./media/bilder/icon_Search.png" alt="searchIcon">
                 </div>
             </li>
-            <li class="header" style=" float: right">
+            <li class="header" style=" float: right" id="loginStuff">
                 <span id="login-name"></span>
                 <button id="loginLogout" onclick="document.getElementById('login').style.display='block'" style="width: auto; float: right">Login
                 </button>
             </li>
         </ul>
     </header>
+</div>
+<div id="impressum" style="display: none">
+    Team 17 <br> <br>
+    Salzdahlumer Str. 46/48, 38302 Wolfenbüttel <br> <br>
+    Telefon: 0123456789<br> <br>
+    E-mail: team17@ostfalia.de<br> <br>
+    Vertretungsberechtigter Geschäftsführer: Till Fricke <br> <br>
 </div>
 
 
@@ -133,8 +144,8 @@
     <div class="footer">
 
         <ul class="footer">
-            <li class="footer"><a onclick="showOverviewHideVideoplayer()" style="cursor: pointer"> Home</a></li>
-            <li class="footer" style="float: right;"> <a href="#Impressum"> Impressum </a> </li>
+            <li class="footer"><a onclick="handleHome()" style="cursor: pointer"> Home</a></li>
+            <li class="footer" style="float: right;"> <a href="#Impressum" onclick="hideSite()"> Impressum </a> </li>
         </ul>
 
     </div>
