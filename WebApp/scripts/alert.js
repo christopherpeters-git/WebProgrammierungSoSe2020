@@ -3,6 +3,7 @@ Fährt das Hinweisfenster mit ensprechenden Inhalt aus.
 inhalt = String der den Inhalt des Hinweises enthällt.
  */
 function openAlert(inhale) {
+    console.log("Alert Fenster wird angezeigt. Meldung: "+inhale);
     const alert = document.getElementById('alert');
     const text = document.getElementById('alert-text');
     text.innerHTML = inhale;

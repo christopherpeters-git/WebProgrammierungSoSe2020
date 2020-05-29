@@ -16,6 +16,7 @@ class user {
 function closeLoginWindow() {
     document.getElementById('login').style.display='none';
     document.getElementById('login-notification').style.display='none';
+    console.log("Login Fenster wird geschlossen")
 }
 //Fügt bei den Inputs beim Login ein Eventheandler der auf die Taste "Enter" reagiert.
 function eventOnEnterByLogin() {
@@ -24,11 +25,13 @@ function eventOnEnterByLogin() {
 
     inputPasswort.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
+            console.log("Event trigger, Enter Taste wurde gedrückt")
             loginCheck();
         }
     });
     inputUsername.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
+            console.log("Event trigger, Enter Taste wurde gedrückt")
             loginCheck();
         }
     });
@@ -41,6 +44,7 @@ function loginCheck() {
 
     //Prüfung ob Illegale zeichen verwendet wurden.
     if (!isInputLegal(username) || !isInputLegal(password)){
+        console.log("Es wurden Illegale Zeichen verwendet.")
         document.getElementById('login-notification').innerHTML = 'Username oder Passwort falsch!';
         document.getElementById('login-notification').style.display='block';
         return;
@@ -54,6 +58,7 @@ function loginCheck() {
             let iterator = new user("", "");
             for (iterator of logins){
                 if (userComparison(userlogin,iterator)){
+                    console.log("Zugangsdaten stimmen überein, Anmeldung wird durchgeführt")
                     document.getElementById('login-notification').style.display='none';
                     document.getElementById('login').style.display='none';
                     document.getElementById('login-name').innerHTML= userlogin.getname[0].toUpperCase();
@@ -70,6 +75,7 @@ function loginCheck() {
                     return;
                 }
             }
+            console.log("Zugansdaten sind nicht Korrekt.")
             document.getElementById('login-notification').innerHTML = 'Username oder Passwort falsch!';
             document.getElementById('login-notification').style.display='block';
         }
@@ -90,6 +96,7 @@ function logout() {
     localStorage.removeItem('auth');
     document.getElementById('login-name').style.display = 'none';
     document.getElementById("submitCommentDiv").style.display = "none";
+    console.log("Benutzer wurde erfolgreich ausgelogt.")
 }
 
 // Vergleicht zweier Benutzerdaten.
