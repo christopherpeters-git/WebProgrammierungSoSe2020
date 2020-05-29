@@ -20,15 +20,15 @@ function closeLoginWindow() {
 
 function eventOnEnterByLogin() {
     let inputUsername = document.getElementById('username');
-    let inputPasswort = document.getElementById('password');
+    let inputPassword = document.getElementById('password');
 
-    inputPasswort.addEventListener("keyup", function (event) {
-        if (event.keyCode === 13) {
+    inputPassword.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
             loginCheck();
         }
     });
     inputUsername.addEventListener("keyup", function (event) {
-        if (event.keyCode === 13) {
+        if (event.key === "Enter") {
             loginCheck();
         }
     });

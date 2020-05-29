@@ -1,4 +1,4 @@
-var slideIndex = 1;
+let slideIndex = 1;
 
 
 // Next/previous controls
@@ -12,8 +12,8 @@ function currentSlide(n) {
 }
 
 function showSlides(n) {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
+    let i;
+    const slides = document.getElementsByClassName("mySlides");
     if (n > slides.length) {slideIndex = 1}
     if (n < 1) {slideIndex = slides.length}
     for (i = 0; i < slides.length; i++) {
@@ -42,11 +42,7 @@ function getIndex() {
 
 function hideSlideShow() {
     const slideShow= document.getElementById("slideShow");
-    if(slideShow.hidden===false){
-        slideShow.hidden=true;
-    }else {
-        slideShow.hidden=false;
-    }
+    slideShow.hidden = slideShow.hidden === false;
 
 }
 
