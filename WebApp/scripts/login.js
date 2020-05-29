@@ -21,18 +21,18 @@ function closeLoginWindow() {
 //Fügt bei den Inputs beim Login ein Eventheandler der auf die Taste "Enter" reagiert.
 function eventOnEnterByLogin() {
     let inputUsername = document.getElementById('username');
-    let inputPasswort = document.getElementById('password');
+    let inputPassword = document.getElementById('password');
 
-    inputPasswort.addEventListener("keyup", function (event) {
-        if (event.keyCode === 13) {
-            console.log("Event trigger, Enter Taste wurde gedrückt")
+    inputPassword.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
             loginCheck();
+            console.log("Event trigger, Enter Taste wurde gedrückt")
         }
     });
     inputUsername.addEventListener("keyup", function (event) {
-        if (event.keyCode === 13) {
-            console.log("Event trigger, Enter Taste wurde gedrückt")
+        if (event.key === "Enter") {
             loginCheck();
+            console.log("Event trigger, Enter Taste wurde gedrückt")
         }
     });
 }
