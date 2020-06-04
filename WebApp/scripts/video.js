@@ -2,6 +2,8 @@
 
 const forbiddenChars=['<','>','/'];
 const categories= ["Entertainment", "Music","Cars"];
+let impressumCalled = false;
+let videoplayerOpen = false;
 //*************************************Classes**************************************
 
 class Video{
@@ -177,6 +179,7 @@ function searchbarScroll() {
 
 //Shows the video-player and hides the video-list
 function showVideoPlayerHideOverview(videoStr){
+    videoplayerOpen = true;
     document.getElementById("searchentrys").innerHTML = "";
     var vidArea = document.getElementById("videoArea");
     if(vidArea.style.display === "none") {
@@ -228,6 +231,7 @@ function showVideoPlayerHideOverview(videoStr){
 //Shows the video-list and hides the video-player
 function showOverviewHideVideoplayer(){
     document.getElementById("searchentrys").innerHTML = "";
+    videoplayerOpen = false;
     const vidOverview = document.getElementById("videooverview");
     if(vidOverview.style.display === "none"){
         const vidArea = document.getElementById("videoArea");
