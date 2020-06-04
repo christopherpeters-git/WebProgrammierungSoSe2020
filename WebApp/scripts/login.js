@@ -18,6 +18,7 @@ class User {
 function closeLoginWindow() {
     document.getElementById('login').style.display='none';
     document.getElementById('login-notification').style.display='none';
+    console.log("close login Window")
 }
 //Fügt bei den Inputs beim Login ein Eventheandler der auf die Taste "Enter" reagiert.
 function eventOnEnterByLogin() {
@@ -26,11 +27,14 @@ function eventOnEnterByLogin() {
 
     inputPassword.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
+            console.log("Event trigger, Enter key")
             loginCheck();
         }
     });
     inputUsername.addEventListener("keyup", function (event) {
+
         if (event.key === "Enter") {
+            console.log("Event trigger, Enter key")
             loginCheck();
         }
     });
@@ -73,6 +77,7 @@ function loginCheck() {
             let iterator = new User("", "");
             for (iterator of logins){
                 if (userComparison(userlogin,iterator)){
+                    console.log("login successful")
                     document.getElementById('login-notification').style.display='none';
                     document.getElementById('login').style.display='none';
                     document.getElementById('login-name').innerHTML= userlogin.getName[0].toUpperCase();
@@ -89,6 +94,7 @@ function loginCheck() {
                     return;
                 }
             }
+            console.log("login credentials incorrect.")
             document.getElementById('login-notification').innerHTML = 'Username oder Passwort falsch!';
             document.getElementById('login-notification').style.display='block';
         }
@@ -109,6 +115,7 @@ function logout() {
     localStorage.removeItem('auth');
     document.getElementById('login-name').style.display = 'none';
     document.getElementById("submitCommentDiv").style.display = "none";
+    console.log("logout successful.")
 }
 
 // Vergleicht zweier Benutzerdaten.
