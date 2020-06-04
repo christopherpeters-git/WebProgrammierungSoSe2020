@@ -1,28 +1,16 @@
 "use strict";
 
 const forbidden=['<','>','/'];
-const localStorageVideoPrefix = "video";
 const categories= ["Entertainment", "Music","Cars"];
 //*************************************Classes**************************************
-//NOT USED YET
-class Comment{
-    constructor(author,message){
-        const date = new Date();
-        this.author = author;
-        this.message = message;
-        const completeTimeString = date.toTimeString();
-        const time = completeTimeString.slice(0,completeTimeString.lastIndexOf(":"));
-        this.date = date.toDateString() + " " +  time;
-    }
-}
-
 class Video{
-    constructor(id,src,name,duration,category){
+    constructor(id,src,name,duration,category,thumbnailPath){
         this.id = id;
         this.src = src;
         this.name = name;
         this.duration = duration;
         this.category = category;
+        this.thumbnailPath = thumbnailPath;
     }
 }
 
@@ -43,6 +31,7 @@ function createAjaxRequest(){
 function isInputLegal(strIn){
     if(!strIn || (strIn.length === 0)){
         return false;
+        console.log("String illegal");
     }
     const inputLength = strIn.length;
     const forbiddenLength = forbidden.length;
@@ -53,56 +42,30 @@ function isInputLegal(strIn){
             }
         }
     }
+    console.log("String is legal");
     return true;
 }
 
-//Loads comments from webstorage. Returns elements in an array, returns array with size 0 if no comments found for id
-function loadCommentsForId(id){
-    let comments;
-    if(localStorage.getItem(localStorageVideoPrefix + String(id))){
-        comments = JSON.parse(localStorage.getItem(localStorageVideoPrefix + String(id)));
-    }else{
-        comments = new Array();
-        console.log("No comments found!");
-    }
-    return comments;
-}
+function createVideoAnker(video){
+    const videoDiv = document.createElement("div");
+    const header5 = document.createElement("h5");
+    const header7 = document.createElement("h7");
+    const a = document.createElement("a");
+    const img = document.createElement("img");
 
-//Saves comments in webstorage for video id.
-function saveCommentsForId(comments, id){
-    localStorage.setItem(localStorageVideoPrefix + String(id), JSON.stringify(comments));
+    videoDiv.setAttribute("class","videoLink");
+    a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
+    img.setAttribute("src",video.thumbnailPath);
+    console.log(video.thumbnailPath);
+    img.setAttribute("class","thumbnail");
+    header5.innerHTML = video.name;
+    header7.innerHTML = video.duration;
+    videoDiv.appendChild(img);
+    videoDiv.appendChild(header5);
+    videoDiv.appendChild(header7);
+    a.appendChild(videoDiv);
+    return a;
 }
-//hidde and unhidde the back Button in videoArea.
-function unhiddeBackbutton(){
-    document.getElementById('backtovideos').hidden = false;
-}
-function hiddeBackbutton() {
-    document.getElementById('backtovideos').hidden = true;
-}
-
-//Clears "createcommentarea" and generates and appends saved comments to parent
-function generateComments(videoIdStr) {
-    const createCommentArea = document.getElementById("createCommentArea");
-    createCommentArea.innerHTML = "";
-    const comments = loadCommentsForId(videoIdStr);
-    if (!(comments.length === 0)) {
-        for (let i = 0; i < comments.length; i++) {
-            //Create new comment-html
-            const newComment = document.createElement("div");
-            newComment.setAttribute("class", "comment");
-            const header3 = document.createElement("h3");
-            header3.innerHTML = comments[i].author + " - " + comments[i].date;
-            const message = document.createElement("p");
-            message.innerHTML = comments[i].message;
-            newComment.appendChild(header3);
-            newComment.appendChild(message);
-            createCommentArea.appendChild(newComment);
-        }
-    }
-}
-
-//creates a comment, in use for foreach loop
-
 //*************************************Initializers************************************
 
 //Creates an entry on the video-overview for every video listed in the videos.json
@@ -140,24 +103,8 @@ function initVideoOverview() {
                     return;
                 }
                 const catDiv = document.getElementById(cat);
-                const videoDiv = document.createElement("div");
-                const header5 = document.createElement("h5");
-                const header7 = document.createElement("h7");
-                const a = document.createElement("a");
-                const img = document.createElement("img");
-
-                videoDiv.setAttribute("class", "videoLink");
-                a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video) + "'" + ")";
-                img.setAttribute("src", video.thumbnailPath);
-                console.log(video.thumbnailPath);
-                img.setAttribute("class", "thumbnail");
-                header5.innerHTML = video.name;
-                header7.innerHTML = video.duration;
-                videoDiv.appendChild(img);
-                videoDiv.appendChild(header5);
-                videoDiv.appendChild(header7);
-                a.appendChild(videoDiv);
-                catDiv.appendChild(a);
+                const newAnker = createVideoAnker(video);
+                catDiv.appendChild(newAnker);
             }
         }
     }
@@ -193,15 +140,19 @@ function init(){
     document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
 
     // Eventlistener for Video Player (X-Button)
-    const xButton = document.getElementById('videoArea');
-    xButton.addEventListener('mouseenter', unhiddeBackbutton, true);
-    xButton.addEventListener('mouseleave', hiddeBackbutton, true);
+    const videoArea = document.getElementById('videoArea');
+    videoArea.addEventListener('mouseenter', () => {
+        document.getElementById('backtovideos').hidden = false;
+    }, true);
+    videoArea.addEventListener('mouseleave', () => {
+        document.getElementById('backtovideos').hidden = true;
+    }, true);
 }
 
 function addEnterFunctionality() {
-    var inputSearch = document.getElementById("searchentry");
+    const inputSearch = document.getElementById("searchentry");
     inputSearch.addEventListener("keyup", function (event) {
-        if (event.keyCode === 13) {
+        if (event.key === "Enter") {
             event.preventDefault();
             document.getElementById("searchPic").click();
         }
@@ -212,9 +163,9 @@ function addEnterFunctionality() {
 //von W3School
 // Searchbar ist fixed und folgt beim Scrollen
 function searchbarScroll() {
-    var header = document.getElementById("upperBody");
+    const header = document.getElementById("upperBody");
 // Get the offset position of the navbar
-    var sticky = header.offsetTop;
+    const sticky = header.offsetTop;
     if (window.pageYOffset > sticky) {
         header.classList.add("sticky");
     } else {
@@ -226,7 +177,7 @@ function searchbarScroll() {
 //Shows the video-player and hides the video-list
 function showVideoPlayerHideOverview(videoStr) {
     document.getElementById("searchentrys").innerHTML = "";
-    var vidArea = document.getElementById("videoArea");
+    const vidArea = document.getElementById("videoArea");
     if (vidArea.style.display === "none") {
 
         // Eventlistener for Video Player hidde/unhidde backButton
@@ -318,9 +269,9 @@ function submitComment() {
     //Create new comment
     let newComment;
     if (author === "") {
-        newComment = new Comment("unknown", message);
+        newComment = new VideoComment("unknown", message);
     } else {
-        newComment = new Comment(author, message);
+        newComment = new VideoComment(author, message);
     }
     //Save new comment in webstorage
     const currentVideoId = document.getElementById("videoId");
@@ -371,24 +322,8 @@ function searchVideos() {
             const searchresults = document.getElementById("searchentrys");
             for (video of videos) {
                 if (checkVideoAttributes(search, video) || (video.duration.localeCompare(search) === 0)) {
-                    const videoDiv = document.createElement("div");
-                    const header5 = document.createElement("h5");
-                    const header7 = document.createElement("h7");
-                    const a = document.createElement("a");
-                    const img = document.createElement("img");
-
-                    videoDiv.setAttribute("class", "videoLink");
-                    a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video) + "'" + ")";
-                    img.setAttribute("src", video.thumbnailPath);
-                    console.log(video.thumbnailPath);
-                    img.setAttribute("class", "thumbnail");
-                    header5.innerHTML = video.name;
-                    header7.innerHTML = video.duration;
-                    videoDiv.appendChild(img);
-                    videoDiv.appendChild(header5);
-                    videoDiv.appendChild(header7);
-                    a.appendChild(videoDiv);
-                    searchresults.appendChild(a);
+                    const newAnker = createVideoAnker(video);
+                    searchresults.appendChild(newAnker);
                 }
             }
         }
