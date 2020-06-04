@@ -52,7 +52,7 @@ function isInputLegal(strIn){
 function createVideoAnker(video){
     const videoDiv = document.createElement("div");
     const header5 = document.createElement("h5");
-    const header7 = document.createElement("h7");
+    const header7 = document.createElement("h6");
     const a = document.createElement("a");
     const img = document.createElement("img");
 
