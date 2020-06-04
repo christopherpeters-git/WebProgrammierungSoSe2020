@@ -25,14 +25,15 @@ function eventOnEnterByLogin() {
 
     inputPassword.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
-            loginCheck();
             console.log("Event trigger, Enter Taste wurde gedrückt")
+            loginCheck();
         }
     });
     inputUsername.addEventListener("keyup", function (event) {
+
         if (event.key === "Enter") {
-            loginCheck();
             console.log("Event trigger, Enter Taste wurde gedrückt")
+            loginCheck();
         }
     });
 }
