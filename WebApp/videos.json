@@ -8,13 +8,13 @@
   { "id":3, "src":"media/videos/zaehne_putzen.mp4", "name": "zaehne putzen", "duration": "0:03", "category": "Entertainment",
     "thumbnailPath":"media/bilder/zaehne_putzen.jpg"},
   { "id":4, "src":"media/videos/cool_cars.mp4", "name": "cool cars", "duration": "0:04", "category": "Cars",
-    "thumbnailPath":"media/bilder/cool_cars.jpg"},
+    "thumbnailPath":"media/bilder/cool_cars.jpg", "quelle": "https://www.youtube.com/watch?v=NDI6VaBqEqc"},
   { "id":5, "src":"media/videos/coincidance.mp4", "name": "coincidance", "duration": "0:06", "category": "Music",
-    "thumbnailPath":"media/bilder/coincidance.jpg"},
+    "thumbnailPath":"media/bilder/coincidance.jpg", "quelle": "https://www.youtube.com/watch?v=nBHkIWAJitg"},
   {"id":6, "src":"media/videos/LinusDropTips.mp4", "name": "LinusDropTips", "duration": "0:12", "category": "Entertainment",
-    "thumbnailPath":"media/bilder/LinusDropTips.jpg"},
+    "thumbnailPath":"media/bilder/LinusDropTips.jpg", "quelle": "https://youtu.be/shyFnRVgvDw?t=35"},
   {"id":7, "src":"media/videos/Coffin_Dance.mp4", "name": "Coffin Dance Meme", "duration": "0:08", "category": "Entertainment",
-    "thumbnailPath":"media/bilder/Coffin_Dance.jpg"},
+    "thumbnailPath":"media/bilder/Coffin_Dance.jpg", "quelle": "https://youtu.be/aJqfMPzcXws?t=119"},
   {"id":8, "src":"media/videos/Flying_Cat.mp4", "name": "Flying Cat", "duration": "0:06", "category": "Entertainment",
-    "thumbnailPath":"media/bilder/Flying_Cat.jpg"}
+    "thumbnailPath":"media/bilder/Flying_Cat.jpg", "quelle": "https://youtu.be/VB4CCHHYOqY?t=64"}
 ]

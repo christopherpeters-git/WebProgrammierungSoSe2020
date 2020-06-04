@@ -26,7 +26,7 @@ body {
     width: 100%
 }
 header{
-    //padding: 30px;
+    /*padding: 30px;*/
     background-color:white;
     }
 ul.header {
@@ -45,7 +45,7 @@ nav{
 }
 
 ul.nav {
-   // background-color: #666;
+    /*background-color: #666;*/
     padding: 10px;
     list-style-type: none;
     overflow: hidden;
@@ -146,6 +146,7 @@ div.footer {
     width: 100%;
     left: 0;
     right: 0;
+    background-color:white;
 }
 
 li.footer{

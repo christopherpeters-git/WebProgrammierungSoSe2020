@@ -32,3 +32,10 @@ function handleDecisionImpressum() {
         showOverviewHideVideoplayer();
     }
 }
+
+
+function quellenTabelle() {
+
+
+
+}
