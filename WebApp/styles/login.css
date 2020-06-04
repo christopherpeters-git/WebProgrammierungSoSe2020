@@ -11,7 +11,7 @@ button {
     background-color: #000000;
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
+    margin: 8px 3px;
     border: none;
     cursor: pointer;
     border-radius: 4px;
@@ -48,7 +48,7 @@ button:hover .login-alert{
     float: none;
 }
 .window-form{
-    padding: 0px 16px 16px 16px;
+    padding: 0 16px 16px 16px;
 }
 .background-login{
     display: none;
@@ -93,7 +93,7 @@ button:hover .login-alert{
     background-color: #4CAF50;
     overflow: hidden;
     width: 40%;
-    height: 0%;
+    height: 0;
     transition: .7s ease;
     border-radius: 8px;
     }
