@@ -1,5 +1,6 @@
-let slideIndex = 1;
+"use strict";
 
+let slideIndex = 1;
 
 // Next/previous controls
 function plusSlides(n) {

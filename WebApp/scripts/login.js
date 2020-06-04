@@ -1,14 +1,16 @@
-class user {
+"use strict";
+
+class User {
     constructor(username, password, loginAccepted) {
         this.username = username;
         this.password = password;
         this.loginAccepted = loginAccepted;
     }
-    get getname(){
+    get getName(){
         return this.username;
     }
-    set loginStatus(staus){
-        return this.loginAccepted=staus;
+    set loginStatus(status){
+        return this.loginAccepted=status;
     }
 
 }
@@ -38,6 +40,23 @@ function eventOnEnterByLogin() {
     });
 }
 
+function setLoginLogoutButton() {
+
+    const user = localStorage.getItem('auth');
+    const button = document.getElementById('loginLogout');
+    const userText = document.getElementById('login-name');
+
+    if (user != null){
+        button.setAttribute('onclick', 'logout()');
+        button.innerHTML= "Logout";
+        userText.innerHTML= user[0].toUpperCase();
+        userText.style.display = 'inline-block';
+    } else {
+        userText.style.display = 'none';
+    }
+
+}
+
 //Funktion überprüft die Benutzerdaten und meldet den User an.
 function loginCheck() {
     const username = document.getElementById('username').value;
@@ -50,18 +69,18 @@ function loginCheck() {
         return;
     }
 
-    const userlogin = new user(username, password,false);
+    const userlogin = new User(username, password,false);
     const request = createAjaxRequest();
     request.onreadystatechange = function() {
         if ((4 === this.readyState) && (200 === this.status)){
             const logins = JSON.parse(this.responseText);
-            let iterator = new user("", "");
+            let iterator = new User("", "");
             for (iterator of logins){
                 if (userComparison(userlogin,iterator)){
                     console.log("Zugangsdaten stimmen überein, Anmeldung wird durchgeführt")
                     document.getElementById('login-notification').style.display='none';
                     document.getElementById('login').style.display='none';
-                    document.getElementById('login-name').innerHTML= userlogin.getname[0].toUpperCase();
+                    document.getElementById('login-name').innerHTML= userlogin.getName[0].toUpperCase();
                     document.getElementById('login-name').style.display = 'inline-block';
                     document.getElementById('loginLogout').innerHTML="Logout";
                     document.getElementById('loginLogout').setAttribute('onclick', 'logout()');

@@ -74,11 +74,11 @@ li.nav{
 h5{
     margin-top: -2px;
     font-size: 17px;
-    height: 0%;
+    height: 0;
 
 }
 
-h7{
+h6{
     margin-top: -2px;
     color:#cccccc;
 }
@@ -190,7 +190,6 @@ li.footer{
 #login-name{
     margin-top:8px;
     margin-right:12px;
-    display: none;
     width: 35px;
     line-height: 35px;
     border-radius: 50%;
