@@ -197,8 +197,9 @@ function showVideoPlayerHideOverview(videoStr){
         //Initialize video player
         videoPlayer.setAttribute("controls", "true");
         videoPlayer.setAttribute("autoplay", "true");
-        videoPlayer.setAttribute("width", "800");
-        videoPlayer.setAttribute("height", "450");
+        videoPlayer.setAttribute('class', 'player');
+        //videoPlayer.setAttribute("max-width", "800");
+        //videoPlayer.setAttribute("height", "450");
         videoSource.setAttribute("type", "video/mp4");
         videoSource.setAttribute("src", video.src);
         videoId.setAttribute("id", "videoId");

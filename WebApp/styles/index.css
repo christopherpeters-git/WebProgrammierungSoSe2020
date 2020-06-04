@@ -66,7 +66,7 @@ li.nav{
     float: left;
     margin-left: 1.5%;
     height: 250px;
-    min-width: 125px;
+    min-width: 250px;
     width: 22%;
 
     color: black;
@@ -121,18 +121,10 @@ hr{
     cursor: pointer;
     border-radius: 4px;
 }
-#search_header{
-    width: 50%;
-    margin-left:350px;
 
 
-}
 
-
-@media only screen and (min-width: 300px)and (max-width:400px ) {
-    #search_header{
-        margin-left:0 ;
-    }
+@media only screen and (max-width:400px ) {
     #searchentry{
         left:5px;
     }
@@ -140,34 +132,7 @@ hr{
         left:10px;
         width: 10%;
     }
-    .closebtn{
-        margin-left: -12px;
-    }
-    .login{
-
-    }
 }
-
-@media only screen and (max-width: 900px) {
-    #search_header{
-        margin-left:0 ;
-    }
-    #searchentry{
-        left:5px;
-    }
-    #searchPic{
-        left:10px;
-        width: 10%;
-    }
-    .closebtn{
-
-        margin-left: -12px;
-    }
-    .login{
-
-    }
-}
-
 
 ul.footer {
     list-style: none;
@@ -197,4 +162,45 @@ li.footer{
     font-size: 32px;
     border: 2px solid black;
     background-color: yellowgreen;
+    float: right;
 }
+#search_header {
+    width: 60%;
+}
+#loginStuff {
+    width: 20%;
+}
+
+@media only screen and (max-width: 400px) {
+    .closebtn {
+        width: 100%;
+        margin: 5px auto;
+    }
+    #loginButton{
+        width: 100%;
+        float: none;
+        margin: auto;
+    }
+    .videoLink{
+        width: 100%;
+        margin: auto;
+    }
+}
+@media only screen and (max-width: 700px) {
+    #search_header{
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
+    #loginStuff{
+        width: 60%;
+        position: absolute;
+        right: 5px;
+    }
+    #searchentry{
+        width: 70%;
+    }
+}
+
+
+
+
