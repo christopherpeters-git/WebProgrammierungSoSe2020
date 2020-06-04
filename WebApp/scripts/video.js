@@ -2,6 +2,8 @@
 
 const forbidden=['<','>','/'];
 const categories= ["Entertainment", "Music","Cars"];
+let impressumCalled = false;
+let videoplayerOpen = false;
 //*************************************Classes**************************************
 class Video{
     constructor(id,src,name,duration,category,thumbnailPath){
@@ -176,6 +178,7 @@ function searchbarScroll() {
 
 //Shows the video-player and hides the video-list
 function showVideoPlayerHideOverview(videoStr) {
+    videoplayerOpen = true;
     document.getElementById("searchentrys").innerHTML = "";
     const vidArea = document.getElementById("videoArea");
     if (vidArea.style.display === "none") {
@@ -230,6 +233,7 @@ function showVideoPlayerHideOverview(videoStr) {
 //Shows the video-list and hides the video-player
 function showOverviewHideVideoplayer() {
     document.getElementById("searchentrys").innerHTML = "";
+    videoplayerOpen = false;
     const vidOverview = document.getElementById("videooverview");
     if (vidOverview.style.display === "none") {
         const vidArea = document.getElementById("videoArea");
@@ -344,3 +348,6 @@ function checkVideoAttributes(searchEntry,video) {
         return true;
     }
 }
+
+
+

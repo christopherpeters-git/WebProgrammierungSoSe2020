@@ -1,5 +1,5 @@
 [
-  { "id":0, "src":"media/videos/funnyvid0.mp4", "name": "funnyVid00", "duration": "0:03", "category": "Entertainment",
+  { "id":0, "src":"media/videos/funnyvid0.mp4", "name": "Lawnmower-Surfing", "duration": "0:03", "category": "Entertainment",
     "thumbnailPath":"media/bilder/Funnyvid.jpg"},
   { "id":1, "src":"media/videos/wendler_egal.mp4", "name": "wendler egal", "duration": "0:03", "category": "Music",
     "thumbnailPath":"media/bilder/wendler_egal.jpg" },
