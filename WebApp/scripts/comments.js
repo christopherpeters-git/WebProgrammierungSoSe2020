@@ -20,7 +20,7 @@ function loadCommentsForId(id){
     if(localStorage.getItem(localStorageVideoPrefix + String(id))){
         comments = JSON.parse(localStorage.getItem(localStorageVideoPrefix + String(id)));
     }else{
-        comments = new Array();
+        comments = [];
         console.log("No comments found!");
     }
     return comments;
