@@ -15,9 +15,9 @@
     width:  800px;
     margin: 5% auto auto;
     background-color: black;
-    -webkit-box-shadow: 0px 7px 13px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 7px 13px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 7px 13px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0 7px 13px 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: 0 7px 13px 0 rgba(0,0,0,0.75);
+    box-shadow: 0 7px 13px 0 rgba(0,0,0,0.75);
 
 }
 
@@ -44,7 +44,7 @@
 
 #submitCommentButton{
     float: right;
-    background-color: #4CAF50;
+    background-color: #000000;
     cursor:pointer;
     padding: 5px;
     margin-top: 10px;
@@ -60,7 +60,7 @@
     background-color: whitesmoke;
     border-bottom-style: groove;
     min-height: 50px;
-    padding-bottom: 0px;
+    padding-bottom: 0;
     height: 2%;
     width: 80%;
 }

@@ -122,6 +122,7 @@ function init(){
     initVideoOverview();
     eventOnEnterByLogin();
     setEventHandlerSlideShow();
+    setLoginLogoutButton();
 
     document.getElementById("inputMessage").addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
@@ -307,7 +308,6 @@ function searchVideos() {
 
     const vidOverview = document.getElementById("videooverview")
     const videoPlayer = document.getElementById("videoArea")
-    const createCommentArea = document.getElementById("createcommentarea");
     if(videoPlayer.style.display === "block") {
         videoPlayer.style.display = "none";
         // if (videoPlayer.firstChild != null) {

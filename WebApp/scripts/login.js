@@ -36,6 +36,23 @@ function eventOnEnterByLogin() {
     });
 }
 
+function setLoginLogoutButton() {
+
+    const user = localStorage.getItem('auth');
+    const button = document.getElementById('loginLogout');
+    const userText = document.getElementById('login-name');
+
+    if (user != null){
+        button.setAttribute('onclick', 'logout()');
+        button.innerHTML= "Logout";
+        userText.innerHTML= user[0].toUpperCase();
+        userText.style.display = 'inline-block';
+    } else {
+        userText.style.display = 'none';
+    }
+
+}
+
 //Funktion überprüft die Benutzerdaten und meldet den User an.
 function loginCheck() {
     const username = document.getElementById('username').value;
