@@ -36,7 +36,7 @@ function generateComments(videoIdStr){
     const createCommentArea = document.getElementById("createCommentArea");
     createCommentArea.innerHTML = "";
     const comments = loadCommentsForId(videoIdStr);
-    if(!(comments.length === 0)){
+    if(comments.length !== 0){
         for(let i = 0; i < comments.length; i++){
             //Create new comment-html
             const newComment = document.createElement("div");
@@ -49,5 +49,8 @@ function generateComments(videoIdStr){
             newComment.appendChild(message);
             createCommentArea.appendChild(newComment);
         }
+        console.log(comments.length + " comments loaded for this video");
+    }else{
+        console.log("No comments found for this video");
     }
 }

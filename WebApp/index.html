@@ -11,6 +11,8 @@
     <script src="scripts/comments.js"></script>
     <script src="scripts/slideshow.js"></script>
     <script src="scripts/login.js"></script>
+    <script src="scripts/alert.js"></script>
+    <script src="scripts/comments.js"></script>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Lassen Sie sich durch kurze Videos ein Lächeln aufs Gesicht zaubern" name="description">
@@ -20,10 +22,10 @@
 </head>
 <body onload="init()">
 <div id="upperBody" class="upperbody">
-
     <header>
         <ul class="header">
             <li class="header">
+<!--                alert fenster angelegt an https://www.w3schools.com/css/tryit.asp?filename=trycss_css_image_overlay_slidetop-->
                 <div class="alert" id="alert" style="z-index: 5">
                     <div class="text-alert" id="alert-text"></div>
                 </div>
@@ -34,6 +36,7 @@
             </li>
             <li class="header"  id="search_header">
                 <div id="searcharea" style="text-align: center">
+                    <label for="searchentry"></label>
                     <input id="searchentry" placeholder="Search" type="text">
                     <img id="searchPic" onclick="searchVideos()" src="./media/bilder/icon_Search.png" alt="searchIcon">
                 </div>
@@ -50,7 +53,7 @@
 
 <div id="lowerBody" class="lowerbody">
     <div id="searchentrys" style="text-align: center"></div>
-
+<!-- Login Fenster angelegt an: https://www.w3schools.com/howto/howto_css_login_form.asp   -->
     <div class="background-login" id="login">
         <form class="login-window animate" id="logininput" method="get">
             <div class="closediv">
@@ -121,6 +124,7 @@
             </div>
             <div id="submitCommentDiv" style="display: none;">
                 <!--                <input id="inputname" placeholder="Author" class="commentInput">-->
+                <label for="inputMessage"></label>
                 <input id="inputMessage" placeholder="Message">
                 <button id="submitCommentButton" onclick="submitComment()">Submit Comment</button>
             </div>

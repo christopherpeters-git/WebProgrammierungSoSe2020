@@ -31,6 +31,7 @@ function createAjaxRequest(){
 //Checks if string contains illegal characters which are defined in forbiddenChars
 function isInputLegal(strIn){
     if(!strIn || (strIn.length === 0)){
+        console.log("String illegal");
         return false;
     }
     const inputLength = strIn.length;
@@ -42,6 +43,7 @@ function isInputLegal(strIn){
             }
         }
     }
+    console.log("String is legal");
     return true;
 }
 //Creates an anker with a thumbnail for a video
@@ -127,6 +129,7 @@ function init(){
     })
 
     // Eventlistener for slideshow
+    setEventHandlerSlideShow();
     document.getElementById("searchPic").addEventListener('mouseenter',function () {
         document.getElementById("searchPic").style.backgroundColor="#cccccc";
     },false);
@@ -134,15 +137,17 @@ function init(){
         document.getElementById("searchPic").style.backgroundColor="#FFFFFF";
     },false);
     addEventListener("scroll",searchbarScroll,false);
-    setEventHandlerSlideShow();
-
     document.getElementById("slideshow-container").addEventListener('mouseenter', setButtonsVisible, false);
     document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
 
     // Eventlistener for Video Player (X-Button)
-    const xButton = document.getElementById('videoArea');
-    xButton.addEventListener('mouseenter', unhiddeBackbutton, true);
-    xButton.addEventListener('mouseleave', hiddeBackbutton, true);
+    const videoArea = document.getElementById('videoArea');
+    videoArea.addEventListener('mouseenter', () => {
+        document.getElementById('backtovideos').hidden = false;
+    }, true);
+    videoArea.addEventListener('mouseleave', () => {
+        document.getElementById('backtovideos').hidden = true;
+    }, true);
 }
 
 function addEnterFunctionality() {
@@ -159,9 +164,9 @@ function addEnterFunctionality() {
 //von W3School
 // Searchbar ist fixed und folgt beim Scrollen
 function searchbarScroll() {
-    var header = document.getElementById("upperBody");
+    const header = document.getElementById("upperBody");
 // Get the offset position of the navbar
-    var sticky = header.offsetTop;
+    const sticky = header.offsetTop;
     if (window.pageYOffset > sticky) {
         header.classList.add("sticky");
     } else {

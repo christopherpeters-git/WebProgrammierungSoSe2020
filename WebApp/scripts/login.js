@@ -14,12 +14,12 @@ class User {
     }
 
 }
-
+//Funktion um das Login Fenster zu schließen.
 function closeLoginWindow() {
     document.getElementById('login').style.display='none';
     document.getElementById('login-notification').style.display='none';
 }
-
+//Fügt bei den Inputs beim Login ein Eventheandler der auf die Taste "Enter" reagiert.
 function eventOnEnterByLogin() {
     let inputUsername = document.getElementById('username');
     let inputPassword = document.getElementById('password');
@@ -41,6 +41,7 @@ function loginCheck() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
+    //Prüfung ob Illegale zeichen verwendet wurden.
     if (!isInputLegal(username) || !isInputLegal(password)){
         document.getElementById('login-notification').innerHTML = 'Username oder Passwort falsch!';
         document.getElementById('login-notification').style.display='block';
@@ -98,21 +99,3 @@ function userComparison (loginuser,vergleich) {
     return loginuser.username === vergleich.username && loginuser.password === vergleich.password;
 }
 
-/*
-Fährt das Hinweisfenster mit ensprechenden Inhalt aus.
-inhalt = String der den Inhalt des Hinweises enthällt.
- */
-function openAlert(inhale) {
-    const alert = document.getElementById('alert');
-    const text = document.getElementById('alert-text');
-    text.innerHTML = inhale;
-    alert.style.bottom = "95%";
-    alert.style.height = "5%";
-    setTimeout(closeAlert,3000);
-}
-//Fährt das Hinweisfenster wieder ein.
-function closeAlert() {
-    const alert = document.getElementById("alert");
-    alert.style.bottom = "100%";
-    alert.style.height = "0%";
-}
