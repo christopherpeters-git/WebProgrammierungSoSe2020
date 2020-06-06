@@ -7,13 +7,14 @@ let videoplayerOpen = false;
 //*************************************Classes**************************************
 
 class Video{
-    constructor(id,src,name,duration,category,thumbnailPath){
+    constructor(id,src,name,duration,category,thumbnailPath,quelle){
         this.id = id;
         this.src = src;
         this.name = name;
         this.duration = duration;
         this.category = category;
         this.thumbnailPath = thumbnailPath;
+        this.quelle = quelle;
     }
 }
 
@@ -59,7 +60,6 @@ function createVideoAnker(video){
     videoDiv.setAttribute("class","videoLink");
     a.href = "javascript:showVideoPlayerHideOverview(" + "'" + JSON.stringify(video)+ "'" + ")";
     img.setAttribute("src",video.thumbnailPath);
-    console.log(video.thumbnailPath);
     img.setAttribute("class","thumbnail");
     header5.innerHTML = video.name;
     header7.innerHTML = video.duration;
@@ -98,7 +98,6 @@ function initVideoOverview(){
                 for(let i=0;i<categories.length;i++){
                     if(categories[i]===video.category){
                         cat= categories[i];
-                        console.log(i);
                         break;
                     }
                 }
@@ -123,6 +122,7 @@ function init(){
     eventOnEnterByLogin();
     setEventHandlerSlideShow();
     setLoginLogoutButton();
+    setQuellenTabelle()
 
     //Tests
     startTests();
@@ -142,7 +142,7 @@ function init(){
     document.getElementById("searchPic").addEventListener('mouseleave',function () {
         document.getElementById("searchPic").style.backgroundColor="#FFFFFF";
     },false);
-    addEventListener("scroll",searchbarScroll,false);
+    // addEventListener("scroll",searchbarScroll,false);
     document.getElementById("slideshow-container").addEventListener('mouseenter', setButtonsVisible, false);
     document.getElementById("slideshow-container").addEventListener('mouseleave', setButtonsHidden, false);
 
@@ -169,17 +169,17 @@ function addEnterFunctionality() {
 
 //von W3School
 // Searchbar ist fixed und folgt beim Scrollen
-function searchbarScroll() {
-    const header = document.getElementById("upperBody");
+// function searchbarScroll() {
+//     const header = document.getElementById("upperBody");
 // Get the offset position of the navbar
-    const sticky = header.offsetTop;
-    if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-    } else {
-        header.classList.remove("sticky");
-    }
-
-}
+    // const sticky = header.offsetTop;
+    // if (window.pageYOffset > sticky) {
+    //     header.classList.add("sticky");
+    // } else {
+    //     header.classList.remove("sticky");
+    // }
+//
+// }
 
 //Shows the video-player and hides the video-list
 function showVideoPlayerHideOverview(videoStr){
@@ -200,8 +200,9 @@ function showVideoPlayerHideOverview(videoStr){
         //Initialize video player
         videoPlayer.setAttribute("controls", "true");
         videoPlayer.setAttribute("autoplay", "true");
-        videoPlayer.setAttribute("width", "800");
-        videoPlayer.setAttribute("height", "450");
+        videoPlayer.setAttribute('class', 'player');
+        //videoPlayer.setAttribute("max-width", "800");
+        //videoPlayer.setAttribute("height", "450");
         videoSource.setAttribute("type", "video/mp4");
         videoSource.setAttribute("src", video.src);
         videoId.setAttribute("id", "videoId");
