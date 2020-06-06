@@ -33,7 +33,7 @@ function handleDecisionImpressum() {
     }
 }
 
-
+//Erstellt Tabelle für die Quellen im Impressum.
 function setQuellenTabelle() {
 
     const impressum = document.getElementById('impressum');

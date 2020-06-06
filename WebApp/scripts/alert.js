@@ -11,6 +11,8 @@ function openAlert(inhale) {
     alert.style.height = "5%";
     setTimeout(closeAlert,3000);
 }
+
+
 //Fährt das Hinweisfenster wieder ein.
 function closeAlert() {
     const alert = document.getElementById("alert");
