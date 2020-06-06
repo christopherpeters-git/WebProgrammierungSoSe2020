@@ -7,9 +7,9 @@ let videoplayerOpen = false;
 //*************************************Classes**************************************
 
 class Video{
-    constructor(id,src,name,duration,category,thumbnailPath,quelle){
+    constructor(id,path,name,duration,category,thumbnailPath,quelle){
         this.id = id;
-        this.src = src;
+        this.path = path;
         this.name = name;
         this.duration = duration;
         this.category = category;
@@ -204,7 +204,7 @@ function showVideoPlayerHideOverview(videoStr){
         //videoPlayer.setAttribute("max-width", "800");
         //videoPlayer.setAttribute("height", "450");
         videoSource.setAttribute("type", "video/mp4");
-        videoSource.setAttribute("src", video.src);
+        videoSource.setAttribute("src", video.path);
         videoId.setAttribute("id", "videoId");
         videoId.setAttribute("style", "display: none;");
         backXButton.setAttribute('id','backtovideos');

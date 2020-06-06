@@ -65,14 +65,14 @@ function setQuellenTabelle() {
 
         if ((4 === this.readyState) && (200 === this.status)) {
             const videos = JSON.parse(this.responseText);
-            var iterator = new Video('','','','','','','');
+            let iterator = new Video('','','','','','','');
             for (iterator of videos) {
                 const zeile = document.createElement('tr');
                 const videoName = document.createElement('td');
                 const quelle = document.createElement('td');
 
                 videoName.innerHTML = iterator.name;
-                quelle.innerHTML = iterator.quelle;
+                quelle.innerHTML = iterator.source;
 
                 zeile.appendChild(videoName);
                 zeile.appendChild(quelle);
