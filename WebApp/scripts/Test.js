@@ -1,6 +1,6 @@
 "use strict";
 
-function startVideoTests(){
+function startTests(){
     test_isInputLegal();
 }
 

@@ -125,7 +125,7 @@ function init(){
     setLoginLogoutButton();
 
     //Tests
-    startVideoTests();
+    startTests();
 
     document.getElementById("inputMessage").addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
