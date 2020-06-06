@@ -7,13 +7,14 @@ let videoplayerOpen = false;
 //*************************************Classes**************************************
 
 class Video{
-    constructor(id,src,name,duration,category,thumbnailPath){
+    constructor(id,src,name,duration,category,thumbnailPath,quelle){
         this.id = id;
         this.src = src;
         this.name = name;
         this.duration = duration;
         this.category = category;
         this.thumbnailPath = thumbnailPath;
+        this.quelle = quelle;
     }
 }
 
@@ -121,6 +122,7 @@ function init(){
     eventOnEnterByLogin();
     setEventHandlerSlideShow();
     setLoginLogoutButton();
+    setQuellenTabelle()
 
     document.getElementById("inputMessage").addEventListener("keyup", function (event) {
         if (event.key === "Enter") {

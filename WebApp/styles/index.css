@@ -153,6 +153,27 @@ li.footer{
     float: left;
 }
 
+.quellTable{
+    border: 1px solid black;
+    border-collapse: collapse;
+    border-spacing: 5px;
+}
+
+.quellTable tr:nth-child(even){
+    background-color: #dddddd;
+}
+
+.quellTable td, th{
+    border: 1px #dddddd;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 8px;
+}
+
+thead{
+    background-color: #a2a2a2;
+}
+
 #login-name{
     margin-top:8px;
     margin-right:12px;
