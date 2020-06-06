@@ -124,6 +124,9 @@ function init(){
     setEventHandlerSlideShow();
     setLoginLogoutButton();
 
+    //Tests
+    startVideoTests();
+
     document.getElementById("inputMessage").addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
             event.preventDefault();

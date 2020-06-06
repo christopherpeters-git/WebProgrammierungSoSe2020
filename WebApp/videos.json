@@ -1,6 +1,6 @@
 [
-  { "id":0, "src":"media/videos/funnyvid0.mp4", "name": "Lawnmower-Surfing", "duration": "0:03", "category": "Entertainment",
-    "thumbnailPath":"media/bilder/Funnyvid.jpg"},
+  { "id":0, "src":"media/videos/mr_forgetful.mp4", "name": "Mr. Forgetful", "duration": "0:09", "category": "Entertainment",
+    "thumbnailPath":"media/bilder/mr_forgetful.jpg"},
   { "id":1, "src":"media/videos/wendler_egal.mp4", "name": "wendler egal", "duration": "0:03", "category": "Music",
     "thumbnailPath":"media/bilder/wendler_egal.jpg" },
   { "id":2, "src":"media/videos/Avengers_Whatever_It_Takes.mp4", "name": "Whatever it Takes", "duration": "0:04", "category": "Entertainment",
