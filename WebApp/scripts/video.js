@@ -338,6 +338,7 @@ function searchVideos() {
 
 function checkVideoAttributes(searchEntry,video) {
     if(searchEntry === "") {
+        console.log()
         return false;
     }
     let searchEntryNormalized = searchEntry.toUpperCase();
@@ -347,3 +348,4 @@ function checkVideoAttributes(searchEntry,video) {
         return true;
     }
 }
+

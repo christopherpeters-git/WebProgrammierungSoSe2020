@@ -10,7 +10,7 @@ function hideSite() {
     document.getElementById("videooverview").style.display = "none";
     document.getElementById("slideShow").hidden = true;
     impressumCalled = true;
-
+    console.log("impressum clicked, show impressum");
 }
 
 function showSite() {
@@ -31,4 +31,5 @@ function handleDecisionImpressum() {
     }else{
         showOverviewHideVideoplayer();
     }
+    console.log("return home, hide impressum");
 }
