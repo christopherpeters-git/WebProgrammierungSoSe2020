@@ -2,16 +2,12 @@
 
 let slideIndex = 1;
 
-// Next/previous controls
+// addiert zum
 function plusSlides(n) {
     showSlides(slideIndex += n);
 }
 
-// Thumbnail image controls
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
-
+//wechselt das Bild abhängig vom aktuellen Index
 function showSlides(n) {
     let i;
     const slides = document.getElementsByClassName("mySlides");
@@ -21,15 +17,18 @@ function showSlides(n) {
         slides[i].style.display = "none";
     }
     slides[slideIndex-1].style.display = "block";
+    console.log(slideIndex);
 }
 
-
+//Buttons werden sichtbar
 function setButtonsVisible() {
     const next = document.getElementById("next");
     const prev = document.getElementById("prev");
     next.hidden=false;
     prev.hidden=false;
 }
+
+//Buttons werden unsichtbar
 function setButtonsHidden() {
     const next = document.getElementById("next");
     const prev = document.getElementById("prev");
@@ -37,16 +36,19 @@ function setButtonsHidden() {
     prev.hidden=true;
 }
 
+//returned den aktuellen Index
 function getIndex() {
     return slideIndex;
 }
 
+//versteckt die Slideshow
 function hideSlideShow() {
     const slideShow= document.getElementById("slideShow");
     slideShow.hidden = slideShow.hidden === false;
 
 }
 
+//Zeigt das Video abhängig vom Bild
 function showVideoHideSlideshow() {
     let video_id = getIndex();
     let video = new Video("","","","");
@@ -66,7 +68,7 @@ function showVideoHideSlideshow() {
     request.send();
 }
 
-
+//Eventhandler für die Bilder
 function setEventHandlerSlideShow() {
     let elements = document.getElementsByClassName("mySlides");
     console.log(elements);

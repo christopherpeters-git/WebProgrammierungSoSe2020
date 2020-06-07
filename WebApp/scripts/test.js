@@ -4,6 +4,7 @@ function startTests(){
     test_isInputLegal();
     test_userComparison();
     test_checkVideoAttributes();
+    test_currentSlideShowIndex();
 }
 
 function test_isInputLegal() {
@@ -29,5 +30,16 @@ function test_checkVideoAttributes() {
 
     console.assert(false === checkVideoAttributes("blabla",video1), "Searchstring does not match video");
     console.assert(true === checkVideoAttributes("democracy",video2), "Searchstring matches video");
+
+}
+
+function test_currentSlideShowIndex(){
+    let index =1;
+    let check=getIndex();
+    console.assert(index===check,'getIndex does not match the expected Index ');
+    index = 3;
+    plusSlides(2);
+    check = getIndex();
+    console.assert(index===check,'getIndex does not match the expected Index ');
 
 }
