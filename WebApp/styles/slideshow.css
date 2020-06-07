@@ -1,8 +1,8 @@
 
 
-
 /* Slideshow container */
 .slideshow-container {
+    cursor: pointer;
     visibility: visible;
     position: relative;
     margin: auto;
