@@ -42,7 +42,6 @@ button:hover .login-alert{
 }
 
 .closebtn{
-    //width: auto;
     background-color: #f44336;
     float: none;
 }
@@ -105,11 +104,9 @@ button:hover .login-alert{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
 }
 
 .animate {
-    -webkit-animation: animatezoom 0.6s;
     animation: animatezoom 0.6s;
 }
 
