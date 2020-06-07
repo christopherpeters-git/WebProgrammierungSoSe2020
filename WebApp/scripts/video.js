@@ -319,13 +319,14 @@ function searchVideos() {
         // }
     }
     vidOverview.style.display = "none";
-    console.log(search);
+    console.log("searching for: " + search);
     let video = new Video("", "", "", "");
     var request = createAjaxRequest();
     request.onreadystatechange = function(){
         if(4 === this.readyState && 200 === this.status) {
             const videos = JSON.parse(this.responseText);
             const searchresults = document.getElementById("searchentrys");
+            console.log("videos found:");
             for (video of videos) {
                 // console.log(video.name)
                 if(checkVideoAttributes(search,video) || (video.duration.localeCompare(search)===0)) {
@@ -342,13 +343,14 @@ function searchVideos() {
 
 function checkVideoAttributes(searchEntry,video) {
     if(searchEntry === "") {
-        console.log()
+        console.log("Empty entry, no results displayed");
         return false;
     }
     let searchEntryNormalized = searchEntry.toUpperCase();
     let videoName = video.name.toUpperCase();
     let videoCategory = video.category.toUpperCase();
     if(videoName.includes(searchEntryNormalized) || videoCategory.includes(searchEntryNormalized)) {
+        console.log(video.name);
         return true;
     }
 }

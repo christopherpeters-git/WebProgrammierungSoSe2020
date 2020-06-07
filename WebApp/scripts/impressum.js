@@ -1,3 +1,5 @@
+
+// hides all necessary divs on the site and shows the impressum
 function hideSite() {
 
     document.getElementById("search_header").style.display = "none";
@@ -10,9 +12,9 @@ function hideSite() {
     document.getElementById("videooverview").style.display = "none";
     document.getElementById("slideShow").hidden = true;
     impressumCalled = true;
-
+    console.log("show impressum");
 }
-
+// shows mainpage and hides impressum
 function showSite() {
     document.getElementById("impressum").style.display = "none"
 
@@ -24,13 +26,14 @@ function showSite() {
     document.getElementById("videooverview").style.display = "block";
     impressumCalled = false;
 }
-
+// decides, wether user returns home from impressum or something else
 function handleDecisionImpressum() {
     if(impressumCalled) {
         showSite();
     }else{
         showOverviewHideVideoplayer();
     }
+    console.log("hide impressum, show mainpage");
 }
 
 
