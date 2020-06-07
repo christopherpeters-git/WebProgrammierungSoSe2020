@@ -162,7 +162,7 @@ function init(){
     }, true);
 }
 
-
+// enables searchbar to start searching by pressing "Enter"
 function addEnterFunctionality() {
     const inputSearch = document.getElementById("searchentry");
     inputSearch.addEventListener("keyup", function (event) {
@@ -286,13 +286,12 @@ function submitComment(){
     generateComments(videoId.innerHTML);
 }
 
-
+// searches through videos.json and checks for matching strings in name and category
 function searchVideos() {
     const vidArea= document.getElementById("videoArea");
     if (vidArea.firstChild != null && vidArea.firstChild.nodeName==="VIDEO"){
         vidArea.removeChild(vidArea.firstChild);
     }
-    //showOverviewHideVideoplayer();
     document.getElementById("searchentrys").innerHTML = "";
     const slideShow = document.getElementById("slideShow");
     const search = document.getElementById("searchentry").value;
@@ -332,18 +331,20 @@ function searchVideos() {
 
 }
 
-
+// helper function for searchVideos(), compares videoname and category with searchstring entered by the user
 function checkVideoAttributes(searchEntry,video) {
     if(searchEntry === "") {
         console.log("Empty entry, no results displayed");
         return false;
     }
     let searchEntryNormalized = searchEntry.toUpperCase();
+    searchEntryNormalized = searchEntryNormalized.replace("  "," ");
     let videoName = video.name.toUpperCase();
     let videoCategory = video.category.toUpperCase();
     if(videoName.includes(searchEntryNormalized) || videoCategory.includes(searchEntryNormalized)) {
         console.log(video.name);
         return true;
     }
+    return false;
 }
 
