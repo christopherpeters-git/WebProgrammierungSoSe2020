@@ -36,7 +36,7 @@ function handleDecisionImpressum() {
     console.log("hide impressum, show mainpage");
 }
 
-
+//Erstellt Tabelle für die Quellen im Impressum.
 function setQuellenTabelle() {
 
     const impressum = document.getElementById('impressum');

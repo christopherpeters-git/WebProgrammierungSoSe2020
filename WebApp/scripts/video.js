@@ -31,6 +31,7 @@ function createAjaxRequest(){
     return request;
 }
 
+
 //Checks if string contains illegal characters which are defined in forbiddenChars
 function isInputLegal(strIn){
     if(!strIn || (strIn.length === 0)){
@@ -49,6 +50,8 @@ function isInputLegal(strIn){
     console.log("String is legal");
     return true;
 }
+
+
 //Creates an anker with a thumbnail for a video
 function createVideoAnker(video){
     const videoDiv = document.createElement("div");
@@ -69,6 +72,8 @@ function createVideoAnker(video){
     a.appendChild(videoDiv);
     return a;
 }
+
+
 //*************************************Initializers************************************
 
 //Creates an entry on the video-overview for every video listed in the videos.json
@@ -114,6 +119,7 @@ function initVideoOverview(){
     request.send();
 }
 
+
 //*************************************HTML-called-functions***********************************
 //Is called on page load, calls all initializers
 function init(){
@@ -156,6 +162,7 @@ function init(){
     }, true);
 }
 
+
 function addEnterFunctionality() {
     const inputSearch = document.getElementById("searchentry");
     inputSearch.addEventListener("keyup", function (event) {
@@ -166,20 +173,6 @@ function addEnterFunctionality() {
     })
 }
 
-
-//von W3School
-// Searchbar ist fixed und folgt beim Scrollen
-// function searchbarScroll() {
-//     const header = document.getElementById("upperBody");
-// Get the offset position of the navbar
-    // const sticky = header.offsetTop;
-    // if (window.pageYOffset > sticky) {
-    //     header.classList.add("sticky");
-    // } else {
-    //     header.classList.remove("sticky");
-    // }
-//
-// }
 
 //Shows the video-player and hides the video-list
 function showVideoPlayerHideOverview(videoStr){
@@ -201,8 +194,6 @@ function showVideoPlayerHideOverview(videoStr){
         videoPlayer.setAttribute("controls", "true");
         videoPlayer.setAttribute("autoplay", "true");
         videoPlayer.setAttribute('class', 'player');
-        //videoPlayer.setAttribute("max-width", "800");
-        //videoPlayer.setAttribute("height", "450");
         videoSource.setAttribute("type", "video/mp4");
         videoSource.setAttribute("src", video.path);
         videoId.setAttribute("id", "videoId");
@@ -233,6 +224,7 @@ function showVideoPlayerHideOverview(videoStr){
     }
 }
 
+
 //Shows the video-list and hides the video-player
 function showOverviewHideVideoplayer(){
     document.getElementById("searchentrys").innerHTML = "";
@@ -260,6 +252,7 @@ function showOverviewHideVideoplayer(){
         hideSlideShow();
     }
 }
+
 
 //Creates a new comment
 function submitComment(){
@@ -293,6 +286,7 @@ function submitComment(){
     generateComments(videoId.innerHTML);
 }
 
+
 function searchVideos() {
     const vidArea= document.getElementById("videoArea");
     if (vidArea.firstChild != null && vidArea.firstChild.nodeName==="VIDEO"){
@@ -314,9 +308,6 @@ function searchVideos() {
     const videoPlayer = document.getElementById("videoArea")
     if(videoPlayer.style.display === "block") {
         videoPlayer.style.display = "none";
-        // if (videoPlayer.firstChild != null) {
-        //     videoPlayer.removeChild(videoPlayer.firstChild);
-        // }
     }
     vidOverview.style.display = "none";
     console.log("searching for: " + search);
@@ -340,6 +331,7 @@ function searchVideos() {
     request.send();
 
 }
+
 
 function checkVideoAttributes(searchEntry,video) {
     if(searchEntry === "") {
