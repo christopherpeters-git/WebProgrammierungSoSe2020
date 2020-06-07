@@ -9,6 +9,10 @@ body {
     margin: auto;
 }
 
+#homeLogo{
+    margin-top: 5px;
+    width: 5%;
+}
 
 #lowerBody{
     padding: 16px;
@@ -207,6 +211,9 @@ thead{
         width: 100%;
         margin: auto;
     }
+    #homeLogo{
+        width: 15%;
+    }
 }
 @media only screen and (max-width: 700px) {
     #search_header{
@@ -220,6 +227,9 @@ thead{
     }
     #searchentry{
         width: 70%;
+    }
+    #homeLogo{
+        width: 15%;
     }
 }
 
