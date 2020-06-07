@@ -1,25 +1,25 @@
 "use strict";
 
 class User {
-    constructor(username, password, loginAccepted) {
+    constructor(username, password) {
         this.username = username;
         this.password = password;
-        this.loginAccepted = loginAccepted;
     }
     get getName(){
         return this.username;
     }
-    set loginStatus(status){
-        return this.loginAccepted=status;
-    }
-
 }
+
+
 //Funktion um das Login Fenster zu schließen.
 function closeLoginWindow() {
     document.getElementById('login').style.display='none';
     document.getElementById('login-notification').style.display='none';
     console.log("close login Window")
 }
+
+
+
 //Fügt bei den Inputs beim Login ein Eventheandler der auf die Taste "Enter" reagiert.
 function eventOnEnterByLogin() {
     let inputUsername = document.getElementById('username');
@@ -40,6 +40,9 @@ function eventOnEnterByLogin() {
     });
 }
 
+
+
+//Prüft ob jemand bereits angemeldet ist und setzt entsprechend den Button auf Login oder Logout
 function setLoginLogoutButton() {
 
     const user = localStorage.getItem('auth');
@@ -56,6 +59,7 @@ function setLoginLogoutButton() {
     }
 
 }
+
 
 //Funktion überprüft die Benutzerdaten und meldet den User an.
 function loginCheck() {
@@ -85,7 +89,6 @@ function loginCheck() {
                     document.getElementById('loginLogout').innerHTML="Logout";
                     document.getElementById('loginLogout').setAttribute('onclick', 'logout()');
                     openAlert("Login erfolgreich");
-                    userlogin.loginStatus = true;
                     //Speichert die Benutzerdaten im local Storage.
                     localStorage.setItem('auth',userlogin.username);
 
@@ -104,6 +107,7 @@ function loginCheck() {
     request.send();
 }
 
+
 //Meldet den Benutzer ab.
 function logout() {
     let loginButton = document.getElementById('loginLogout');
@@ -117,6 +121,7 @@ function logout() {
     document.getElementById("submitCommentDiv").style.display = "none";
     console.log("logout successful.")
 }
+
 
 // Vergleicht zweier Benutzerdaten.
 function userComparison (loginuser,vergleich) {

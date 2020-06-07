@@ -17,5 +17,7 @@
   {"id":7, "path":"media/videos/Coffin_Dance.mp4", "name": "Coffin Dance Meme", "duration": "0:08", "category": "Entertainment",
     "thumbnailPath":"media/bilder/Coffin_Dance.jpg", "source": "https://youtu.be/aJqfMPzcXws?t=119"},
   {"id":8, "path":"media/videos/Flying_Cat.mp4", "name": "Flying Cat", "duration": "0:06", "category": "Entertainment",
-    "thumbnailPath":"media/bilder/Flying_Cat.jpg", "source": "https://youtu.be/VB4CCHHYOqY?t=64"}
+    "thumbnailPath":"media/bilder/Flying_Cat.jpg", "source": "https://youtu.be/VB4CCHHYOqY?t=64"},
+  {"id":9, "path":"media/videos/Close_Call.mp4", "name": "Close Call", "duration": "0:13", "category": "Cars",
+    "thumbnailPath":"media/bilder/Close_Call.jpg", "source": "selfmade"}
 ]
