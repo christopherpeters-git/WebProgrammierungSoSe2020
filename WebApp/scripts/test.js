@@ -8,9 +8,9 @@ function startTests(){
 }
 
 function test_isInputLegal() {
-    console.assert(false === isInputLegal(""),"Empty String is legal");
-    console.assert(false === isInputLegal("<script>alert('Test');</script>"),"Empty string is legal");
-    console.assert(true === isInputLegal("Hello"),"Empty string is legal");
+    console.assert(false === isInputLegal(""),"Empty String should be illegal");
+    console.assert(false === isInputLegal("<script>alert('Test');</script>"),"Strings with forbidden chars should be illegal");
+    console.assert(true === isInputLegal("Hello"),"'Hello' should be legal");
 }
 
 function test_userComparison() {

@@ -17,7 +17,6 @@ function showSlides(n) {
         slides[i].style.display = "none";
     }
     slides[slideIndex-1].style.display = "block";
-    console.log(slideIndex);
 }
 
 //Buttons werden sichtbar

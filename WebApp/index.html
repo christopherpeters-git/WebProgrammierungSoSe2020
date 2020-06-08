@@ -30,11 +30,11 @@
         </div>
         <ul class="header">
             <li class="header" id="homeLogo">
-                <img onclick="handleDecisionImpressum()" src="media/bilder/Logo.png" style="cursor: pointer; width: 44px; height: 44px;"
+                <img onclick="handleDecisionImpressum()" title="Startseite" src="media/bilder/Logo.png" style="cursor: pointer; width: 44px; height: 44px;"
                 alt="logo"/>
             </li>
             <li class="header" style="margin-top: 5px;width:15%;">
-                <img onclick="handleDecisionImpressum()" src="media/bilder/home2Icon.jpg" style="cursor: pointer; width: 45px; height: 45px;"
+                <img onclick="handleDecisionImpressum()" src="media/bilder/home2Icon.jpg" title="Startseite" style="cursor: pointer; width: 45px; height: 45px;"
                      alt="logo"/>
             </li>
 
@@ -43,12 +43,12 @@
                 <div id="searcharea" style="text-align: center">
                     <label for="searchentry"></label>
                     <input id="searchentry" placeholder="Search" type="text">
-                    <img id="searchPic" onclick="searchVideos()" src="./media/bilder/icon_Search.png" alt="searchIcon">
+                    <img id="searchPic" onclick="searchVideos()" title="Suchen" src="./media/bilder/icon_Search.png" alt="searchIcon">
                 </div>
             </li>
             <li class="header" style=" float: right;" id="loginStuff">
                 <span id="login-name"></span>
-                <button id="loginLogout" onclick="document.getElementById('login').style.display='block'" style="width: auto; float: right">Login
+                <button id="loginLogout" onclick="document.getElementById('login').style.display='block'" title="Anmelden" style="width: auto; float: right">Login
                 </button>
             </li>
         </ul>
@@ -81,7 +81,7 @@
             </div>
             <div class="window-form" style="background-color: #f2f2f2">
                 <button class="closebtn" onclick="closeLoginWindow()" title="Fenster schließen" type="button">Cancel</button>
-                <button class="login" id="loginButton" onclick="loginCheck()" style="text-align: center" type="button">Login</button>
+                <button class="login" id="loginButton" onclick="loginCheck()" title="Anmelden" style="text-align: center" type="button">Login</button>
             </div>
 
         </form>
@@ -131,7 +131,7 @@
                 <!--                <input id="inputname" placeholder="Author" class="commentInput">-->
                 <label for="inputMessage"></label>
                 <input id="inputMessage" placeholder="Message">
-                <button id="submitCommentButton" onclick="submitComment()">Submit Comment</button>
+                <button id="submitCommentButton" onclick="submitComment()" title="Kommentar absenden">Submit Comment</button>
             </div>
             <div id="createCommentArea">
 
